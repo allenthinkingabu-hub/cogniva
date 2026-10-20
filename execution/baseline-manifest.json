@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "timestamp": "2026-10-20T01:20:16.871277+00:00",
-  "git_commit": "9573764c640a215dcd01381b6876b50950c4fe92",
-  "total_files": 104,
-  "total_bytes": 3889871,
+  "timestamp": "2026-10-20T02:13:18.409294+00:00",
+  "git_commit": "8a59c83",
+  "total_files": 106,
+  "total_bytes": 3931360,
   "files": {
     "doc/design/README.md": {
       "sha256": "a496f188bf9a7ea401a7513a53574fb1b45a7cf130103f5e90f288eff7702b47",
@@ -152,6 +152,14 @@
     "doc/architecture/4A-架构决策与实施门禁-v1.0.md": {
       "sha256": "33cacb8cb79cf73de96b78eb595f7e7122e8b2f4c9484732972f9755eef0a7a7",
       "size_bytes": 10904
+    },
+    "doc/architecture/AI-Agent-Harness-Enterprise-Scaffold-Detailed-Design-v1.0.md": {
+      "sha256": "a00ba3ef57ac0c88fc697584e7bca8ed7fef4ac56390d277010d3c0e9e458c7f",
+      "size_bytes": 20986
+    },
+    "doc/architecture/AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md": {
+      "sha256": "d389400e40043715f99515c9ca1295b12917c1c72e38964594acad4b8639e699",
+      "size_bytes": 20503
     },
     "doc/architecture/README.md": {
       "sha256": "407f499821031b0ff6609c00301c6d617aec282db682fdb39a6e7b800448c870",
