@@ -4,8 +4,9 @@
 |---|---|
 | 文档状态 | 2026-10-19；企业级 Agent 运行时与工程脚手架架构规范；指导 M03 及后续工程落地 |
 | 适用系统 | Cogniva 平台（Cognition + Nova）多 Agent 协作系统及通用 Agentic 工程 |
-| 直接上位架构 | [通用Agent-Harness参考架构与工程规范 v1.0](../../architecture/通用Agent-Harness-参考架构与工程规范-v1.0.md) |
-| 相关详细设计 | [学生持续学习-AI-Agent群详细设计 v1.0](../学生持续学习-AI-Agent群详细设计-v1.0.md)、[LA-01 需求与C4详细设计 v1.0](../agents/LA-01-学习协调Agent-需求与C4详细设计-v1.0.md) |
+| 直接上位架构 | [通用Agent-Harness参考架构与工程规范 v1.0](./通用Agent-Harness-参考架构与工程规范-v1.0.md) |
+| 相关详细设计 | [学生持续学习-AI-Agent群详细设计 v1.0](../design/学生持续学习-AI-Agent群详细设计-v1.0.md)、[LA-01 需求与C4详细设计 v1.0](../design/agents/LA-01-学习协调Agent-需求与C4详细设计-v1.0.md) |
+| 英文对应文件 | [AI-Agent-Harness-Enterprise-Scaffold-Detailed-Design-v1.0.md](./AI-Agent-Harness-Enterprise-Scaffold-Detailed-Design-v1.0.md) |
 | 核心目标 | 构建高可用、强隔离、具故障自愈与审计能力的企业级 Agent Harness 脚手架，彻底跨越玩具级 Demo 与工业生产系统的鸿沟 |
 
 ---
