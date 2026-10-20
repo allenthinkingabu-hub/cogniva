@@ -1,0 +1,866 @@
+{
+  "view_version": "lanes-1.0",
+  "parent_plan_version": "1.0",
+  "active_task": "I-01",
+  "completed_tasks": [
+    "I-01"
+  ],
+  "next_task": "I-02",
+  "milestones": {
+    "L1": "I-09",
+    "L2": "I-12",
+    "L3": "I-14"
+  },
+  "conditional_gate_dependencies": {
+    "mcp_enabled": {
+      "gate_task": "I-08",
+      "requires": [
+        "A-OP01"
+      ]
+    },
+    "skills_enabled": {
+      "gate_task": "I-08",
+      "requires": [
+        "A-OP02"
+      ]
+    }
+  },
+  "tasks": {
+    "I-01": {
+      "id": "I-01",
+      "title": "范围、基线与三线账本",
+      "lane": "I",
+      "depends_on": [],
+      "original_task_refs": [
+        "M00"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "contracts/",
+        "doc/implementation/"
+      ],
+      "status": "done",
+      "updated_at": "2026-10-20T01:13:48.349721+00:00",
+      "metadata": {
+        "commit": "9573764c640a215dcd01381b6876b50950c4fe92",
+        "verified": true,
+        "verified_at": "2026-10-20T01:13:48.350157+00:00",
+        "exit_code": 0
+      }
+    },
+    "I-02": {
+      "id": "I-02",
+      "title": "工具链兼容与版本锁",
+      "lane": "I",
+      "depends_on": [
+        "I-01"
+      ],
+      "original_task_refs": [
+        "M01"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "pipelines/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350009+00:00",
+      "metadata": {}
+    },
+    "I-03": {
+      "id": "I-03",
+      "title": "冻结契约、fixture与双向Stub",
+      "lane": "I",
+      "depends_on": [
+        "I-02"
+      ],
+      "original_task_refs": [
+        "M02"
+      ],
+      "allowed_paths": [
+        "contracts/",
+        "execution/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350011+00:00",
+      "metadata": {}
+    },
+    "I-04": {
+      "id": "I-04",
+      "title": "共享脚手架、CI与本地环境",
+      "lane": "I",
+      "depends_on": [
+        "I-03"
+      ],
+      "original_task_refs": [
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "allowed_paths": [
+        "Makefile",
+        "infra/local/",
+        "pipelines/",
+        "scripts/",
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350013+00:00",
+      "metadata": {}
+    },
+    "I-05": {
+      "id": "I-05",
+      "title": "第一轮：真实入口贯通",
+      "lane": "I",
+      "depends_on": [
+        "I-04",
+        "A-06",
+        "B-06"
+      ],
+      "original_task_refs": [
+        "M07",
+        "M10",
+        "M11",
+        "M12",
+        "M15",
+        "M16",
+        "M27"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350015+00:00",
+      "metadata": {}
+    },
+    "I-06": {
+      "id": "I-06",
+      "title": "第二轮：单模板与正式提交",
+      "lane": "I",
+      "depends_on": [
+        "I-05",
+        "A-13",
+        "B-08"
+      ],
+      "original_task_refs": [
+        "M17",
+        "M18",
+        "M19",
+        "M21",
+        "M23",
+        "M24"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350016+00:00",
+      "metadata": {}
+    },
+    "I-07": {
+      "id": "I-07",
+      "title": "第三轮：联合协作与页面",
+      "lane": "I",
+      "depends_on": [
+        "I-06",
+        "A-14",
+        "B-09"
+      ],
+      "original_task_refs": [
+        "M09",
+        "M20",
+        "M22",
+        "M24",
+        "M25",
+        "M26"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350018+00:00",
+      "metadata": {}
+    },
+    "I-08": {
+      "id": "I-08",
+      "title": "全量跨线回归与缺陷关闭",
+      "lane": "I",
+      "depends_on": [
+        "I-07",
+        "A-16",
+        "B-12"
+      ],
+      "original_task_refs": [
+        "M06",
+        "M27",
+        "M28",
+        "M29",
+        "O01",
+        "O02"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "scripts/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350019+00:00",
+      "metadata": {}
+    },
+    "I-09": {
+      "id": "I-09",
+      "title": "干净环境L1验收",
+      "lane": "I",
+      "depends_on": [
+        "I-08"
+      ],
+      "original_task_refs": [
+        "M30"
+      ],
+      "allowed_paths": [
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350021+00:00",
+      "metadata": {}
+    },
+    "I-10": {
+      "id": "I-10",
+      "title": "真实模型/内容/专家质量",
+      "lane": "I",
+      "depends_on": [
+        "I-09"
+      ],
+      "original_task_refs": [
+        "M31"
+      ],
+      "allowed_paths": [
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350022+00:00",
+      "metadata": {}
+    },
+    "I-11": {
+      "id": "I-11",
+      "title": "预发交付与基础设施",
+      "lane": "I",
+      "depends_on": [
+        "I-10"
+      ],
+      "original_task_refs": [
+        "M32"
+      ],
+      "allowed_paths": [
+        "execution/",
+        "infra/k8s/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350026+00:00",
+      "metadata": {}
+    },
+    "I-12": {
+      "id": "I-12",
+      "title": "预发L2验收",
+      "lane": "I",
+      "depends_on": [
+        "I-11"
+      ],
+      "original_task_refs": [
+        "M33"
+      ],
+      "allowed_paths": [
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350028+00:00",
+      "metadata": {}
+    },
+    "I-13": {
+      "id": "I-13",
+      "title": "生产就绪包",
+      "lane": "I",
+      "depends_on": [
+        "I-12"
+      ],
+      "original_task_refs": [
+        "M34"
+      ],
+      "allowed_paths": [
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350030+00:00",
+      "metadata": {}
+    },
+    "I-14": {
+      "id": "I-14",
+      "title": "生产灰度与L3交接",
+      "lane": "I",
+      "depends_on": [
+        "I-13"
+      ],
+      "original_task_refs": [
+        "M35"
+      ],
+      "allowed_paths": [
+        "execution/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350031+00:00",
+      "metadata": {}
+    },
+    "A-01": {
+      "id": "A-01",
+      "title": "Python工程、DTO与迁移",
+      "lane": "A",
+      "depends_on": [
+        "I-04"
+      ],
+      "original_task_refs": [
+        "M03",
+        "M06"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350033+00:00",
+      "metadata": {}
+    },
+    "A-02": {
+      "id": "A-02",
+      "title": "API/Worker、身份与持久Runtime",
+      "lane": "A",
+      "depends_on": [
+        "A-01"
+      ],
+      "original_task_refs": [
+        "M07",
+        "M12"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350034+00:00",
+      "metadata": {}
+    },
+    "A-03": {
+      "id": "A-03",
+      "title": "Harness Hook与执行控制",
+      "lane": "A",
+      "depends_on": [
+        "A-02"
+      ],
+      "original_task_refs": [
+        "M10",
+        "M13"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350035+00:00",
+      "metadata": {}
+    },
+    "A-04": {
+      "id": "A-04",
+      "title": "Profile、上下文与记忆",
+      "lane": "A",
+      "depends_on": [
+        "A-03"
+      ],
+      "original_task_refs": [
+        "M14"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350037+00:00",
+      "metadata": {}
+    },
+    "A-05": {
+      "id": "A-05",
+      "title": "Provider与模型适配",
+      "lane": "A",
+      "depends_on": [
+        "A-04"
+      ],
+      "original_task_refs": [
+        "M15"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350038+00:00",
+      "metadata": {}
+    },
+    "A-06": {
+      "id": "A-06",
+      "title": "LA-01规则与意图识别",
+      "lane": "A",
+      "depends_on": [
+        "A-05"
+      ],
+      "original_task_refs": [
+        "M16"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350039+00:00",
+      "metadata": {}
+    },
+    "A-07": {
+      "id": "A-07",
+      "title": "Gate与三模板Compiler",
+      "lane": "A",
+      "depends_on": [
+        "A-06"
+      ],
+      "original_task_refs": [
+        "M17"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350041+00:00",
+      "metadata": {}
+    },
+    "A-08": {
+      "id": "A-08",
+      "title": "RAG与证据接口",
+      "lane": "A",
+      "depends_on": [
+        "A-07"
+      ],
+      "original_task_refs": [
+        "M19"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350042+00:00",
+      "metadata": {}
+    },
+    "A-09": {
+      "id": "A-09",
+      "title": "LA-02分析",
+      "lane": "A",
+      "depends_on": [
+        "A-08"
+      ],
+      "original_task_refs": [
+        "M20"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350044+00:00",
+      "metadata": {}
+    },
+    "A-10": {
+      "id": "A-10",
+      "title": "LA-03讲解",
+      "lane": "A",
+      "depends_on": [
+        "A-09"
+      ],
+      "original_task_refs": [
+        "M21"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350046+00:00",
+      "metadata": {}
+    },
+    "A-11": {
+      "id": "A-11",
+      "title": "LA-05个人建议",
+      "lane": "A",
+      "depends_on": [
+        "A-10"
+      ],
+      "original_task_refs": [
+        "M22"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350047+00:00",
+      "metadata": {}
+    },
+    "A-12": {
+      "id": "A-12",
+      "title": "LA-04规划",
+      "lane": "A",
+      "depends_on": [
+        "A-11"
+      ],
+      "original_task_refs": [
+        "M23"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350048+00:00",
+      "metadata": {}
+    },
+    "A-13": {
+      "id": "A-13",
+      "title": "多Agent Dispatcher与工作流",
+      "lane": "A",
+      "depends_on": [
+        "A-12"
+      ],
+      "original_task_refs": [
+        "M24"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350050+00:00",
+      "metadata": {}
+    },
+    "A-14": {
+      "id": "A-14",
+      "title": "取消、澄清恢复与对账器",
+      "lane": "A",
+      "depends_on": [
+        "A-13"
+      ],
+      "original_task_refs": [
+        "M25"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350051+00:00",
+      "metadata": {}
+    },
+    "A-15": {
+      "id": "A-15",
+      "title": "Python观测、安全与删除",
+      "lane": "A",
+      "depends_on": [
+        "A-14"
+      ],
+      "original_task_refs": [
+        "M27",
+        "M28"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350052+00:00",
+      "metadata": {}
+    },
+    "A-16": {
+      "id": "A-16",
+      "title": "A线回归与交接包",
+      "lane": "A",
+      "depends_on": [
+        "A-15"
+      ],
+      "original_task_refs": [
+        "M29"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350054+00:00",
+      "metadata": {}
+    },
+    "A-OP01": {
+      "id": "A-OP01",
+      "title": "可选能力：MCP真实协议与鉴权",
+      "lane": "A",
+      "depends_on": [
+        "I-03",
+        "A-16"
+      ],
+      "original_task_refs": [
+        "O01"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350055+00:00",
+      "metadata": {}
+    },
+    "A-OP02": {
+      "id": "A-OP02",
+      "title": "可选能力：Skills注册与权限隔离",
+      "lane": "A",
+      "depends_on": [
+        "I-03",
+        "A-16"
+      ],
+      "original_task_refs": [
+        "O02"
+      ],
+      "allowed_paths": [
+        "services/python/",
+        "execution/lanes/A/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350056+00:00",
+      "metadata": {}
+    },
+    "B-01": {
+      "id": "B-01",
+      "title": "Java模块、DTO与业务迁移",
+      "lane": "B",
+      "depends_on": [
+        "I-04"
+      ],
+      "original_task_refs": [
+        "M03",
+        "M06"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350058+00:00",
+      "metadata": {}
+    },
+    "B-02": {
+      "id": "B-02",
+      "title": "学生/工作负载鉴权与授权",
+      "lane": "B",
+      "depends_on": [
+        "B-01"
+      ],
+      "original_task_refs": [
+        "M07"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350059+00:00",
+      "metadata": {}
+    },
+    "B-03": {
+      "id": "B-03",
+      "title": "知识母本、图谱与题库",
+      "lane": "B",
+      "depends_on": [
+        "B-02"
+      ],
+      "original_task_refs": [
+        "M08"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350060+00:00",
+      "metadata": {}
+    },
+    "B-04": {
+      "id": "B-04",
+      "title": "范围确认、答题与复习主链",
+      "lane": "B",
+      "depends_on": [
+        "B-03"
+      ],
+      "original_task_refs": [
+        "M09"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350144+00:00",
+      "metadata": {}
+    },
+    "B-05": {
+      "id": "B-05",
+      "title": "预算、Invocation、租约与AI设置",
+      "lane": "B",
+      "depends_on": [
+        "B-04"
+      ],
+      "original_task_refs": [
+        "M10"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350146+00:00",
+      "metadata": {}
+    },
+    "B-06": {
+      "id": "B-06",
+      "title": "Assist五接口与可信Context",
+      "lane": "B",
+      "depends_on": [
+        "B-05"
+      ],
+      "original_task_refs": [
+        "M11"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350147+00:00",
+      "metadata": {}
+    },
+    "B-07": {
+      "id": "B-07",
+      "title": "提案采纳、四项更新与收据",
+      "lane": "B",
+      "depends_on": [
+        "B-06"
+      ],
+      "original_task_refs": [
+        "M18"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350149+00:00",
+      "metadata": {}
+    },
+    "B-08": {
+      "id": "B-08",
+      "title": "状态投影、澄清/取消及人工核对",
+      "lane": "B",
+      "depends_on": [
+        "B-07"
+      ],
+      "original_task_refs": [
+        "M25",
+        "M26"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350150+00:00",
+      "metadata": {}
+    },
+    "B-09": {
+      "id": "B-09",
+      "title": "WEB与移动交互",
+      "lane": "B",
+      "depends_on": [
+        "B-08"
+      ],
+      "original_task_refs": [
+        "M26"
+      ],
+      "allowed_paths": [
+        "apps/student-web/",
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350151+00:00",
+      "metadata": {}
+    },
+    "B-10": {
+      "id": "B-10",
+      "title": "Java/页面观测与反馈",
+      "lane": "B",
+      "depends_on": [
+        "B-09"
+      ],
+      "original_task_refs": [
+        "M27"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350153+00:00",
+      "metadata": {}
+    },
+    "B-11": {
+      "id": "B-11",
+      "title": "Java数据治理与安全",
+      "lane": "B",
+      "depends_on": [
+        "B-10"
+      ],
+      "original_task_refs": [
+        "M28"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350154+00:00",
+      "metadata": {}
+    },
+    "B-12": {
+      "id": "B-12",
+      "title": "B线回归与交接包",
+      "lane": "B",
+      "depends_on": [
+        "B-11"
+      ],
+      "original_task_refs": [
+        "M29"
+      ],
+      "allowed_paths": [
+        "services/java/",
+        "execution/lanes/B/"
+      ],
+      "status": "todo",
+      "updated_at": "2026-10-20T01:13:48.350156+00:00",
+      "metadata": {}
+    }
+  }
+}

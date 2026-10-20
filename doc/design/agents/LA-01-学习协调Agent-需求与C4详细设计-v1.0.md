@@ -28,6 +28,7 @@ LA-01负责选择合法的协作模板；Runtime按模板启动不同Agent及等
 - [协作模板注册表](la-01/contracts/workflow-catalog.json)：固定模板、步骤、Agent/规则职责、依赖和权限。
 - [合成验收案例](la-01/examples/la01-cases.json)：合法/非法协议及业务决策案例，非已运行模型评测。
 - [检查器](la-01/verification/check_la01_design.py)、[检查记录](la-01/verification/LA-01设计检查记录-v1.0.md)：实际验证范围和未实施项。
+- [工程落地基线与三线账本 (I-01)](../../implementation/I-01-baseline-and-ledger-overview.md)：三线任务账本、基线文件审计、103项需求覆盖矩阵与里程碑划界。
 
 ### 1.2 建议阅读路线
 
@@ -1082,6 +1083,9 @@ Artifact复用现有存储，至少有owner/tenant、来源run/step、大小/类
 | 存储/灾备故障 | SRE停止不可追踪新写，恢复后先对账 | RPO/RTO与已接受请求损失范围核对 |
 
 ## 20. 企业级实施与验收基线
+
+> [!NOTE]
+> 工程落地主计划参见 [Master Plan v1.0](../../implementation/LA-01与Agent-Harness-AI工程落地-Master-Plan-v1.0.md)；已建立的工程基线、三线状态机与需求覆盖矩阵详见 [I-01 任务说明](../../implementation/I-01-baseline-and-ledger-overview.md)。
 
 ### 20.1 新增实现规则的验证矩阵
 
