@@ -1,0 +1,425 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-10-20T01:20:16.871277+00:00",
+  "git_commit": "9573764c640a215dcd01381b6876b50950c4fe92",
+  "total_files": 104,
+  "total_bytes": 3889871,
+  "files": {
+    "doc/design/README.md": {
+      "sha256": "a496f188bf9a7ea401a7513a53574fb1b45a7cf130103f5e90f288eff7702b47",
+      "size_bytes": 975
+    },
+    "doc/design/学生持续学习-AI-Agent群程序设计与工程脚手架-v1.0.md": {
+      "sha256": "bfa273bf8d79d99f06baad333289e39b8f12dd12c4b712b6756ecd5f289f2b5a",
+      "size_bytes": 50164
+    },
+    "doc/design/学生持续学习-AI-Agent群详细设计-v1.0.md": {
+      "sha256": "f207fce9fd23ca8cb24d8f235d70734f440f04fcdd754ae69add3427955f6572",
+      "size_bytes": 66153
+    },
+    "doc/design/agents/LA-01-学习协调Agent-需求与C4详细设计-v1.0.md": {
+      "sha256": "bf0101c931d4e02517078c5d26d2acb9e87aad0f0f7ddec2588435452b88a5c3",
+      "size_bytes": 114178
+    },
+    "doc/design/agents/la-01/contracts/agentic-engineering.schema.json": {
+      "sha256": "14632f16f365c29843e62398ec27b508e148f4a7120ae79e50daab1cfd08b4b9",
+      "size_bytes": 20680
+    },
+    "doc/design/agents/la-01/contracts/agentic-policy.json": {
+      "sha256": "45c562b6710a98b8287f1c1145dd28ae3569d258ab9cd9bb829c8b71f20a9b85",
+      "size_bytes": 1935
+    },
+    "doc/design/agents/la-01/contracts/journey-coverage.json": {
+      "sha256": "13c7ace21b21bd7e2fcdc936b4f27f53289e78bf25892cc58e02dd0a0ef48557",
+      "size_bytes": 7888
+    },
+    "doc/design/agents/la-01/contracts/la01.openapi.json": {
+      "sha256": "a8c98bc2f1b3906dcf3b2a0f957ba11970aa880e4e8ce7257859b32e8b780653",
+      "size_bytes": 19578
+    },
+    "doc/design/agents/la-01/contracts/la01.schema.json": {
+      "sha256": "3f5a92d674a8087e1c52b61ddf500066ec935a726ec318bd64bbd63c2bb9cadb",
+      "size_bytes": 18696
+    },
+    "doc/design/agents/la-01/contracts/workflow-catalog.json": {
+      "sha256": "0833d79715575bf57ea40e4a10f787466fbd8436551dbbb587b073f4b2ac55a5",
+      "size_bytes": 2884
+    },
+    "doc/design/agents/la-01/verification/LA-01设计检查记录-v1.0.md": {
+      "sha256": "ac62be83c6a4d849e2686a040945242db7b5743f9278364f370425a3a34fd081",
+      "size_bytes": 3191
+    },
+    "doc/design/agents/la-01/verification/check_la01_design.py": {
+      "sha256": "1c92425493f930ace17381803bd9c95622c23ae9f2eded37c255f762b6a6ea41",
+      "size_bytes": 14287
+    },
+    "doc/design/agents/la-01/examples/agentic-engineering-cases.json": {
+      "sha256": "34d2b99f1e8d9dcbe13095c20431ef24a6e09b8acfd935d294f52e5f5fa28885",
+      "size_bytes": 26721
+    },
+    "doc/design/agents/la-01/examples/la01-cases.json": {
+      "sha256": "5642d134d5f1fa99a74d9442797031e54d9d0151ef4fc8e38dd9475303d28065",
+      "size_bytes": 48896
+    },
+    "doc/design/agents/la-01/examples/skills/la01-coordinate-learning/SKILL.md": {
+      "sha256": "8e4ec4ff3142bb3adefb206b5dcf4d25456426b4c1c9a02939fb4a6a885e99f8",
+      "size_bytes": 1126
+    },
+    "doc/design/agents/la-01/examples/skills/la01-coordinate-learning/references/routing.md": {
+      "sha256": "c1c5776c87866fdd29cebb3c88874e3bf9831ce277cd0086481884388e0188e5",
+      "size_bytes": 405
+    },
+    "doc/design/ai-agent/agent-prompts-v1.0.md": {
+      "sha256": "fac3173fc7e4f85a39b116ba33aba4f7dd1e796d5f70d12bafa2b4d670f306f1",
+      "size_bytes": 4937
+    },
+    "doc/design/ai-agent/contracts/learning-agent.openapi.json": {
+      "sha256": "9853669a58411c2fd7f80ff9c130cfd6c1eb4540eb1137156345decab2430951",
+      "size_bytes": 50245
+    },
+    "doc/design/ai-agent/contracts/learning-agent.schema.json": {
+      "sha256": "34259897a4cfe1f6d155ce2e4547e626f1bec827ec6b70c427cb0e27efaa3b27",
+      "size_bytes": 73112
+    },
+    "doc/design/ai-agent/verification/check_design.py": {
+      "sha256": "b1a39aa5c9c94dbdf9c586710b8a6d9d68bec69349bd5f0c9c59fd8a084202a1",
+      "size_bytes": 5612
+    },
+    "doc/design/ai-agent/verification/设计检查记录-v1.0.md": {
+      "sha256": "45110184f962ca1cc1797156b664d76497d0f86f3e5e816ca1b65a2b41400df1",
+      "size_bytes": 2290
+    },
+    "doc/design/ai-agent/programming/component-cases.json": {
+      "sha256": "a4db48e15f2b442e0e48de9847246565d69bf07fbe2d3df540ec3bfb6f77fb65",
+      "size_bytes": 13358
+    },
+    "doc/design/ai-agent/programming/scaffold-blueprint.json": {
+      "sha256": "edc2bc19775cf166491add8b0a9d963f304c25447abc3b04ad7d1860de1b4e20",
+      "size_bytes": 7357
+    },
+    "doc/design/ai-agent/programming/verification/check_programming_design.py": {
+      "sha256": "5505f2869e4b9c0467c9665890fb895eb15c906a356800e1a0fdd2ca29750a6c",
+      "size_bytes": 6018
+    },
+    "doc/design/ai-agent/programming/verification/程序设计检查记录-v1.0.md": {
+      "sha256": "758fb95d5f1ba724309f57ba14fad55194a501128294f74dbc6d257fda535f60",
+      "size_bytes": 2438
+    },
+    "doc/design/ai-agent/programming/templates/ports.py.example": {
+      "sha256": "b1902d709a5624451bd4217c1f05b956a812a2c12d37bb9410f250fdaa28980e",
+      "size_bytes": 2817
+    },
+    "doc/design/ai-agent/programming/templates/pyproject.toml.example": {
+      "sha256": "5186c2e613b23ceda36701e5108fe6a3cb3540e4279baf319f6067bb5a158360",
+      "size_bytes": 1158
+    },
+    "doc/design/ai-agent/programming/sql/001_agent_runtime.sql": {
+      "sha256": "7be669a1a6c51e29fa189f1a828a0dc43d505ccbb268fe1114b3fd935e0104e8",
+      "size_bytes": 6661
+    },
+    "doc/design/ai-agent/programming/sql/002_learning_coordination.sql": {
+      "sha256": "bc6acd0e84ce6b24675869bfa2d7be29be719433efac0979e12b66dd327d8463",
+      "size_bytes": 6597
+    },
+    "doc/design/ai-agent/deployment/agent-worker.example.yaml": {
+      "sha256": "99a15c4fc55dae289a1b29edae629e06af72a3c81867655b5ff26d7a182397bf",
+      "size_bytes": 3641
+    },
+    "doc/design/ai-agent/deployment/pilot-policy.json": {
+      "sha256": "1f651f867192d016b9b93842a86b99fe8e994bceb3bb96be0716c1563093a374",
+      "size_bytes": 1738
+    },
+    "doc/design/ai-agent/examples/contract-cases.json": {
+      "sha256": "46e3d9ad6e1b5c5aa999fd1ef2fad57ccf0eb520778c1a5fa9707ebe3f1c517b",
+      "size_bytes": 18159
+    },
+    "doc/requirements/README.md": {
+      "sha256": "c98212917d3e6ffe1ce02c3cff78271fa00c1ae582d787117f53b0dde2c8f46d",
+      "size_bytes": 883
+    },
+    "doc/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666",
+      "size_bytes": 75658
+    },
+    "doc/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.3.md": {
+      "sha256": "de8e77eaf8571d37dadd5e353917eda58ce00f0255a4ab1208364da470b4beb0",
+      "size_bytes": 174030
+    },
+    "doc/architecture/4A-关键契约与实施约束-v1.0.md": {
+      "sha256": "60e8b9845cfb4f9fbadce22e886234369d91e6851fe7168cac2f8654ba96abfa",
+      "size_bytes": 12259
+    },
+    "doc/architecture/4A-架构决策与实施门禁-v1.0.md": {
+      "sha256": "33cacb8cb79cf73de96b78eb595f7e7122e8b2f4c9484732972f9755eef0a7a7",
+      "size_bytes": 10904
+    },
+    "doc/architecture/README.md": {
+      "sha256": "407f499821031b0ff6609c00301c6d617aec282db682fdb39a6e7b800448c870",
+      "size_bytes": 2057
+    },
+    "doc/architecture/多Agent协作与RAG知识库设计-v0.1.md": {
+      "sha256": "d73e15e9aaaf94a18aafb1ea26207bff6a6d645271f1d3e20126cde141f4d4db",
+      "size_bytes": 388
+    },
+    "doc/architecture/学生持续学习-多Agent与RAG-4A专项架构设计-v1.0.md": {
+      "sha256": "143206f3b2bf760b330e6d195bb2f3b3910c07e37fe97d6c457ef04aaedb8375",
+      "size_bytes": 42838
+    },
+    "doc/architecture/运行与恢复手册-v0.1.md": {
+      "sha256": "2502a0364286aedeeaf3e0ce501d6214ce3acf4b9ef5e8b24bb2df8e4fd773e5",
+      "size_bytes": 374
+    },
+    "doc/architecture/通用Agent-Harness-参考架构与工程规范-v1.0.md": {
+      "sha256": "8d168bfefed36e7f33649a5ff341e24df2ee99e183c38e571073d017fefdaa44",
+      "size_bytes": 75254
+    },
+    "doc/architecture/通用Agentic学习与考试平台-4A总体架构设计-v1.0.md": {
+      "sha256": "cb6b38667de6bc6271eb9868341e03436964ce315dbfa6aea7111c0baf0459e6",
+      "size_bytes": 59838
+    },
+    "doc/architecture/通用Agentic学习与考试平台-4A总体架构设计-v1.1.md": {
+      "sha256": "95899c745b63d216d1d20ca8e6e473155874f2ce25f0d7311dde0392e1aa12a7",
+      "size_bytes": 87579
+    },
+    "doc/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md": {
+      "sha256": "6bf51e0ed5a062a9f51b7db1b0217e65636243e51d443fc0d4519b2e28df36a5",
+      "size_bytes": 406
+    },
+    "doc/architecture/adr/架构决策记录-v0.1.md": {
+      "sha256": "150fc2bbd57cd15d176e05fed0886bf4360cb2696edc693f1d6e345087fb604f",
+      "size_bytes": 381
+    },
+    "doc/architecture/archive/README.md": {
+      "sha256": "43c7b1fd613a02956e049e8bede69ed9826fd0e026ec502798d739b286d3c54c",
+      "size_bytes": 1988
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/manifest.json": {
+      "sha256": "631e9afca5984aa75b82cf9ce0f7f25a4413188066ffadadeb30490ab9f5b97c",
+      "size_bytes": 6903
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/requirements/README.md": {
+      "sha256": "c98212917d3e6ffe1ce02c3cff78271fa00c1ae582d787117f53b0dde2c8f46d",
+      "size_bytes": 883
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666",
+      "size_bytes": 75658
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md": {
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328",
+      "size_bytes": 107100
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd",
+      "size_bytes": 142435
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.3.md": {
+      "sha256": "03656d699c3c31da8fd016926b86f7fe7371f830e07c24904f3d21d855687600",
+      "size_bytes": 169454
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/4A-关键契约与实施约束-v1.0.md": {
+      "sha256": "60e8b9845cfb4f9fbadce22e886234369d91e6851fe7168cac2f8654ba96abfa",
+      "size_bytes": 12259
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/4A-架构决策与实施门禁-v1.0.md": {
+      "sha256": "33cacb8cb79cf73de96b78eb595f7e7122e8b2f4c9484732972f9755eef0a7a7",
+      "size_bytes": 10904
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/README.md": {
+      "sha256": "81ce4555d83e7ef78420c5163264d0beedeececce874c0790217a63ee398f0cd",
+      "size_bytes": 1021
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/多Agent协作与RAG知识库设计-v0.1.md": {
+      "sha256": "d73e15e9aaaf94a18aafb1ea26207bff6a6d645271f1d3e20126cde141f4d4db",
+      "size_bytes": 388
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/运行与恢复手册-v0.1.md": {
+      "sha256": "2502a0364286aedeeaf3e0ce501d6214ce3acf4b9ef5e8b24bb2df8e4fd773e5",
+      "size_bytes": 374
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/通用Agentic学习与考试平台-4A总体架构设计-v1.0.md": {
+      "sha256": "cb6b38667de6bc6271eb9868341e03436964ce315dbfa6aea7111c0baf0459e6",
+      "size_bytes": 59838
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md": {
+      "sha256": "6bf51e0ed5a062a9f51b7db1b0217e65636243e51d443fc0d4519b2e28df36a5",
+      "size_bytes": 406
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/adr/架构决策记录-v0.1.md": {
+      "sha256": "150fc2bbd57cd15d176e05fed0886bf4360cb2696edc693f1d6e345087fb604f",
+      "size_bytes": 381
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/README.md": {
+      "sha256": "746057276c3ab0c26340d323c352be75c2f8407fbc1b55edadff7aa0bd0bf05d",
+      "size_bytes": 1399
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/manifest.json": {
+      "sha256": "bad2631548f6812acb42d7368d8104c79ea31137073a8ae4eeb29f6a4af9246d",
+      "size_bytes": 2421
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666",
+      "size_bytes": 75658
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md": {
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328",
+      "size_bytes": 107100
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd",
+      "size_bytes": 142435
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/多Agent协作与RAG知识库设计-v0.1.md": {
+      "sha256": "fa741b00bd90ce27695291e8fafc2c8f1cbec7ec36e6c86fe7c5352872d48984",
+      "size_bytes": 15822
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/运行与恢复手册-v0.1.md": {
+      "sha256": "5d601944934e0171b93684f1d06fae25c511ba2e5dbbeaef4f3f1ecc192b4ab8",
+      "size_bytes": 9033
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md": {
+      "sha256": "38e1d082d8c07d03b820002bd7143a1ee5af9ae6d096d22b51b770748c3e65bf",
+      "size_bytes": 85713
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/adr/架构决策记录-v0.1.md": {
+      "sha256": "983ace96c70e00216325ff2ca053165a103d4e3fd516dbac2290b2a3ed98a399",
+      "size_bytes": 8857
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/contracts/核心数据与接口契约-v0.1.md": {
+      "sha256": "3b96822578761c7b851cba1fd7ea1c0e9785ba8ef28b5bdb227d2c02645e6539",
+      "size_bytes": 11707
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/check_architecture_docs.py": {
+      "sha256": "47e41c506dd32c7ab99623adb059198265c5338f7b312d1a6749b8c692ce0d6e",
+      "size_bytes": 7317
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/requirement-index.json": {
+      "sha256": "130be5388a1f1886558502388e3fa79894d32ee033aeb6941aeba7badc161103",
+      "size_bytes": 58789
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/文档检查报告-v0.1.md": {
+      "sha256": "d687dbcc571f40ed62a38ac603ad52ade3c1565eb039a6b88d4cca7d31879a5e",
+      "size_bytes": 2599
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/需求追溯与验证矩阵-v0.1.md": {
+      "sha256": "7617b3e2ccef71cecc256740d994960063a06e46e7a233b7afb2238bfb120abd",
+      "size_bytes": 160169
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/contracts/核心数据与接口契约-v0.1.md": {
+      "sha256": "0c6687f2e7c8403937bcb5aef67b3e5e7dd965249b38ea24d0e1c5e88fae2c21",
+      "size_bytes": 396
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/4A-requirement-index-v1.0.json": {
+      "sha256": "a4659d73688d98619c111071d0de9d28876360bd6d945e91dbd4c9808120b316",
+      "size_bytes": 189578
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/4A-文档检查报告-v1.0.md": {
+      "sha256": "0494c6a856a69f1c6be3778117e23eb6128175a4bf6e73e386c400493e346569",
+      "size_bytes": 2924
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/4A-需求追溯与验证矩阵-v1.0.md": {
+      "sha256": "d48522b8b4f9591ef666f58b9aea54ef004f60dfce98ac1942ca0d15b541945b",
+      "size_bytes": 144894
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/check_4a_documents.py": {
+      "sha256": "0f8ba4ef1552276196c9578c69722790bd513045f44e90ed212645b68602ce3e",
+      "size_bytes": 8591
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/文档检查报告-v0.1.md": {
+      "sha256": "11922fd27c6897a7b3a88fb64fe54c46421bd35ebb25ee8d25ed29f3f9ba2787",
+      "size_bytes": 390
+    },
+    "doc/architecture/archive/2026-10-18-pre-core-learning/docs/architecture/verification/需求追溯与验证矩阵-v0.1.md": {
+      "sha256": "09b60d0336830b9528992d6d385f0754f4e201066b84f161ef6d1441cb27830e",
+      "size_bytes": 399
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/manifest.json": {
+      "sha256": "bad2631548f6812acb42d7368d8104c79ea31137073a8ae4eeb29f6a4af9246d",
+      "size_bytes": 2421
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666",
+      "size_bytes": 75658
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md": {
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328",
+      "size_bytes": 107100
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md": {
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd",
+      "size_bytes": 142435
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/多Agent协作与RAG知识库设计-v0.1.md": {
+      "sha256": "fa741b00bd90ce27695291e8fafc2c8f1cbec7ec36e6c86fe7c5352872d48984",
+      "size_bytes": 15822
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/运行与恢复手册-v0.1.md": {
+      "sha256": "5d601944934e0171b93684f1d06fae25c511ba2e5dbbeaef4f3f1ecc192b4ab8",
+      "size_bytes": 9033
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md": {
+      "sha256": "38e1d082d8c07d03b820002bd7143a1ee5af9ae6d096d22b51b770748c3e65bf",
+      "size_bytes": 85713
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/adr/架构决策记录-v0.1.md": {
+      "sha256": "983ace96c70e00216325ff2ca053165a103d4e3fd516dbac2290b2a3ed98a399",
+      "size_bytes": 8857
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/contracts/核心数据与接口契约-v0.1.md": {
+      "sha256": "3b96822578761c7b851cba1fd7ea1c0e9785ba8ef28b5bdb227d2c02645e6539",
+      "size_bytes": 11707
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/check_architecture_docs.py": {
+      "sha256": "47e41c506dd32c7ab99623adb059198265c5338f7b312d1a6749b8c692ce0d6e",
+      "size_bytes": 7317
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/requirement-index.json": {
+      "sha256": "130be5388a1f1886558502388e3fa79894d32ee033aeb6941aeba7badc161103",
+      "size_bytes": 58789
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/文档检查报告-v0.1.md": {
+      "sha256": "d687dbcc571f40ed62a38ac603ad52ade3c1565eb039a6b88d4cca7d31879a5e",
+      "size_bytes": 2599
+    },
+    "doc/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/需求追溯与验证矩阵-v0.1.md": {
+      "sha256": "7617b3e2ccef71cecc256740d994960063a06e46e7a233b7afb2238bfb120abd",
+      "size_bytes": 160169
+    },
+    "doc/architecture/contracts/核心数据与接口契约-v0.1.md": {
+      "sha256": "0c6687f2e7c8403937bcb5aef67b3e5e7dd965249b38ea24d0e1c5e88fae2c21",
+      "size_bytes": 396
+    },
+    "doc/architecture/verification/4A-requirement-index-v1.0.json": {
+      "sha256": "a4659d73688d98619c111071d0de9d28876360bd6d945e91dbd4c9808120b316",
+      "size_bytes": 189578
+    },
+    "doc/architecture/verification/4A-文档检查报告-v1.0.md": {
+      "sha256": "0494c6a856a69f1c6be3778117e23eb6128175a4bf6e73e386c400493e346569",
+      "size_bytes": 2924
+    },
+    "doc/architecture/verification/4A-需求追溯与验证矩阵-v1.0.md": {
+      "sha256": "d48522b8b4f9591ef666f58b9aea54ef004f60dfce98ac1942ca0d15b541945b",
+      "size_bytes": 144894
+    },
+    "doc/architecture/verification/check_4a_documents.py": {
+      "sha256": "0f8ba4ef1552276196c9578c69722790bd513045f44e90ed212645b68602ce3e",
+      "size_bytes": 8591
+    },
+    "doc/architecture/verification/文档检查报告-v0.1.md": {
+      "sha256": "11922fd27c6897a7b3a88fb64fe54c46421bd35ebb25ee8d25ed29f3f9ba2787",
+      "size_bytes": 390
+    },
+    "doc/architecture/verification/需求追溯与验证矩阵-v0.1.md": {
+      "sha256": "09b60d0336830b9528992d6d385f0754f4e201066b84f161ef6d1441cb27830e",
+      "size_bytes": 399
+    },
+    "doc/implementation/I-01-baseline-and-ledger-overview.md": {
+      "sha256": "f30152c1c6637bfb82e6b25fdd26574f63370af3d27687b9f84597acd96c5fc1",
+      "size_bytes": 7339
+    },
+    "doc/implementation/LA-01与Agent-Harness-AI工程落地-Master-Plan-v1.0.md": {
+      "sha256": "353ec7b7256950edb5a76c05abd3c5bccd5a3cace2595f611c75d3e3bde51cd4",
+      "size_bytes": 74813
+    }
+  }
+}
