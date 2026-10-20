@@ -2,17 +2,19 @@
 
 | 属性 | 内容 |
 |---|---|
-| 日期 / 状态 | 2026-10-18；程序设计评审稿，含参考DDL和模板；尚未生成完整应用脚手架、执行服务联调或部署 |
+| 日期 / 状态 | 2026-10-19；程序设计与脚手架实施规范评审稿，融合通用Harness架构与企业级脚手架设计；指导M03落地 |
 | 直接上位设计 | [AI Agent群详细设计 v1.0](学生持续学习-AI-Agent群详细设计-v1.0.md)；本文将其职责/契约落实为程序组件、算法、工程和开发任务 |
+| 上位通用架构 | [通用Agent-Harness参考架构与工程规范 v1.0](../architecture/通用Agent-Harness-参考架构与工程规范-v1.0.md)、[AI-Agent-Harness企业级通用脚手架详细设计 v1.0](../architecture/AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md) |
 | 需求 / 架构 | [需求 v0.3](../requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.3.md)、[4A专项架构](../architecture/学生持续学习-多Agent与RAG-4A专项架构设计-v1.0.md)、[总体架构 v1.1](../architecture/通用Agentic学习与考试平台-4A总体架构设计-v1.1.md) |
 | 业务范围 | 首次图谱路线共建、逐题作答、行为分析、讲解、四项更新、复习及恢复；公共知识运营内部另行设计 |
 | 契约原则 | 沿用上位Schema/OpenAPI 1.0，不另造一组同名API；内部类名为建议实现名，不改变业务含义 |
-| 技术方向 | Java应用＋Python Agent/RAG；Spring Cloud/Alibaba；Kubernetes；DevSecOps/CI/CD |
-| 版本策略 | 本文确定框架和候选兼容线；精确patch、镜像摘要、锁文件由G0 PoC生成，经验证才成为部署基线 |
+| 技术方向 | Java微服务＋Python Agent Harness/Provider；Spring Cloud/Alibaba；LangGraph＋Harness；Kubernetes；DevSecOps/CI/CD |
+| 版本策略 | 本文确定框架和候选兼容线；精确patch、镜像摘要、锁文件由G0/M01 PoC生成，经验证才成为部署基线 |
 
 ## 1. 阅读与交付边界
 
-阅读顺序：需求→4A专项→详细设计→本文技术/脚手架→组件/算法→数据/测试→开发任务。本文维持BA/AA/DA/TA追溯，但以开发顺序组织；不重复上位业务定义。
+阅读顺序：需求→4A专项→通用Harness参考架构→脚手架详细设计→详细设计→本文技术/脚手架→组件/算法→数据/测试→开发任务。本文维持BA/AA/DA/TA追溯，但以开发顺序组织；不重复上位业务定义。
+
 
 | 交付件 | 用途 | 本次状态 |
 |---|---|---|
@@ -84,52 +86,96 @@ BA：学生持续学习与授权；AA：第4～9章；DA：第10章与DDL；TA�
 
 ## 4. 工程脚手架（Scaffold）设计
 
-### 4.1 仓库与运行单元
+### 4.1 仓库与微服务运行单元
+
+遵循云原生与微服务领域能力命名规范，项目杜绝宽泛的语言目录命名，采用标准领域能力微服务结构：
 
 ```text
-services/java/
-  pom.xml                              # parent: toolchain/BOM/plugins/enforcer
-  learning-core/                       # goals/attempts/evidence/profile/plans/cycles
-  knowledge-service/                   # approved catalog/revisions/answers/releases
-  platform-service/                    # workload identity/Invocation/budget
-  gateway-bff/                         # student session/routing/SSE
-services/python/learning-agent/
-  pyproject.toml / uv.lock / .python-version
-  src/learning_agent/
-    api/app.py / worker.py / rag_api.py # three independent entrypoints
-    bootstrap/container.py             # composition root only
-    domain/                            # immutable refs, policies, errors
-    generated/                         # DTO compiled from reviewed schema
-    application/                       # RunService, AgentExecutor, ProposalDispatcher
-    agents/la01_router.py ... la05_personal.py
-    workflows/bootstrap.py / attempt.py / assist.py
-    tools/registry.py / adapters.py
-    ports/                             # interfaces, no concrete SDK imports
-    infrastructure/                    # SQL, AMQP, HTTP, tracing, checkpoint
-    rag/                               # authorization, retrieval, RRF, evidence
-    prompts/                           # signed/versioned manifests
-  migrations/ / tests/ / Dockerfile
-services/python/provider/               # separate image/identity, adapters/secrets
-contracts/                             # reviewed Schema/OpenAPI copies + generation manifest
-infra/local/                           # compose + synthetic seed, not production secrets
-infra/k8s/base/ + overlays/{test,stage,prod}/
-pipelines/                             # platform-neutral tasks/quality gates
-scripts/                               # contract-gen, smoke, redelivery/fault tests
+services/
+  cogniva-learning-core/               # [Java] 目标/答题事实/四项收据/计划正式生效事务
+  cogniva-knowledge-service/           # [Java] 已审知识母本/题库/图谱版本与审核发布
+  cogniva-platform-service/            # [Java] 工作负载鉴权/租约/预算预占与对账
+  cogniva-gateway-bff/                 # [Java] 学生接入/会话/查询与状态投影
+  cogniva-learning-agent/              # [Python] 核心 Agent Harness 运行时 (包名: cogniva_agent)
+    pyproject.toml / uv.lock / Dockerfile
+    migrations/                        # Alembic 执行库迁移 (runs, steps, checkpoints, leases, inbox, outbox)
+    src/cogniva_agent/
+      domain/                          # 纯净领域模型 (Run, Step, Event, Session, IntentProposal, 规则路由)
+      ports/                           # 六边形抽象端口 (ModelPort, PolicyPort, BudgetPort, CheckpointPort, ReceiptPort, EvidencePort)
+      harness/                         # 宿主控制环 (advance 状态机, 9阶段 Hook, 租约fence, 保护项装配, 对账器)
+      agents/                          # LA-01 协调器及 LA-02~05 叶角色业务逻辑
+      workflows/                       # LangGraph 确定性图 (explain_flow, practice_flow, replan_flow)
+      adapters/                        # 适配器 (FastAPI 入口, SQLAlchemy 2 异步Checkpointer, AMQP, Fake/ProviderClient)
+    tests/                             # unit / contract / harness (含故障注入)
+  cogniva-model-provider/              # [Python] 独立大模型出网网关与密钥代理 (包名: cogniva_provider)
+    pyproject.toml / Dockerfile
+    src/cogniva_provider/
+      domain/                          # ModelProfile, 价格表版本, 计数器
+      ports/                           # 统一大模型供应商接口
+      adapters/                        # FakeProvider (测试用) 与真实厂商 SDK 适配器 (出网边界)
+      server/                          # Provider 内部 HTTP/gRPC 出网代理服务
+    tests/
+contracts/                             # 冻结的 OpenAPI 契约、JSON Schema、工作流目录与生成器清单
+infra/local/                           # 本地 Docker Compose (PG+pgvector, RabbitMQ, Valkey, OTel)
+infra/k8s/{base,overlays}/             # K8s 部署清单 (test / stage / prod)
+pipelines/                             # 平台中立 CI 流水线与质量门禁
+scripts/                               # 契约生成、冒烟测试、故障重投演练脚本
 ```
 
-PythonAPI、Worker、RAG可共享包，按启动角色裁剪权限；Provider独立包/镜像避免普通Worker加载密钥SDK。Java学习核心首发保持一个事务域，不为每个AA模块独立数据库。父POM管理依赖，不形成巨大的common业务包；共享包限契约/基础协议，不能依赖具体领域实现。
+### 4.2 Harness 宿主控制环与 9 阶段生命周期 Hooks（核心工程规范）
 
-### 4.2 Composition Root与依赖方向
+脚手架遵循上位 [《AI-Agent-Harness企业级通用脚手架详细设计 v1.0》](../architecture/AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md) 确立的 **“LangGraph 作为图执行引擎，Harness 作为外层受控宿主（Control Ring & Host）”** 铁律。
+
+```text
+advance(run, fencing_token):
+  load pinned release and durable state
+  verify lease, tenant, cancellation, deadline, authorization freshness
+  reconcile any pending or unknown external operation before resending
+  select ready step from approved workflow
+  assemble protected context; resolve approved skills; reserve model budget
+  choose deterministic rule OR invoke approved model
+  validate candidate schema, evidence and legal action set
+  for each selected action within bounded concurrency:
+    verify dependency, latest scope, cancellation and resource revision
+    authorize action; reserve its budget
+    persist tool/delegation intent with stable operation_ref
+    execute via adapter, record result OR unknown status
+    validate output, sanitize untrusted content, record usage/receipt
+  checkpoint durable progress
+  evaluate done / wait / no-progress / budget / deadline / cancellation
+  finalize atomically OR persist wait / enqueue next bounded step
+```
+
+#### 9 阶段生命周期拦截器规范（不可绕过）：
+1. **`on_run_load`**：加载不可变版本 Profile，校验租户、租约（lease）与删除墓碑（Tombstone），拦截已被注销或越权的任务；
+2. **`before_context`**：校验学生授权时效与目的（purpose），重读必要事实，剔除越权片段；
+3. **`before_model`**：Token 计数预测、出网目的地检查、原子预占模型预算，检查 Run 是否已被用户取消；
+4. **`after_model`**：校验结构化 JSON Schema、记录实际 Token/用量、拦截非法提权，处理拒答；
+5. **`before_action`**：**安全核心闸门**。只有宿主能从模型候选构造 `AuthorizedToolCall`，模型自己输出 `permit=true` 必须被代码阻断；
+6. **`after_action`**：持久化全局唯一业务操作键（`operation_ref`）、哈希校验、处理网络未知超时（标记 `unknown`）；
+7. **`before_checkpoint`**：使用单调自增 `fencing_token` 与 CAS 乐观锁持久化状态，旧 Worker 脑裂写操作立即拒绝；
+8. **`before_finalize`**：汇总已达成目标与待确认/未完成项，生成聚合收据；
+9. **`after_finalize`**：Outbox 异步发布终态与脱敏审计日志。
+
+#### 核心机制落地：
+- **进程密钥物理隔离**：`cogniva-learning-agent` 绝对不持有大模型 API Key，仅通过内部 RPC/HTTP 与 `cogniva-model-provider` 通信；本地测试默认注入 100% 确定性的 `FakeProvider`；
+- **操作幂等与未知对账**：每次工具执行与外部提案提交前必须持久化 `operation_ref`；遇网络超时标为 `unknown`，由专职对账器（Reconciler）进行指数退避查询，严禁盲目自动重试非幂等写；
+- **长上下文保护项**：系统指令、学生当前否定句（如“周末不学民法”）、当前核心目标为最高优先级保护片段，禁止简单“截断最近N轮”；输出显式 `ContextManifest`；
+- **原子预算守恒**：父 Agent 预占总预算，子 Agent 委派时原子切分子额度，`子分配 + 父已花费 <= 批准总上限`；
+- **死循环/无进展熔断**：步数上限、超时、预算耗尽以及“输入/动作/参数哈希连续 3 次无新状态变化”强制熔断；
+- **双向 Stub 生态**：内置 `JavaStub`（供 Python 模拟业务上下文与收据）与 `AgentStub`（供 Java 模拟 Agent 响应）。
+
+### 4.3 Composition Root与依赖方向
 
 FastAPI lifespan创建Settings→契约/Prompt/Policy/Graph清单校验→HTTP/SQL/消息连接池→适配器→AgentRegistry/GraphRegistry→用例服务；关闭时停止接新任务、标记readiness=false、等待有界在途、flush投递状态、释放租约/连接。导入模块不能开网络或自动迁移DB。
 
-Agent→Port/DTO；UseCase→Agent/Port；Adapter→外部SDK；bootstrap→所有实现负责装配。API/AMQP只转换/验证和调用用例，不直接实现教学/事务逻辑。禁止Agent依赖SQLAlchemy、HTTPX、厂商SDK或读环境密钥。Repository不持模型调用，模型不在数据库事务中等待。
+- **依赖单向流动**：Domain（纯业务/无三方依赖）← Ports（接口定义）← Harness（控制环）← Workflows/Agents ← Adapters（具体技术实现：FastAPI, SQLAlchemy, LangGraph, ProviderClient）。
+- **绝对禁止反向依赖**：禁止 Agent 依赖 SQLAlchemy、HTTPX、厂商 SDK 或读取环境变量中的密钥。Repository 不持模型调用，模型不在数据库事务中等待。
+- **Java 侧边界**：JavaController→ApplicationService→DomainPolicy/RepositoryPort；JDBC/AMQP实现位于infrastructure。请求用户与内部工作负载安全链分开，内部DTO不能作为学生公开接口。使用构造器注入，测试替换端口而非修改全局单例。
 
-JavaController→ApplicationService→DomainPolicy/RepositoryPort；JDBC/AMQP实现位于infrastructure。请求用户与内部工作负载安全链分开，内部DTO不能作为学生公开接口。使用构造器注入，测试替换端口而非修改全局单例。
+### 4.4 标准启动与开发任务（未来生成工程的命令契约）
 
-### 4.3 标准启动与开发任务（未来生成工程的命令契约）
-
-以下命令目标尚不存在，本轮不执行或宣称可用；实际脚手架阶段实现Makefile/scripts并逐条验收。
+以下命令目标由脚手架阶段通过根 Makefile 与 scripts 统一实现并逐条验收：
 
 | 计划目标 | 内容 / 成功条件 |
 |---|---|
@@ -137,19 +183,26 @@ JavaController→ApplicationService→DomainPolicy/RepositoryPort；JDBC/AMQP实
 | make contracts | 验证Schema/OpenAPI并生成Python DTO/Java DTO；生成清单记录输入hash/工具版本，CI检测漂移 |
 | make dev-up | 启动本地PG/RabbitMQ/Valkey/对象存储与测试身份，端口仅本机；等待健康；不包含生产模型密钥 |
 | make migrate | Java Flyway、Python Alembic、框架checkpoint安装任务分别串行执行；不由每个Pod启动时抢迁移 |
-| make seed-demo | 仅合成知识、题目/答案、用户、授权、固定MockProvider；可重复，无真实法考版权材料 |
-| make run-java / run-agent-api / run-worker / run-rag / run-provider | 独立启动；默认MockProvider；内部地址/健康端口从Settings加载 |
-| make test-unit / test-contract / test-integration | 无网单测、契约、真实本地DB/消息集成分开；失败非零退出 |
+| make seed-demo | 仅合成知识、题目/答案、用户、授权、固定FakeProvider；可重复，无真实版权材料 |
+| make run-java / run-agent-api / run-worker / run-provider | 独立启动；内部地址/健康端口从Settings加载；Agent使用FakeProvider或Provider代理 |
+| make test-unit / test-contract / test-integration | 无网单测（<5s）、契约校验、真实本地DB/消息集成分开；失败非零退出 |
 | make smoke-learning | 一次完整任务、四项收据、查询状态及trace验证 |
-| make fault-redelivery | 投递重复消息、杀Worker、旧fencing回执，确认不重复写入 |
+| make fault-redelivery | 投递重复消息（10次）、杀Worker恢复测试、旧fencing回执冲突测试，确认不重复写入 |
 | make package / deploy-stage | 构建签名镜像/SBOM和Kustomize清单，预发部署；生产需受保护GitOps流程 |
 | make dev-down | 停本地服务，默认保留卷；删除数据必须显式额外选项 |
 
-### 4.4 脚手架最小链路验收
+### 4.5 脚手架最小链路验收与非功能性硬指标
 
-使用合成Submission/event→Java事务Outbox→RabbitMQ→PythonInbox/run→规则路由到LA-02 MockProvider→ProposalDelivery→Java验签/租约/版本/采纳→四项规则结果→GET cycle/run。骨架用规则完成其余项并标原因，不能伪装全体Agent有教学能力。
+使用合成Submission/event→Java事务Outbox→RabbitMQ→PythonInbox/run→规则路由到LA-02 FakeProvider→ProposalDelivery→Java验签/租约/版本/采纳→四项规则结果→GET cycle/run。
 
-验收要求：一键构建/启动、trace关联、重复投递不重复落库、非法Schema被拒、模型异常有状态、Worker崩溃可恢复、未授权拒绝、CI通过。只有这些实测通过才称“可运行脚手架”；仅目录、模板或mock返回200不算完整验收。
+必须满足以下 6 大非功能性（S-NFR）硬指标才可判定脚手架就绪：
+1. **S-NFR-01 安全零信任**：Worker 进程 0 密钥配置；`before_action` 成功拦截模型伪造的 `permit=true`；审计日志中学生 PII 自动脱敏；
+2. **S-NFR-02 高可靠幂等与自愈**：同一作答消息重复投递 10 次，业务收据与事实仅变更 1 次；Worker 进程在任意 Step 被强杀后重启自动从 Checkpoint 恢复；旧租约 Worker 的写操作 100% 被 CAS Fencing 阻断；
+3. **S-NFR-03 本地确定性**：依赖 FakeProvider 与 Synthetic 数据，全部单元测试与契约测试在断网机器上 100% 通过，耗时 < 5 秒；
+4. **S-NFR-04 并发有界**：全链路异步非阻塞（FastAPI + asyncpg + HTTPX），单 Run 子 Agent 最大递归深度 `max_depth <= 2`；
+5. **S-NFR-05 可观测审计**：完整关联 trace/run/step/operation_ref，高风险提案审计日志不可采样；
+6. **S-NFR-06 架构纯粹**：替换 LangGraph 或底层模型驱动不影响 Agent 领域层与意图规则。
+
 
 ## 5. 类型、端口、错误和执行上下文
 
@@ -161,23 +214,24 @@ JSON timestamps→timezone-aware datetime / Java Instant；revision/seq→整数
 
 Schema封闭字段下，新增字段先发布接收端兼容多版本，再发送新minor；新增枚举、必填或含义变化评审，破坏升级新major。上下游共享同一输入hash规范，采用固定键序、UTF-8、明确null/缺失语义的canonical JSON；幂等payload中包含影响执行的字段，不包含trace瞬时头。
 
-### 5.2 主要类与端口
+### 5.2 六边形端口体系（Ports Architecture）
 
-| 类 / 接口 | 方法规格 | 边界 |
+脚手架遵循六边形架构（Ports & Adapters），领域层与 Harness 内核通过强类型抽象端口与外部技术实现解耦：
+
+| 端口名称 (Port) | 核心方法规格 | 职责与安全边界 |
 |---|---|---|
-| RunService | create(RunCreateRequest, Identity)→RunReceipt；control(id, RunControl) | 持久化入队/控制，不在HTTP内跑长图 |
-| WorkflowRunner | execute(run_ref)→RunExecutionSummary | 领取租约/重建输入/执行图/汇总；仅一个当前执行epoch |
-| AgentExecutor | execute(AgentInvocation, AgentContext)→RoleOutput | 上下文、提示、Provider、解析/修复；不直接改业务事实 |
-| AgentPort | execute(context)→指定角色输出 | LA-01～05的领域实现，工具由白名单适配 |
-| ModelGatewayPort | reserve/submit/query/settle(call_spec)→ModelResult | SDK只在Provider；unknown独立业务状态 |
-| ContextResolverPort | resolve(refs, purpose, auth_ref)→AuthorizedContext | Java签发必要输入和工具范围，执行时重新授权 |
-| LeasePort | claim/renew/release/get(run_ref, expected_token) | Java权威租约；Python仅镜像 |
-| ProposalPort | submit(ProposalRequest, key)→ProposalReceipt | Java正式采纳；200不等于全部updated |
-| RunRepository / UnitOfWork | get/create/CAS_transition/save_step | 本地短事务，比较expected_revision与fencing镜像 |
-| EvidenceRetrieverPort | retrieve(EvidenceQuery)→EvidenceSet | 授权集合内检索，不直接计算学生掌握 |
-| ToolPort | execute(ToolInvocation, VerifiedContext)→ToolResult | 工具/参数/目标再次校验，禁止任意URL/SQL |
+| **ModelPort** (ModelGatewayPort) | reserve / submit / query / settle(spec) → ModelResult | 模型调用抽象；SDK仅存在于独立Provider；超时未知记录 `usage_unknown` |
+| **PolicyPort** (ContextResolverPort) | resolve(refs, purpose, auth_ref) → AuthorizedContext | 校验学生授权与时效；签发最小必要上下文，未授权操作失败关闭 |
+| **BudgetPort** | reserve / allocate / record_usage / settle / release | 模型预算与费用管理；多Agent委派时原子切分子预算，防止并发超支 |
+| **CheckpointPort** (RunRepository / UoW) | get / save_checkpoint / CAS_transition(fence) | 状态检查点与分布式CAS；校验单调自增 `fencing_token` 防脑裂 |
+| **ReceiptPort** (ProposalPort) | submit_proposal(kind, payload, operation_ref) → Receipt | 向Java业务核心提交候选提案并获取正式收据；200不等于全部更新 |
+| **EvidencePort** (EvidenceRetrieverPort) | retrieve(query, auth_scope) → EvidenceSet | 知识与证据检索；仅在授权范围内返回带来源/版本/有效期的证据 |
+| **ToolPort** | execute(invocation, verified_context) → ToolResult | 受控动作执行；必须具备持久化 `operation_ref` 与白名单权限检查 |
+| **LeasePort** | claim / renew / release(run_ref, expected_token) | 分布式租约操作；以Java/数据库租约服务为时钟权威 |
+| **AgentPort** | execute(invocation, agent_context) → RoleOutput | LA-01～05 领域实现规范，返回类型化提案，绝不直接写业务表 |
 
-详细签名见[端口模板](ai-agent/programming/templates/ports.py.example)。接口可异步，副作用不能藏在属性访问/序列化。上下文不可变；运行进度在独立状态中更新。
+详细签名见 [端口模板](ai-agent/programming/templates/ports.py.example)。接口采用全异步声明（`async/await`），副作用不得隐藏在属性访问或序列化过程中。上下文不可变；运行进度仅在独立状态与检查点中更新。
+
 
 ### 5.3 AgentContext与图状态
 
