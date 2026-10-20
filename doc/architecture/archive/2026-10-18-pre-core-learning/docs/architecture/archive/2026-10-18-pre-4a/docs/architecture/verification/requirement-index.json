@@ -1,0 +1,4080 @@
+[
+  {
+    "id": "SRC-01",
+    "source_line": 31,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-02",
+    "source_line": 32,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-03",
+    "source_line": 33,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-04",
+    "source_line": 34,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-05",
+    "source_line": 35,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-06",
+    "source_line": 36,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-07",
+    "source_line": 37,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-08",
+    "source_line": 38,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-09",
+    "source_line": 39,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-10",
+    "source_line": 40,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-11",
+    "source_line": 41,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-12",
+    "source_line": 42,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-13",
+    "source_line": 43,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-14",
+    "source_line": 44,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-15",
+    "source_line": 45,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-16",
+    "source_line": 46,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "SRC-17",
+    "source_line": 47,
+    "sections": [
+      1,
+      4,
+      7,
+      23
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-01",
+    "source_line": 90,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-02",
+    "source_line": 91,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-03",
+    "source_line": 92,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-04",
+    "source_line": 93,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-05",
+    "source_line": 94,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-06",
+    "source_line": 95,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-07",
+    "source_line": 96,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-08",
+    "source_line": 97,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "BR-09",
+    "source_line": 98,
+    "sections": [
+      2,
+      3,
+      7,
+      19,
+      20,
+      22
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-23",
+      "AC-24",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-USR-01",
+    "source_line": 483,
+    "sections": [
+      4,
+      5,
+      7,
+      15
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-13",
+      "AC-16"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-USR-02",
+    "source_line": 484,
+    "sections": [
+      4,
+      5,
+      7,
+      15
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-13",
+      "AC-16"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-USR-03",
+    "source_line": 485,
+    "sections": [
+      4,
+      5,
+      7,
+      15
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-13",
+      "AC-16"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CH-01",
+    "source_line": 486,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-09",
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CH-02",
+    "source_line": 487,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-09",
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CH-03",
+    "source_line": 488,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-09",
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-KG-01",
+    "source_line": 494,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-KG-02",
+    "source_line": 495,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-KG-03",
+    "source_line": 496,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-KG-04",
+    "source_line": 497,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-KG-05",
+    "source_line": 498,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-01",
+    "source_line": 504,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-02",
+    "source_line": 505,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-03",
+    "source_line": 506,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-04",
+    "source_line": 507,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-05",
+    "source_line": 508,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-QB-06",
+    "source_line": 509,
+    "sections": [
+      9,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-05",
+      "AC-12",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CNT-01",
+    "source_line": 510,
+    "sections": [
+      9,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-12",
+      "AC-17",
+      "AC-20",
+      "AC-29",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CNT-02",
+    "source_line": 511,
+    "sections": [
+      9,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-12",
+      "AC-17",
+      "AC-20",
+      "AC-29",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CNT-03",
+    "source_line": 512,
+    "sections": [
+      9,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-12",
+      "AC-17",
+      "AC-20",
+      "AC-29",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CNT-04",
+    "source_line": 513,
+    "sections": [
+      9,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-12",
+      "AC-17",
+      "AC-20",
+      "AC-29",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-CNT-05",
+    "source_line": 514,
+    "sections": [
+      9,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-12",
+      "AC-17",
+      "AC-20",
+      "AC-29",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PR-01",
+    "source_line": 520,
+    "sections": [
+      7,
+      9,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-14",
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PR-02",
+    "source_line": 521,
+    "sections": [
+      7,
+      9,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-14",
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PR-03",
+    "source_line": 522,
+    "sections": [
+      7,
+      9,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-14",
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PR-04",
+    "source_line": 523,
+    "sections": [
+      7,
+      9,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-14",
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-GRD-01",
+    "source_line": 524,
+    "sections": [
+      7,
+      10,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-20",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-GRD-02",
+    "source_line": 525,
+    "sections": [
+      7,
+      10,
+      11,
+      12
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-02",
+      "AC-20",
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-EXP-01",
+    "source_line": 526,
+    "sections": [
+      8,
+      9,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-07",
+      "AC-08",
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-EXP-02",
+    "source_line": 527,
+    "sections": [
+      8,
+      9,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-07",
+      "AC-08",
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-EXP-03",
+    "source_line": 528,
+    "sections": [
+      8,
+      9,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-07",
+      "AC-08",
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-EXP-04",
+    "source_line": 529,
+    "sections": [
+      8,
+      9,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-07",
+      "AC-08",
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-ASM-01",
+    "source_line": 535,
+    "sections": [
+      10,
+      12,
+      19
+    ],
+    "acceptance": [
+      "AC-02",
+      "AC-05",
+      "AC-20",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-ASM-02",
+    "source_line": 536,
+    "sections": [
+      10,
+      12,
+      19
+    ],
+    "acceptance": [
+      "AC-02",
+      "AC-05",
+      "AC-20",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-ASM-03",
+    "source_line": 537,
+    "sections": [
+      10,
+      12,
+      19
+    ],
+    "acceptance": [
+      "AC-02",
+      "AC-05",
+      "AC-20",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-ASM-04",
+    "source_line": 538,
+    "sections": [
+      10,
+      12,
+      19
+    ],
+    "acceptance": [
+      "AC-02",
+      "AC-05",
+      "AC-20",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PKB-01",
+    "source_line": 539,
+    "sections": [
+      9,
+      10,
+      12,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PKB-02",
+    "source_line": 540,
+    "sections": [
+      9,
+      10,
+      12,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PKB-03",
+    "source_line": 541,
+    "sections": [
+      9,
+      10,
+      12,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PKB-04",
+    "source_line": 542,
+    "sections": [
+      9,
+      10,
+      12,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-RPT-01",
+    "source_line": 543,
+    "sections": [
+      10,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-18",
+      "AC-19",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-RPT-02",
+    "source_line": 544,
+    "sections": [
+      10,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-18",
+      "AC-19",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PLN-01",
+    "source_line": 550,
+    "sections": [
+      7,
+      10,
+      12,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-15",
+      "AC-16",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PLN-02",
+    "source_line": 551,
+    "sections": [
+      7,
+      10,
+      12,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-15",
+      "AC-16",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PLN-03",
+    "source_line": 552,
+    "sections": [
+      7,
+      10,
+      12,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-15",
+      "AC-16",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-PLN-04",
+    "source_line": 553,
+    "sections": [
+      7,
+      10,
+      12,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-15",
+      "AC-16",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-REV-01",
+    "source_line": 554,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-16",
+      "AC-19",
+      "AC-26",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-REV-02",
+    "source_line": 555,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-16",
+      "AC-19",
+      "AC-26",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-REV-03",
+    "source_line": 556,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-04",
+      "AC-16",
+      "AC-19",
+      "AC-26",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-AI-01",
+    "source_line": 562,
+    "sections": [
+      8,
+      13,
+      15,
+      20
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-AI-02",
+    "source_line": 563,
+    "sections": [
+      8,
+      13,
+      15,
+      20
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-AI-03",
+    "source_line": 564,
+    "sections": [
+      8,
+      13,
+      15,
+      20
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-AI-04",
+    "source_line": 565,
+    "sections": [
+      8,
+      13,
+      15,
+      20
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-AI-05",
+    "source_line": 566,
+    "sections": [
+      8,
+      13,
+      15,
+      20
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-NET-01",
+    "source_line": 567,
+    "sections": [
+      9,
+      13,
+      15
+    ],
+    "acceptance": [
+      "AC-08",
+      "AC-12",
+      "AC-29"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-NET-02",
+    "source_line": 568,
+    "sections": [
+      9,
+      13,
+      15
+    ],
+    "acceptance": [
+      "AC-08",
+      "AC-12",
+      "AC-29"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-OPS-01",
+    "source_line": 569,
+    "sections": [
+      5,
+      9,
+      17,
+      20
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-BIZ-01",
+    "source_line": 570,
+    "sections": [
+      13,
+      16,
+      20
+    ],
+    "acceptance": [
+      "AC-10",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-BIZ-02",
+    "source_line": 571,
+    "sections": [
+      13,
+      16,
+      20
+    ],
+    "acceptance": [
+      "AC-10",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-BIZ-03",
+    "source_line": 572,
+    "sections": [
+      13,
+      16,
+      20
+    ],
+    "acceptance": [
+      "AC-10",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-BIZ-04",
+    "source_line": 573,
+    "sections": [
+      13,
+      16,
+      20
+    ],
+    "acceptance": [
+      "AC-10",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-01",
+    "source_line": 579,
+    "sections": [
+      8,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-13"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-02",
+    "source_line": 580,
+    "sections": [
+      7,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-14"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-03",
+    "source_line": 581,
+    "sections": [
+      9,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-04",
+    "source_line": 582,
+    "sections": [
+      10,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-05",
+    "source_line": 583,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-16"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-06",
+    "source_line": 584,
+    "sections": [
+      7,
+      9,
+      20
+    ],
+    "acceptance": [
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-07",
+    "source_line": 585,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-08",
+    "source_line": 586,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-19"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-09",
+    "source_line": 587,
+    "sections": [
+      7,
+      9,
+      17,
+      20
+    ],
+    "acceptance": [
+      "AC-20"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-10",
+    "source_line": 588,
+    "sections": [
+      12,
+      15,
+      17
+    ],
+    "acceptance": [
+      "AC-21"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-JRN-11",
+    "source_line": 589,
+    "sections": [
+      7,
+      14,
+      20
+    ],
+    "acceptance": [
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-01",
+    "source_line": 597,
+    "sections": [
+      4,
+      11,
+      14
+    ],
+    "acceptance": [
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-02",
+    "source_line": 598,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-03",
+    "source_line": 599,
+    "sections": [
+      5,
+      11
+    ],
+    "acceptance": [
+      "AC-23",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-04",
+    "source_line": 600,
+    "sections": [
+      9,
+      10,
+      11
+    ],
+    "acceptance": [
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-05",
+    "source_line": 601,
+    "sections": [
+      11,
+      13
+    ],
+    "acceptance": [
+      "AC-25",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-06",
+    "source_line": 602,
+    "sections": [
+      10,
+      11,
+      19
+    ],
+    "acceptance": [
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-07",
+    "source_line": 603,
+    "sections": [
+      10,
+      11,
+      19
+    ],
+    "acceptance": [
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-08",
+    "source_line": 604,
+    "sections": [
+      10,
+      11
+    ],
+    "acceptance": [
+      "AC-24",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-09",
+    "source_line": 605,
+    "sections": [
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-10",
+    "source_line": 606,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-11",
+    "source_line": 607,
+    "sections": [
+      9,
+      11
+    ],
+    "acceptance": [
+      "AC-29"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-12",
+    "source_line": 608,
+    "sections": [
+      11,
+      19,
+      22
+    ],
+    "acceptance": [
+      "AC-23",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-13",
+    "source_line": 609,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-14",
+    "source_line": 610,
+    "sections": [
+      7,
+      11,
+      17,
+      20
+    ],
+    "acceptance": [
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-15",
+    "source_line": 611,
+    "sections": [
+      8,
+      11,
+      15
+    ],
+    "acceptance": [
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "FR-DOM-16",
+    "source_line": 612,
+    "sections": [
+      13,
+      20
+    ],
+    "acceptance": [
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-01",
+    "source_line": 624,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-02",
+    "source_line": 625,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-03",
+    "source_line": 626,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-04",
+    "source_line": 627,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-05",
+    "source_line": 628,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-06",
+    "source_line": 629,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-07",
+    "source_line": 630,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-08",
+    "source_line": 631,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-09",
+    "source_line": 632,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-10",
+    "source_line": 633,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-11",
+    "source_line": 634,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-12",
+    "source_line": 642,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-13",
+    "source_line": 643,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AR-14",
+    "source_line": 644,
+    "sections": [
+      8,
+      12,
+      15,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-09",
+      "AC-27",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-01",
+    "source_line": 652,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-02",
+    "source_line": 653,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-03",
+    "source_line": 654,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-04",
+    "source_line": 655,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-05",
+    "source_line": 656,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-06",
+    "source_line": 657,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-07",
+    "source_line": 658,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-08",
+    "source_line": 659,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-09",
+    "source_line": 660,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-10",
+    "source_line": 661,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-11",
+    "source_line": 662,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-01",
+    "source_line": 666,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-02",
+    "source_line": 667,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-03",
+    "source_line": 668,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-04",
+    "source_line": 669,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-05",
+    "source_line": 670,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-06",
+    "source_line": 671,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-07",
+    "source_line": 672,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-08",
+    "source_line": 673,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-09",
+    "source_line": 674,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-12",
+    "source_line": 680,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-13",
+    "source_line": 681,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-14",
+    "source_line": 682,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-15",
+    "source_line": 683,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DR-16",
+    "source_line": 684,
+    "sections": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-05",
+      "AC-11",
+      "AC-23",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-10",
+    "source_line": 686,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-11",
+    "source_line": 687,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-12",
+    "source_line": 688,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-13",
+    "source_line": 689,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "DATA-14",
+    "source_line": 690,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-20",
+      "AC-21",
+      "AC-27",
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "IR-01",
+    "source_line": 696,
+    "sections": [
+      11,
+      13,
+      18,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-07",
+      "AC-10",
+      "AC-25",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "IR-02",
+    "source_line": 697,
+    "sections": [
+      11,
+      13,
+      18,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-07",
+      "AC-10",
+      "AC-25",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "IR-03",
+    "source_line": 698,
+    "sections": [
+      11,
+      13,
+      18,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-07",
+      "AC-10",
+      "AC-25",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "IR-04",
+    "source_line": 699,
+    "sections": [
+      11,
+      13,
+      18,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-07",
+      "AC-10",
+      "AC-25",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-01",
+    "source_line": 700,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-02",
+    "source_line": 701,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-03",
+    "source_line": 702,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-04",
+    "source_line": 703,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-05",
+    "source_line": 704,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "IR-05",
+    "source_line": 706,
+    "sections": [
+      11,
+      13,
+      18,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-07",
+      "AC-10",
+      "AC-25",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-06",
+    "source_line": 706,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "UX-07",
+    "source_line": 706,
+    "sections": [
+      7,
+      13,
+      14,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-06",
+      "AC-13",
+      "AC-18",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-01",
+    "source_line": 716,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-09",
+      "AC-11"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-02",
+    "source_line": 717,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-11"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-03",
+    "source_line": 718,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-09",
+      "AC-11"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-04",
+    "source_line": 719,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-09",
+      "AC-20"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-05",
+    "source_line": 720,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-21"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-06",
+    "source_line": 721,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-07",
+    "source_line": 722,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-08",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-08",
+    "source_line": 723,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-08",
+      "AC-21"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-09",
+    "source_line": 724,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-21",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-10",
+    "source_line": 725,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-12",
+      "AC-20",
+      "AC-29"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-11",
+    "source_line": 726,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-01",
+      "AC-08",
+      "AC-11",
+      "AC-12"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-12",
+    "source_line": 727,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-02",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-13",
+    "source_line": 728,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-05",
+      "AC-29",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-14",
+    "source_line": 729,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-20",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-15",
+    "source_line": 730,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-16",
+    "source_line": 731,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-21",
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-17",
+    "source_line": 732,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-07",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-18",
+    "source_line": 733,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-09",
+      "AC-11",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-19",
+    "source_line": 734,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-08",
+      "AC-11",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-20",
+    "source_line": 735,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-21",
+    "source_line": 736,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-10",
+      "AC-22",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-22",
+    "source_line": 737,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-11",
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-23",
+    "source_line": 743,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-03",
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-24",
+    "source_line": 744,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-23",
+      "AC-24",
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-25",
+    "source_line": 745,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-25",
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-26",
+    "source_line": 746,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-09",
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-27",
+    "source_line": 747,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-06",
+      "AC-11",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "NFR-28",
+    "source_line": 748,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-28",
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-01",
+    "source_line": 758,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-02",
+    "source_line": 759,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-03",
+    "source_line": 760,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-04",
+    "source_line": 761,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-05",
+    "source_line": 762,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-06",
+    "source_line": 763,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-07",
+    "source_line": 764,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-08",
+    "source_line": 765,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-09",
+    "source_line": 767,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-10",
+    "source_line": 767,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "CON-11",
+    "source_line": 767,
+    "sections": [
+      3,
+      6,
+      18,
+      21,
+      22
+    ],
+    "acceptance": [
+      "AC-11",
+      "AC-23",
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-01",
+    "source_line": 797,
+    "sections": [
+      7,
+      9,
+      10
+    ],
+    "acceptance": [
+      "AC-01"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-02",
+    "source_line": 798,
+    "sections": [
+      10,
+      19
+    ],
+    "acceptance": [
+      "AC-02"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-03",
+    "source_line": 799,
+    "sections": [
+      10,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-03"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-04",
+    "source_line": 800,
+    "sections": [
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-04"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-05",
+    "source_line": 801,
+    "sections": [
+      7,
+      9,
+      12
+    ],
+    "acceptance": [
+      "AC-05"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-06",
+    "source_line": 802,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-06"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-07",
+    "source_line": 803,
+    "sections": [
+      8,
+      13,
+      15
+    ],
+    "acceptance": [
+      "AC-07"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-08",
+    "source_line": 804,
+    "sections": [
+      8,
+      9,
+      15
+    ],
+    "acceptance": [
+      "AC-08"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-09",
+    "source_line": 805,
+    "sections": [
+      7,
+      8,
+      17
+    ],
+    "acceptance": [
+      "AC-09"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-10",
+    "source_line": 806,
+    "sections": [
+      13,
+      20
+    ],
+    "acceptance": [
+      "AC-10"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-11",
+    "source_line": 807,
+    "sections": [
+      16,
+      17,
+      19
+    ],
+    "acceptance": [
+      "AC-11"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-12",
+    "source_line": 808,
+    "sections": [
+      9,
+      19,
+      20
+    ],
+    "acceptance": [
+      "AC-12"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-13",
+    "source_line": 809,
+    "sections": [
+      8,
+      14,
+      15
+    ],
+    "acceptance": [
+      "AC-13"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-14",
+    "source_line": 810,
+    "sections": [
+      7,
+      10,
+      13
+    ],
+    "acceptance": [
+      "AC-14"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-15",
+    "source_line": 811,
+    "sections": [
+      9,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-15"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-16",
+    "source_line": 812,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-16"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-17",
+    "source_line": 813,
+    "sections": [
+      7,
+      9,
+      20
+    ],
+    "acceptance": [
+      "AC-17"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-18",
+    "source_line": 814,
+    "sections": [
+      7,
+      13,
+      14
+    ],
+    "acceptance": [
+      "AC-18"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-19",
+    "source_line": 815,
+    "sections": [
+      7,
+      10,
+      14
+    ],
+    "acceptance": [
+      "AC-19"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-20",
+    "source_line": 816,
+    "sections": [
+      7,
+      9,
+      12,
+      17
+    ],
+    "acceptance": [
+      "AC-20"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-21",
+    "source_line": 817,
+    "sections": [
+      12,
+      15,
+      17
+    ],
+    "acceptance": [
+      "AC-21"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-22",
+    "source_line": 818,
+    "sections": [
+      7,
+      14,
+      20
+    ],
+    "acceptance": [
+      "AC-22"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-23",
+    "source_line": 819,
+    "sections": [
+      5,
+      11,
+      22
+    ],
+    "acceptance": [
+      "AC-23"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-24",
+    "source_line": 820,
+    "sections": [
+      7,
+      10,
+      11
+    ],
+    "acceptance": [
+      "AC-24"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-25",
+    "source_line": 821,
+    "sections": [
+      11,
+      13,
+      19
+    ],
+    "acceptance": [
+      "AC-25"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-26",
+    "source_line": 822,
+    "sections": [
+      10,
+      11,
+      19
+    ],
+    "acceptance": [
+      "AC-26"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-27",
+    "source_line": 823,
+    "sections": [
+      8,
+      9,
+      12,
+      15
+    ],
+    "acceptance": [
+      "AC-27"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-28",
+    "source_line": 824,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-28"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-29",
+    "source_line": 825,
+    "sections": [
+      9,
+      11
+    ],
+    "acceptance": [
+      "AC-29"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-30",
+    "source_line": 826,
+    "sections": [
+      11,
+      19,
+      22
+    ],
+    "acceptance": [
+      "AC-30"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-31",
+    "source_line": 827,
+    "sections": [
+      7,
+      11,
+      17
+    ],
+    "acceptance": [
+      "AC-31"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-32",
+    "source_line": 828,
+    "sections": [
+      10,
+      12
+    ],
+    "acceptance": [
+      "AC-32"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "AC-33",
+    "source_line": 829,
+    "sections": [
+      16,
+      20
+    ],
+    "acceptance": [
+      "AC-33"
+    ],
+    "status": "design_mapped_unverified"
+  },
+  {
+    "id": "T-01",
+    "source_line": 843,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-02",
+    "source_line": 844,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-03",
+    "source_line": 845,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-04",
+    "source_line": 846,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-05",
+    "source_line": 847,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-06",
+    "source_line": 848,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-07",
+    "source_line": 849,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-08",
+    "source_line": 850,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-09",
+    "source_line": 851,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-10",
+    "source_line": 852,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-11",
+    "source_line": 853,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-12",
+    "source_line": 854,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-13",
+    "source_line": 855,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-14",
+    "source_line": 856,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-15",
+    "source_line": 857,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-16",
+    "source_line": 858,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-17",
+    "source_line": 859,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-18",
+    "source_line": 860,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-19",
+    "source_line": 861,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  },
+  {
+    "id": "T-20",
+    "source_line": 862,
+    "sections": [
+      3,
+      22,
+      23
+    ],
+    "acceptance": [],
+    "status": "pending_decision"
+  }
+]

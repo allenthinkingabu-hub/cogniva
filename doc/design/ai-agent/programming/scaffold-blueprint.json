@@ -1,0 +1,313 @@
+{
+  "document_version": "1.0",
+  "status": "design_only_no_generated_services",
+  "upstream_schema": "../contracts/learning-agent.schema.json",
+  "upstream_openapi": "../contracts/learning-agent.openapi.json",
+  "technology": {
+    "java": {
+      "jdk_line": "21 LTS",
+      "build": "Maven Wrapper",
+      "boot_line": "4.0.x",
+      "cloud_line": "2025.1.x",
+      "alibaba_mapping_start": "2025.1.0.0",
+      "patch_lock_status": "requires_G0_PoC"
+    },
+    "python": {
+      "line": "3.14 standard GIL build",
+      "packaging": "uv/src",
+      "api": "FastAPI/Uvicorn",
+      "types": "Pydantic 2 + JSON Schema",
+      "orchestration": "LangGraph 1",
+      "data": "SQLAlchemy 2.1 async Core + psycopg 3/Alembic",
+      "amqp": "aio-pika",
+      "http": "HTTPX",
+      "patch_lock_status": "requires_G0_PoC"
+    },
+    "delivery": {
+      "orchestrator": "Kubernetes",
+      "manifests": "Kustomize",
+      "cd": "Argo CD",
+      "ci": "platform neutral tasks; runner selected by deployment team"
+    }
+  },
+  "modules": [
+    {
+      "id": "contracts",
+      "planned_path": "contracts",
+      "owner": "Java/Python",
+      "depends_on": []
+    },
+    {
+      "id": "java-learning",
+      "planned_path": "services/java/learning-core",
+      "owner": "Java",
+      "depends_on": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "java-knowledge",
+      "planned_path": "services/java/knowledge-service",
+      "owner": "Java",
+      "depends_on": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "java-platform",
+      "planned_path": "services/java/platform-service",
+      "owner": "Java",
+      "depends_on": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "java-gateway",
+      "planned_path": "services/java/gateway-bff",
+      "owner": "Java/frontend",
+      "depends_on": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "python-domain",
+      "planned_path": "services/python/learning-agent/src/learning_agent/domain",
+      "owner": "Python",
+      "depends_on": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "python-ports",
+      "planned_path": "services/python/learning-agent/src/learning_agent/ports",
+      "owner": "Python",
+      "depends_on": [
+        "python-domain",
+        "contracts"
+      ]
+    },
+    {
+      "id": "python-agents",
+      "planned_path": "services/python/learning-agent/src/learning_agent/agents",
+      "owner": "Python/teaching",
+      "depends_on": [
+        "python-domain",
+        "python-ports"
+      ]
+    },
+    {
+      "id": "python-application",
+      "planned_path": "services/python/learning-agent/src/learning_agent/application",
+      "owner": "Python",
+      "depends_on": [
+        "python-agents",
+        "python-ports"
+      ]
+    },
+    {
+      "id": "python-infrastructure",
+      "planned_path": "services/python/learning-agent/src/learning_agent/infrastructure",
+      "owner": "Python",
+      "depends_on": [
+        "python-ports",
+        "contracts"
+      ]
+    },
+    {
+      "id": "python-rag",
+      "planned_path": "services/python/learning-agent/src/learning_agent/rag",
+      "owner": "Python/retrieval",
+      "depends_on": [
+        "python-domain",
+        "python-ports"
+      ]
+    },
+    {
+      "id": "python-bootstrap",
+      "planned_path": "services/python/learning-agent/src/learning_agent/bootstrap",
+      "owner": "Python",
+      "depends_on": [
+        "python-application",
+        "python-infrastructure",
+        "python-rag"
+      ]
+    },
+    {
+      "id": "provider",
+      "planned_path": "services/python/provider",
+      "owner": "Python/security",
+      "depends_on": [
+        "contracts"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "role": "LA-01",
+      "planned_class": "IntentRouterAgent",
+      "output_definition": "CoordinationOutput",
+      "primary_workflow": "assist"
+    },
+    {
+      "role": "LA-02",
+      "planned_class": "AttemptAnalysisAgent",
+      "output_definition": "AnalysisOutput",
+      "primary_workflow": "attempt"
+    },
+    {
+      "role": "LA-03",
+      "planned_class": "TutorAgent",
+      "output_definition": "ExplanationOutput",
+      "primary_workflow": "attempt"
+    },
+    {
+      "role": "LA-04",
+      "planned_class": "LearningPlannerAgent",
+      "output_definition": "PlanOutput",
+      "primary_workflow": "bootstrap"
+    },
+    {
+      "role": "LA-05",
+      "planned_class": "PersonalEvidenceAgent",
+      "output_definition": "PersonalOutput",
+      "primary_workflow": "attempt"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "bootstrap",
+      "planned_module": "workflows/bootstrap.py",
+      "nodes": [
+        "authorize",
+        "load_scope",
+        "deterministic_seed",
+        "propose_plan",
+        "validate_draft",
+        "persist_draft",
+        "finish"
+      ]
+    },
+    {
+      "name": "attempt",
+      "planned_module": "workflows/attempt.py",
+      "nodes": [
+        "authorize",
+        "extract_features",
+        "analyze",
+        "explain",
+        "personal",
+        "plan",
+        "collect"
+      ],
+      "parallel_branches": [
+        [
+          "explain"
+        ],
+        [
+          "personal",
+          "plan"
+        ]
+      ]
+    },
+    {
+      "name": "review",
+      "alias_of": "attempt",
+      "note": "Java schedules review and creates Attempt; submitted review shares attempt graph"
+    },
+    {
+      "name": "assist",
+      "planned_module": "workflows/assist.py",
+      "nodes": [
+        "authorize",
+        "route",
+        "clarify_or_execute",
+        "collect"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "name": "agent-api",
+      "planned_module": "learning_agent.api.app",
+      "owner_module": "python-bootstrap"
+    },
+    {
+      "name": "agent-worker",
+      "planned_module": "learning_agent.worker",
+      "owner_module": "python-bootstrap"
+    },
+    {
+      "name": "rag-api",
+      "planned_module": "learning_agent.rag_api",
+      "owner_module": "python-bootstrap"
+    },
+    {
+      "name": "provider",
+      "planned_module": "provider_service.api",
+      "owner_module": "provider"
+    }
+  ],
+  "planned_make_targets": [
+    "bootstrap",
+    "contracts",
+    "dev-up",
+    "migrate",
+    "seed-demo",
+    "run-java",
+    "run-agent-api",
+    "run-worker",
+    "run-rag",
+    "run-provider",
+    "test-unit",
+    "test-contract",
+    "test-integration",
+    "smoke-learning",
+    "fault-redelivery",
+    "package",
+    "deploy-stage",
+    "dev-down"
+  ],
+  "required_openapi_operation_ids": [
+    "createRun",
+    "getRun",
+    "controlRun",
+    "applyProposal",
+    "resolveContext",
+    "retrieveEvidence",
+    "reserveInvocation",
+    "settleInvocation",
+    "manageRunLease",
+    "getRunLease",
+    "executeProvider",
+    "getProviderExecution",
+    "beginInvocation"
+  ],
+  "forbidden_dependencies": [
+    {
+      "from": "python-agents",
+      "to": "python-infrastructure"
+    },
+    {
+      "from": "python-agents",
+      "to": "provider"
+    },
+    {
+      "from": "python-domain",
+      "to": "python-bootstrap"
+    }
+  ],
+  "production_blockers": [
+    "dependency locks and compatibility evidence",
+    "approved content and model destinations",
+    "teaching/evidence/review policies",
+    "behavior retention and authorization",
+    "runtime security and load/recovery evidence"
+  ],
+  "acceptance_gates": [
+    "SC-0",
+    "SC-1",
+    "SC-2",
+    "SC-3",
+    "SC-4"
+  ]
+}

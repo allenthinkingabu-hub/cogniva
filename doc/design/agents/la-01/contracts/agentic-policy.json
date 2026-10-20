@@ -1,0 +1,74 @@
+{
+  "status": "pilot_not_production",
+  "revision": "engineering-1",
+  "context": {
+    "la01_total_window_budget": 4096,
+    "output_reserve": 600,
+    "safety_reserve": 256,
+    "input_budget": 3240,
+    "default_sync_llm_compaction": false,
+    "preserve_protected_fragments": true,
+    "overflow_action": "clarify_or_menu",
+    "summary_is_authorization": false
+  },
+  "memory": {
+    "scope_keys": [
+      "owner_ref",
+      "goal_ref",
+      "purpose"
+    ],
+    "accept_expired": false,
+    "accept_revoked": false,
+    "promote_derived_to_authoritative": false
+  },
+  "handoff": {
+    "full_parent_transcript_allowed": false,
+    "require_manifest_and_limits": true,
+    "authority_from_receipt_only": true
+  },
+  "mcp": {
+    "production_enabled": false,
+    "target_protocol": "2026-07-28",
+    "legacy_profiles_explicit": true,
+    "stdio_in_production": false,
+    "auto_enable_discovered_tools": false,
+    "first_pilot_read_only": true,
+    "transport_is_object_authorization": false
+  },
+  "skills": {
+    "max_loaded_skills": 3,
+    "scripts_enabled": false,
+    "auto_install_untrusted": false,
+    "permission_mode": "intersection_and_all_required_tools_must_be_granted",
+    "revocation_checked_before_load": true
+  },
+  "observability": {
+    "allowed_span_names": [
+      "context.assemble",
+      "memory.select",
+      "skill.load",
+      "agent.route",
+      "handoff.send",
+      "tool.call",
+      "mcp.call",
+      "proposal.apply",
+      "result.assemble"
+    ],
+    "capture_content_by_default": false,
+    "metric_labels": [
+      "role",
+      "template",
+      "status",
+      "server_ref"
+    ],
+    "replay_real_side_effects": false
+  },
+  "production_required_approvals": [
+    "context_budget_and_semantic_preservation",
+    "memory_retention_and_privacy",
+    "mcp_version_sdk_auth_interoperability",
+    "skill_artifact_and_permissions",
+    "trace_and_redaction",
+    "end_to_end_journeys"
+  ]
+}

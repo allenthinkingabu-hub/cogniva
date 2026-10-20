@@ -1,0 +1,73 @@
+{
+  "status": "pilot_not_production",
+  "version": "pilot-1",
+  "requires_approval_before_production": true,
+  "workflow": {
+    "attempt_deadline_seconds": 30,
+    "bootstrap_deadline_seconds": 45,
+    "max_provider_requests": 6,
+    "max_tool_calls": 20,
+    "max_transitions": 24,
+    "max_role_retries": 1,
+    "context_token_limit_including_output": 12000
+  },
+  "roles": {
+    "LA-01": {
+      "timeout_seconds": 3,
+      "max_output_tokens": 600
+    },
+    "LA-02": {
+      "timeout_seconds": 6,
+      "max_output_tokens": 1200
+    },
+    "LA-03": {
+      "timeout_seconds": 10,
+      "max_output_tokens": 2000
+    },
+    "LA-04": {
+      "timeout_seconds": 8,
+      "max_output_tokens": 2000
+    },
+    "LA-05": {
+      "timeout_seconds": 5,
+      "max_output_tokens": 1200
+    }
+  },
+  "behavior": {
+    "max_batch_events": 50,
+    "max_batch_bytes": 65536,
+    "flush_interval_seconds": 3,
+    "late_window_seconds": 30,
+    "analysis_debounce_seconds": 5,
+    "comment": "T-28/T-29 approval required; independent final answer submission"
+  },
+  "rag": {
+    "lexical_top_k": 20,
+    "vector_top_k": 20,
+    "rrf_k": 60,
+    "rerank_top_k": 8,
+    "max_passages": 8,
+    "max_evidence_input_tokens": 6000,
+    "max_graph_depth": 1,
+    "max_graph_nodes": 20,
+    "chunk_target_characters": [
+      300,
+      700
+    ],
+    "max_overlap_characters": 80
+  },
+  "capacity": {
+    "pilot_model_concurrency": 10,
+    "comment": "not a throughput commitment"
+  },
+  "production_required_refs": [
+    "model_profiles",
+    "approved_budget_policy",
+    "approved_learning_policy",
+    "approved_retention_policy",
+    "authorized_destinations",
+    "approved_slo_profile",
+    "release_manifest",
+    "dependency_lock_manifest"
+  ]
+}

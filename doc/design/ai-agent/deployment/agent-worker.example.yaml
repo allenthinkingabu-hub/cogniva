@@ -1,0 +1,127 @@
+# Design-only template: image, Secret, identity trust, policies and dependencies must be supplied.
+# Resource values are pilot starting points, not tested production sizing.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: learning-agent-worker
+  namespace: learning-ai
+  labels:
+    app: learning-agent-worker
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learning-agent-worker
+  namespace: learning-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: learning-agent-worker
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: learning-agent-worker
+    spec:
+      serviceAccountName: learning-agent-worker
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: learning-agent-worker
+      containers:
+        - name: worker
+          image: registry.example.invalid/learning-agent-worker:REPLACE_WITH_VERIFIED_DIGEST
+          imagePullPolicy: Always
+          command: ["python", "-m", "learning_agent.worker"]
+          ports:
+            - containerPort: 8081
+              name: management
+          env:
+            - name: AGENT_RUNTIME_CONFIG_REF
+              value: approved-agent-policy
+            - name: AGENT_BROKER_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: learning-agent-runtime
+                  key: broker-dsn
+            - name: AGENT_CHECKPOINT_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: learning-agent-runtime
+                  key: checkpoint-dsn
+            - name: WORKLOAD_ASSERTION_PATH
+              value: /var/run/workload/token
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: management
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: management
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: management
+            periodSeconds: 10
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: workload-identity
+              mountPath: /var/run/workload
+              readOnly: true
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: "256Mi"
+        - name: workload-identity
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: token
+                  audience: learning-agent-workload-exchange
+                  expirationSeconds: 3600
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: learning-agent-worker
+  namespace: learning-ai
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: learning-agent-worker

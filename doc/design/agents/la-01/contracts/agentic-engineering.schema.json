@@ -1,0 +1,890 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LA-01 agentic engineering sidecar contracts 1.0",
+  "$comment": "Separate context/audit/governance sidecars; no fields added to closed LA-01 wire contracts.",
+  "$defs": {
+    "ContextFragment": {
+      "type": "object",
+      "properties": {
+        "fragment_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "source_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "authority_header",
+            "current_request",
+            "unresolved_constraint",
+            "task_receipt",
+            "recent_turn",
+            "summary",
+            "memory",
+            "skill",
+            "tool_result"
+          ]
+        },
+        "trust_level": {
+          "type": "string",
+          "enum": [
+            "authoritative_record",
+            "untrusted_content",
+            "derived"
+          ]
+        },
+        "protected": {
+          "type": "boolean"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "token_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "fragment_ref",
+        "source_ref",
+        "source_revision",
+        "kind",
+        "trust_level",
+        "protected",
+        "priority",
+        "token_count",
+        "content_hash"
+      ],
+      "additionalProperties": false
+    },
+    "ContextManifest": {
+      "type": "object",
+      "properties": {
+        "manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "context_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "run_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "LA-01",
+            "LA-02",
+            "LA-03",
+            "LA-04",
+            "LA-05"
+          ]
+        },
+        "auth_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "model_profile_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "token_counter_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "total_window_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "output_reserve": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "safety_reserve": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fragments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ContextFragment"
+          },
+          "maxItems": 100,
+          "minItems": 0
+        },
+        "selected_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 100,
+          "minItems": 0
+        },
+        "dropped_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 100,
+          "minItems": 0
+        },
+        "protected_fact_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 100,
+          "minItems": 0
+        },
+        "summary_source_watermark": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "ready",
+            "context_insufficient"
+          ]
+        }
+      },
+      "required": [
+        "manifest_ref",
+        "context_ref",
+        "run_ref",
+        "role",
+        "auth_revision",
+        "context_revision",
+        "model_profile_ref",
+        "token_counter_version",
+        "total_window_budget",
+        "output_reserve",
+        "safety_reserve",
+        "fragments",
+        "selected_refs",
+        "dropped_refs",
+        "protected_fact_refs",
+        "summary_source_watermark",
+        "decision"
+      ],
+      "additionalProperties": false
+    },
+    "MemoryRecord": {
+      "type": "object",
+      "properties": {
+        "memory_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "owner_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "goal_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "route",
+            "explain",
+            "plan"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "confirmed_preference",
+            "task_state",
+            "derived_hypothesis",
+            "conversation_summary"
+          ]
+        },
+        "trust_level": {
+          "type": "string",
+          "enum": [
+            "authoritative_record",
+            "derived"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 20,
+          "minItems": 1
+        },
+        "source_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "content_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "revoked",
+            "deleted"
+          ]
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "memory_ref",
+        "owner_ref",
+        "goal_ref",
+        "purpose",
+        "kind",
+        "trust_level",
+        "source_refs",
+        "source_revision",
+        "content_ref",
+        "status",
+        "expires_at"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "conversation_summary",
+                  "derived_hypothesis"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "trust_level": {
+                "const": "derived"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "HandoffEnvelope": {
+      "type": "object",
+      "properties": {
+        "handoff_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "parent_task_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "task_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "run_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "step_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "sender_role": {
+          "type": "string",
+          "enum": [
+            "LA-01",
+            "LA-02",
+            "LA-03",
+            "LA-04",
+            "LA-05",
+            "Runtime"
+          ]
+        },
+        "receiver_role": {
+          "type": "string",
+          "enum": [
+            "LA-02",
+            "LA-03",
+            "LA-04",
+            "LA-05"
+          ]
+        },
+        "context_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "input_refs_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "expected_output_schema_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "authorization_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "auth_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "budget_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fencing_token": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "causation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "limitations_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 20,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "handoff_ref",
+        "parent_task_ref",
+        "task_ref",
+        "request_ref",
+        "run_ref",
+        "step_ref",
+        "sender_role",
+        "receiver_role",
+        "context_manifest_ref",
+        "input_refs_hash",
+        "expected_output_schema_ref",
+        "authorization_ref",
+        "auth_revision",
+        "budget_ref",
+        "deadline_at",
+        "fencing_token",
+        "idempotency_key",
+        "causation_ref",
+        "limitations_refs"
+      ],
+      "additionalProperties": false
+    },
+    "MCPToolBinding": {
+      "type": "object",
+      "properties": {
+        "server_tool_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "domain_tool_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "schema_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "read_only": {
+          "const": true
+        }
+      },
+      "required": [
+        "server_tool_name",
+        "domain_tool_ref",
+        "schema_sha256",
+        "read_only"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerBinding": {
+      "type": "object",
+      "properties": {
+        "server_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "modern",
+            "legacy"
+          ]
+        },
+        "protocol_version": {
+          "type": "string",
+          "enum": [
+            "2026-07-28",
+            "2025-11-25"
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "approval_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "auth_resource": {
+          "type": "string",
+          "format": "uri"
+        },
+        "credential_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "allowed_tool_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MCPToolBinding"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5000
+        },
+        "max_response_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 262144
+        }
+      },
+      "required": [
+        "server_ref",
+        "endpoint",
+        "profile",
+        "protocol_version",
+        "enabled",
+        "approval_ref",
+        "auth_resource",
+        "credential_ref",
+        "allowed_tool_bindings",
+        "timeout_ms",
+        "max_response_bytes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "modern"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "protocol_version": {
+                "const": "2026-07-28"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "legacy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "protocol_version": {
+                "const": "2025-11-25"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SkillManifest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "artifact_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signature_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "approval_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "license_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "evaluation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved",
+            "active",
+            "revoked",
+            "retired"
+          ]
+        },
+        "applicable_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "LA-01",
+              "LA-02",
+              "LA-03",
+              "LA-04",
+              "LA-05"
+            ]
+          },
+          "maxItems": 5,
+          "minItems": 1
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "route",
+            "explain",
+            "plan"
+          ]
+        },
+        "required_tool_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 10,
+          "minItems": 0
+        },
+        "instructions_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "reference_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "maxItems": 20,
+          "minItems": 0
+        },
+        "scripts_enabled": {
+          "const": false
+        },
+        "policy_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "dependency_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 10,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "version",
+        "artifact_sha256",
+        "signature_ref",
+        "approval_ref",
+        "license_ref",
+        "evaluation_ref",
+        "status",
+        "applicable_roles",
+        "purpose",
+        "required_tool_refs",
+        "instructions_ref",
+        "reference_paths",
+        "scripts_enabled",
+        "policy_ref",
+        "dependency_refs"
+      ],
+      "additionalProperties": false
+    },
+    "TelemetryRecord": {
+      "type": "object",
+      "properties": {
+        "span_name": {
+          "type": "string",
+          "enum": [
+            "context.assemble",
+            "memory.select",
+            "skill.load",
+            "agent.route",
+            "handoff.send",
+            "tool.call",
+            "mcp.call",
+            "proposal.apply",
+            "result.assemble"
+          ]
+        },
+        "trace_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "span_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "parent_or_link_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 20,
+          "minItems": 0
+        },
+        "correlation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "learning.role": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "learning.context_manifest_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "learning.input_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "learning.output_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "learning.template_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "learning.tool_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "learning.skill_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "learning.schema_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "error.type": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "span_name",
+        "trace_ref",
+        "span_ref",
+        "parent_or_link_refs",
+        "correlation_ref",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "MetricPoint": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "learning_agent_requests_total",
+            "learning_agent_duration_ms",
+            "learning_agent_context_tokens"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string",
+              "enum": [
+                "LA-01",
+                "LA-02",
+                "LA-03",
+                "LA-04",
+                "LA-05"
+              ]
+            },
+            "template": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "status": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "server_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "labels"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

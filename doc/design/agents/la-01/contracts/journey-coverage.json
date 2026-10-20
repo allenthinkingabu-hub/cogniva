@@ -1,0 +1,343 @@
+{
+  "status": "design_coverage_not_executed_user_test",
+  "entry_stage": "J00",
+  "completion_stage": "J10",
+  "stages": [
+    {
+      "stage_id": "J00",
+      "label": "进入/恢复",
+      "student_visible_state": "进入/恢复",
+      "owner": "Java",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J01",
+        "J10"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-02",
+        "LA01-FR-03"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-04",
+        "LA01-NFR-13"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-02"
+      ]
+    },
+    {
+      "stage_id": "J01",
+      "label": "输入诉求",
+      "student_visible_state": "输入诉求",
+      "owner": "Java",
+      "persisted_state": "client_pending_message",
+      "next_stages": [
+        "J02",
+        "J10"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-01",
+        "LA01-FR-04"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-08"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-01",
+        "LA01-AT-04"
+      ]
+    },
+    {
+      "stage_id": "J02",
+      "label": "持久接收",
+      "student_visible_state": "持久接收",
+      "owner": "Java",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J03",
+        "J09"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-11",
+        "LA01-FR-14"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-01",
+        "LA01-NFR-06"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-13"
+      ]
+    },
+    {
+      "stage_id": "J03",
+      "label": "装配上下文",
+      "student_visible_state": "装配上下文",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J04",
+        "J09"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-03",
+        "LA01-FR-18",
+        "LA01-FR-19",
+        "LA01-FR-22",
+        "LA01-FR-23"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-08",
+        "LA01-NFR-09",
+        "LA01-NFR-15",
+        "LA01-NFR-16",
+        "LA01-NFR-17"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-17",
+        "LA01-AT-18",
+        "LA01-AT-19",
+        "LA01-AT-24",
+        "LA01-AT-25",
+        "LA01-AT-28"
+      ]
+    },
+    {
+      "stage_id": "J04",
+      "label": "理解/澄清",
+      "student_visible_state": "理解/澄清",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J03",
+        "J05",
+        "J10"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-04",
+        "LA01-FR-05",
+        "LA01-FR-13",
+        "LA01-FR-16"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-02",
+        "LA01-NFR-05"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-05",
+        "LA01-AT-06",
+        "LA01-AT-07"
+      ]
+    },
+    {
+      "stage_id": "J05",
+      "label": "闸门/编译",
+      "student_visible_state": "闸门/编译",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J04",
+        "J06",
+        "J10"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-06",
+        "LA01-FR-07",
+        "LA01-FR-08",
+        "LA01-FR-22",
+        "LA01-FR-23"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-07",
+        "LA01-NFR-14",
+        "LA01-NFR-20",
+        "LA01-NFR-21"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-09",
+        "LA01-AT-10",
+        "LA01-AT-22",
+        "LA01-AT-23",
+        "LA01-AT-24"
+      ]
+    },
+    {
+      "stage_id": "J06",
+      "label": "协作执行",
+      "student_visible_state": "协作执行",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J07",
+        "J09"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-09",
+        "LA01-FR-12",
+        "LA01-FR-20",
+        "LA01-FR-21",
+        "LA01-FR-22",
+        "LA01-FR-23"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-03",
+        "LA01-NFR-06",
+        "LA01-NFR-09",
+        "LA01-NFR-10",
+        "LA01-NFR-18",
+        "LA01-NFR-19",
+        "LA01-NFR-20",
+        "LA01-NFR-21",
+        "LA01-NFR-23"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-03",
+        "LA01-AT-08",
+        "LA01-AT-12",
+        "LA01-AT-20",
+        "LA01-AT-21",
+        "LA01-AT-27",
+        "LA01-AT-28"
+      ]
+    },
+    {
+      "stage_id": "J07",
+      "label": "展示结果",
+      "student_visible_state": "展示结果",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J08",
+        "J09",
+        "J10"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-10",
+        "LA01-FR-14",
+        "LA01-FR-15",
+        "LA01-FR-17",
+        "LA01-FR-21",
+        "LA01-FR-24"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-05",
+        "LA01-NFR-10",
+        "LA01-NFR-13",
+        "LA01-NFR-22",
+        "LA01-NFR-23"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-11",
+        "LA01-AT-16",
+        "LA01-AT-21",
+        "LA01-AT-26"
+      ]
+    },
+    {
+      "stage_id": "J08",
+      "label": "明确确认",
+      "student_visible_state": "明确确认",
+      "owner": "Java",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J07",
+        "J04"
+      ],
+      "exception_exit": "J09",
+      "functional_requirements": [
+        "LA01-FR-07",
+        "LA01-FR-16",
+        "LA01-FR-24"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-07",
+        "LA01-NFR-15"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-06",
+        "LA01-AT-07",
+        "LA01-AT-26"
+      ]
+    },
+    {
+      "stage_id": "J09",
+      "label": "故障恢复",
+      "student_visible_state": "故障恢复",
+      "owner": "Java/Python",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J03",
+        "J07",
+        "J10"
+      ],
+      "exception_exit": "J10",
+      "functional_requirements": [
+        "LA01-FR-11",
+        "LA01-FR-12",
+        "LA01-FR-13",
+        "LA01-FR-18",
+        "LA01-FR-19",
+        "LA01-FR-20",
+        "LA01-FR-21",
+        "LA01-FR-24"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-11",
+        "LA01-NFR-12",
+        "LA01-NFR-15",
+        "LA01-NFR-17",
+        "LA01-NFR-18",
+        "LA01-NFR-22"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-12",
+        "LA01-AT-14",
+        "LA01-AT-15",
+        "LA01-AT-19",
+        "LA01-AT-25",
+        "LA01-AT-26",
+        "LA01-AT-27"
+      ]
+    },
+    {
+      "stage_id": "J10",
+      "label": "结束/继续",
+      "student_visible_state": "结束/继续",
+      "owner": "Java",
+      "persisted_state": "versioned_request_or_business_reference",
+      "next_stages": [
+        "J00"
+      ],
+      "exception_exit": "J10",
+      "functional_requirements": [
+        "LA01-FR-14",
+        "LA01-FR-17"
+      ],
+      "nonfunctional_requirements": [
+        "LA01-NFR-12",
+        "LA01-NFR-14"
+      ],
+      "acceptance_specs": [
+        "LA01-AT-14",
+        "LA01-AT-15"
+      ]
+    }
+  ],
+  "bounded_loops": {
+    "clarification_rounds_pilot": 2,
+    "runtime_transitions": "inherited_parent_limit"
+  },
+  "not_proven": [
+    "runtime_liveness",
+    "NLU_quality",
+    "actual_UI_compatibility"
+  ]
+}

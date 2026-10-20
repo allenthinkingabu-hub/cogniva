@@ -1,0 +1,39 @@
+# PoC dependency ranges only: resolve, validate and commit uv.lock before frozen CI.
+# This file does not claim the dependency combination was installed or tested.
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "learning-agent"
+version = "0.1.0"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+  "fastapi", "uvicorn", "pydantic>=2,<3", "pydantic-settings>=2,<3",
+  "langgraph>=1,<2", "langgraph-checkpoint-postgres",
+  "sqlalchemy>=2.1,<2.2", "psycopg[binary,pool]>=3,<4", "alembic",
+  "httpx", "aio-pika", "jsonschema", "opentelemetry-api", "opentelemetry-sdk"
+]
+
+[project.scripts]
+learning-agent-api = "learning_agent.api.app:main"
+learning-agent-worker = "learning_agent.worker:main"
+learning-agent-rag = "learning_agent.rag_api:main"
+
+[dependency-groups]
+dev = ["pytest", "pytest-asyncio", "ruff", "mypy", "testcontainers", "openapi-spec-validator"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/learning_agent"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.14"
+strict = true

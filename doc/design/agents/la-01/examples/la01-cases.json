@@ -1,0 +1,1574 @@
+{
+  "status": "synthetic_contract_and_gate_cases_not_model_eval",
+  "valid": [
+    {
+      "id": "V01",
+      "definition": "AssistRequest",
+      "value": {
+        "text": "为什么A不对",
+        "client_message_id": "m01",
+        "client_context": {
+          "attempt_ref": "attempt01"
+        }
+      }
+    },
+    {
+      "id": "V02",
+      "definition": "CoordinationContext",
+      "value": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      }
+    },
+    {
+      "id": "V03",
+      "definition": "IntentProposal",
+      "value": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      }
+    },
+    {
+      "id": "V04",
+      "definition": "CoordinationPlan",
+      "value": {
+        "plan_ref": "plan01",
+        "decision_ref": "decision01",
+        "request_ref": "request01",
+        "template_ref": "assist.explain_replan.v1",
+        "catalog_version": "1.0",
+        "context_revision": 2,
+        "auth_revision": "authrev01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "scope_candidate_id": "scope01",
+        "step_bindings": [
+          {
+            "step_id": "analyze",
+            "executor": "LA-02",
+            "depends_on": [],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "explain",
+            "executor": "LA-03",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "personal",
+            "executor": "LA-05",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "commit_personal",
+            "executor": "Java",
+            "depends_on": [
+              "personal"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "propose_plan",
+            "executor": "LA-04",
+            "depends_on": [
+              "commit_personal"
+            ],
+            "bind_confirmed_personal_from": "commit_personal",
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_plan_candidate",
+            "executor": "Java",
+            "depends_on": [
+              "propose_plan"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_explanation",
+            "executor": "Java",
+            "depends_on": [
+              "explain"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          }
+        ],
+        "budget_ref": "budget01",
+        "deadline_at": "2026-10-19T18:00:00Z",
+        "requires_student_confirmation": true
+      }
+    },
+    {
+      "id": "V05",
+      "definition": "ClarificationAnswer",
+      "value": {
+        "question_ref": "q01",
+        "expected_context_revision": 2,
+        "choice_ref": "scope01"
+      }
+    },
+    {
+      "id": "V06",
+      "definition": "AssistReceipt",
+      "value": {
+        "request_ref": "request01",
+        "request_revision": 2,
+        "status": "waiting_input",
+        "result_refs": [],
+        "reason_codes": [
+          "ambiguous_scope"
+        ],
+        "clarification": {
+          "question_ref": "q01",
+          "text": "你想调整哪个目标？",
+          "choice_refs": [
+            "scope01"
+          ],
+          "expires_at": "2026-10-19T18:15:00Z"
+        }
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "I01",
+      "definition": "IntentProposal",
+      "value": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ],
+        "agents": [
+          "arbitrary_agent"
+        ]
+      },
+      "expected_rejection": "模型不得自造调用图"
+    },
+    {
+      "id": "I02",
+      "definition": "IntentProposal",
+      "value": {
+        "intent": "pay",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_rejection": "非法意图"
+    },
+    {
+      "id": "I03",
+      "definition": "IntentProposal",
+      "value": {
+        "intent": "clarify",
+        "scope_candidate_ids": [],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_rejection": "澄清必须有具体问题"
+    },
+    {
+      "id": "I04",
+      "definition": "IntentProposal",
+      "value": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_rejection": "执行意图必须选一个候选"
+    },
+    {
+      "id": "I05",
+      "definition": "AssistRequest",
+      "value": {
+        "text": "为什么A不对",
+        "client_message_id": "m01",
+        "client_context": {
+          "attempt_ref": "attempt01"
+        },
+        "authorization_ref": "fake"
+      },
+      "expected_rejection": "客户端不能授予权限"
+    },
+    {
+      "id": "I06",
+      "definition": "AssistRequest",
+      "value": {
+        "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "client_message_id": "m01",
+        "client_context": {
+          "attempt_ref": "attempt01"
+        }
+      },
+      "expected_rejection": "超长文本"
+    },
+    {
+      "id": "I07",
+      "definition": "ClarificationAnswer",
+      "value": {
+        "question_ref": "q01",
+        "expected_context_revision": 2,
+        "choice_ref": "scope01",
+        "answer": "also"
+      },
+      "expected_rejection": "回答与choice只能选一种"
+    },
+    {
+      "id": "I08",
+      "definition": "AssistReceipt",
+      "value": {
+        "request_ref": "request01",
+        "request_revision": 2,
+        "status": "waiting_input",
+        "result_refs": [],
+        "reason_codes": [
+          "ambiguous_scope"
+        ]
+      },
+      "expected_rejection": "waiting_input需要问题"
+    }
+  ],
+  "gate_cases": [
+    {
+      "id": "D01",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "allow",
+      "reason": "满足联合模板"
+    },
+    {
+      "id": "D02",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "next_question",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "bypass_java",
+      "reason": "页面明确操作不调用路由模型"
+    },
+    {
+      "id": "D03",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "someone_else"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "deny",
+      "reason": "无授权候选"
+    },
+    {
+      "id": "D04",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "clarify",
+      "reason": "联合请求不能静默少做"
+    },
+    {
+      "id": "D05",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "clarify",
+      "reason": "缺提交证据/规划条件"
+    },
+    {
+      "id": "D06",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "clarify",
+      "reason": "联合模板未允许"
+    },
+    {
+      "id": "D07",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "clarify",
+        "scope_candidate_ids": [],
+        "clarification_question": "你想调整哪部分？",
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "clarify",
+      "reason": "模型候选明确请求澄清"
+    },
+    {
+      "id": "D08",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": true
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "unsupported",
+        "scope_candidate_ids": [],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "deny",
+      "reason": "范围外不分派"
+    },
+    {
+      "id": "D09",
+      "context": {
+        "context_ref": "ctx01",
+        "message_ref": "msg01",
+        "text": "讲清楚这道题，再调整本周学习",
+        "session_ref": "session01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "current_scope_candidate_id": "scope01",
+        "scope_candidates": [
+          {
+            "candidate_id": "scope01",
+            "label": "当前侵权目标",
+            "goal_ref": "goal01",
+            "manifest_ref": "release01",
+            "node_refs": [
+              "node01"
+            ],
+            "is_current": false
+          }
+        ],
+        "allowed_template_refs": [
+          "assist.explain.v1",
+          "assist.replan.v1",
+          "assist.explain_replan.v1"
+        ],
+        "capability_refs": [
+          "explain",
+          "analyze_submission",
+          "update_personal",
+          "propose_plan"
+        ],
+        "precondition_refs": [
+          "learning_target_available",
+          "submission_evidence_available",
+          "planning_inputs_sufficient"
+        ],
+        "page_action": "free_text",
+        "policy_ref": "policy01",
+        "auth_revision": "authrev01",
+        "context_revision": 2,
+        "deadline_at": "2026-10-19T18:00:00Z"
+      },
+      "proposal": {
+        "intent": "explain_and_replan",
+        "scope_candidate_ids": [
+          "scope01"
+        ],
+        "clarification_question": null,
+        "reason_codes": [
+          "explicit_compound_request"
+        ]
+      },
+      "expected_gate": "clarify",
+      "reason": "切目标不静默执行"
+    }
+  ],
+  "plan_cases": [
+    {
+      "id": "P01",
+      "value": {
+        "plan_ref": "plan01",
+        "decision_ref": "decision01",
+        "request_ref": "request01",
+        "template_ref": "assist.explain_replan.v1",
+        "catalog_version": "1.0",
+        "context_revision": 2,
+        "auth_revision": "authrev01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "scope_candidate_id": "scope01",
+        "step_bindings": [
+          {
+            "step_id": "analyze",
+            "executor": "LA-02",
+            "depends_on": [],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "explain",
+            "executor": "LA-03",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "personal",
+            "executor": "LA-05",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "commit_personal",
+            "executor": "Java",
+            "depends_on": [
+              "personal"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "propose_plan",
+            "executor": "LA-04",
+            "depends_on": [
+              "commit_personal"
+            ],
+            "bind_confirmed_personal_from": "commit_personal",
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_plan_candidate",
+            "executor": "Java",
+            "depends_on": [
+              "propose_plan"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_explanation",
+            "executor": "Java",
+            "depends_on": [
+              "explain"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          }
+        ],
+        "budget_ref": "budget01",
+        "deadline_at": "2026-10-19T18:00:00Z",
+        "requires_student_confirmation": true
+      },
+      "expected": "valid"
+    },
+    {
+      "id": "P02",
+      "value": {
+        "plan_ref": "plan01",
+        "decision_ref": "decision01",
+        "request_ref": "request01",
+        "template_ref": "assist.explain_replan.v1",
+        "catalog_version": "1.0",
+        "context_revision": 2,
+        "auth_revision": "authrev01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "scope_candidate_id": "scope01",
+        "step_bindings": [
+          {
+            "step_id": "analyze",
+            "executor": "LA-02",
+            "depends_on": [],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "explain",
+            "executor": "LA-03",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "personal",
+            "executor": "LA-05",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "commit_personal",
+            "executor": "Java",
+            "depends_on": [
+              "personal"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "propose_plan",
+            "executor": "LA-04",
+            "depends_on": [],
+            "bind_confirmed_personal_from": "commit_personal",
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_plan_candidate",
+            "executor": "Java",
+            "depends_on": [
+              "propose_plan"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_explanation",
+            "executor": "Java",
+            "depends_on": [
+              "explain"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          }
+        ],
+        "budget_ref": "budget01",
+        "deadline_at": "2026-10-19T18:00:00Z",
+        "requires_student_confirmation": true
+      },
+      "expected": "reject"
+    },
+    {
+      "id": "P03",
+      "value": {
+        "plan_ref": "plan01",
+        "decision_ref": "decision01",
+        "request_ref": "request01",
+        "template_ref": "assist.explain_replan.v1",
+        "catalog_version": "1.0",
+        "context_revision": 2,
+        "auth_revision": "authrev01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "scope_candidate_id": "scope01",
+        "step_bindings": [
+          {
+            "step_id": "analyze",
+            "executor": "LA-04",
+            "depends_on": [],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "explain",
+            "executor": "LA-03",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "personal",
+            "executor": "LA-05",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "commit_personal",
+            "executor": "Java",
+            "depends_on": [
+              "personal"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "propose_plan",
+            "executor": "LA-04",
+            "depends_on": [
+              "commit_personal"
+            ],
+            "bind_confirmed_personal_from": "commit_personal",
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_plan_candidate",
+            "executor": "Java",
+            "depends_on": [
+              "propose_plan"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_explanation",
+            "executor": "Java",
+            "depends_on": [
+              "explain"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          }
+        ],
+        "budget_ref": "budget01",
+        "deadline_at": "2026-10-19T18:00:00Z",
+        "requires_student_confirmation": true
+      },
+      "expected": "reject"
+    },
+    {
+      "id": "P04",
+      "value": {
+        "plan_ref": "plan01",
+        "decision_ref": "decision01",
+        "request_ref": "request01",
+        "template_ref": "assist.explain_replan.v1",
+        "catalog_version": "1.0",
+        "context_revision": 2,
+        "auth_revision": "authrev01",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "goal_bundle_ref": "bundle01",
+          "attempt_ref": "attempt01",
+          "submission_ref": "sub01",
+          "behavior_snapshot_revision": 1,
+          "profile_revision": 3,
+          "evidence_watermark": 5,
+          "plan_revision": 2
+        },
+        "scope_candidate_id": "scope01",
+        "step_bindings": [
+          {
+            "step_id": "analyze",
+            "executor": "LA-02",
+            "depends_on": [],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "explain",
+            "executor": "LA-03",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "personal",
+            "executor": "LA-05",
+            "depends_on": [
+              "analyze"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "commit_personal",
+            "executor": "Java",
+            "depends_on": [
+              "personal"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "propose_plan",
+            "executor": "LA-04",
+            "depends_on": [
+              "commit_personal"
+            ],
+            "bind_confirmed_personal_from": "commit_personal",
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          },
+          {
+            "step_id": "save_plan_candidate",
+            "executor": "Java",
+            "depends_on": [
+              "propose_plan"
+            ],
+            "input_refs": {
+              "goal_ref": "goal01",
+              "manifest_ref": "release01",
+              "goal_bundle_ref": "bundle01",
+              "attempt_ref": "attempt01",
+              "submission_ref": "sub01",
+              "behavior_snapshot_revision": 1,
+              "profile_revision": 3,
+              "evidence_watermark": 5,
+              "plan_revision": 2
+            }
+          }
+        ],
+        "budget_ref": "budget01",
+        "deadline_at": "2026-10-19T18:00:00Z",
+        "requires_student_confirmation": true
+      },
+      "expected": "reject"
+    }
+  ],
+  "not_covered": [
+    "real_model_intent_classification",
+    "runtime_authorization",
+    "concurrent_clarification",
+    "production_performance"
+  ]
+}

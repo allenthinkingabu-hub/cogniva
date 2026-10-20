@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-18",
+  "purpose": "核心学习链修订前输入快照；需求已含SRC-20，4A架构及旧矩阵尚未同步；不代表旧状态已验证",
+  "files": [
+    {
+      "path": "docs/architecture/4A-关键契约与实施约束-v1.0.md",
+      "sha256": "60e8b9845cfb4f9fbadce22e886234369d91e6851fe7168cac2f8654ba96abfa"
+    },
+    {
+      "path": "docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md",
+      "sha256": "6bf51e0ed5a062a9f51b7db1b0217e65636243e51d443fc0d4519b2e28df36a5"
+    },
+    {
+      "path": "docs/architecture/运行与恢复手册-v0.1.md",
+      "sha256": "2502a0364286aedeeaf3e0ce501d6214ce3acf4b9ef5e8b24bb2df8e4fd773e5"
+    },
+    {
+      "path": "docs/architecture/4A-架构决策与实施门禁-v1.0.md",
+      "sha256": "33cacb8cb79cf73de96b78eb595f7e7122e8b2f4c9484732972f9755eef0a7a7"
+    },
+    {
+      "path": "docs/architecture/通用Agentic学习与考试平台-4A总体架构设计-v1.0.md",
+      "sha256": "cb6b38667de6bc6271eb9868341e03436964ce315dbfa6aea7111c0baf0459e6"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "81ce4555d83e7ef78420c5163264d0beedeececce874c0790217a63ee398f0cd"
+    },
+    {
+      "path": "docs/architecture/多Agent协作与RAG知识库设计-v0.1.md",
+      "sha256": "d73e15e9aaaf94a18aafb1ea26207bff6a6d645271f1d3e20126cde141f4d4db"
+    },
+    {
+      "path": "docs/architecture/adr/架构决策记录-v0.1.md",
+      "sha256": "150fc2bbd57cd15d176e05fed0886bf4360cb2696edc693f1d6e345087fb604f"
+    },
+    {
+      "path": "docs/architecture/archive/README.md",
+      "sha256": "746057276c3ab0c26340d323c352be75c2f8407fbc1b55edadff7aa0bd0bf05d"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/manifest.json",
+      "sha256": "bad2631548f6812acb42d7368d8104c79ea31137073a8ae4eeb29f6a4af9246d"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md",
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md",
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md",
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/.DS_Store",
+      "sha256": "50b92f27e942e39b9a459d46e8562f5b770c8fadc8e840e471d05b3f6335119c"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md",
+      "sha256": "38e1d082d8c07d03b820002bd7143a1ee5af9ae6d096d22b51b770748c3e65bf"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/运行与恢复手册-v0.1.md",
+      "sha256": "5d601944934e0171b93684f1d06fae25c511ba2e5dbbeaef4f3f1ecc192b4ab8"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/多Agent协作与RAG知识库设计-v0.1.md",
+      "sha256": "fa741b00bd90ce27695291e8fafc2c8f1cbec7ec36e6c86fe7c5352872d48984"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/adr/架构决策记录-v0.1.md",
+      "sha256": "983ace96c70e00216325ff2ca053165a103d4e3fd516dbac2290b2a3ed98a399"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/contracts/核心数据与接口契约-v0.1.md",
+      "sha256": "3b96822578761c7b851cba1fd7ea1c0e9785ba8ef28b5bdb227d2c02645e6539"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/check_architecture_docs.py",
+      "sha256": "47e41c506dd32c7ab99623adb059198265c5338f7b312d1a6749b8c692ce0d6e"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/requirement-index.json",
+      "sha256": "130be5388a1f1886558502388e3fa79894d32ee033aeb6941aeba7badc161103"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/文档检查报告-v0.1.md",
+      "sha256": "d687dbcc571f40ed62a38ac603ad52ade3c1565eb039a6b88d4cca7d31879a5e"
+    },
+    {
+      "path": "docs/architecture/archive/2026-10-18-pre-4a/docs/architecture/verification/需求追溯与验证矩阵-v0.1.md",
+      "sha256": "7617b3e2ccef71cecc256740d994960063a06e46e7a233b7afb2238bfb120abd"
+    },
+    {
+      "path": "docs/architecture/contracts/核心数据与接口契约-v0.1.md",
+      "sha256": "0c6687f2e7c8403937bcb5aef67b3e5e7dd965249b38ea24d0e1c5e88fae2c21"
+    },
+    {
+      "path": "docs/architecture/verification/4A-文档检查报告-v1.0.md",
+      "sha256": "0494c6a856a69f1c6be3778117e23eb6128175a4bf6e73e386c400493e346569"
+    },
+    {
+      "path": "docs/architecture/verification/check_4a_documents.py",
+      "sha256": "0f8ba4ef1552276196c9578c69722790bd513045f44e90ed212645b68602ce3e"
+    },
+    {
+      "path": "docs/architecture/verification/4A-需求追溯与验证矩阵-v1.0.md",
+      "sha256": "d48522b8b4f9591ef666f58b9aea54ef004f60dfce98ac1942ca0d15b541945b"
+    },
+    {
+      "path": "docs/architecture/verification/4A-requirement-index-v1.0.json",
+      "sha256": "a4659d73688d98619c111071d0de9d28876360bd6d945e91dbd4c9808120b316"
+    },
+    {
+      "path": "docs/architecture/verification/文档检查报告-v0.1.md",
+      "sha256": "11922fd27c6897a7b3a88fb64fe54c46421bd35ebb25ee8d25ed29f3f9ba2787"
+    },
+    {
+      "path": "docs/architecture/verification/需求追溯与验证矩阵-v0.1.md",
+      "sha256": "09b60d0336830b9528992d6d385f0754f4e201066b84f161ef6d1441cb27830e"
+    },
+    {
+      "path": "docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md",
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328"
+    },
+    {
+      "path": "docs/requirements/README.md",
+      "sha256": "c98212917d3e6ffe1ce02c3cff78271fa00c1ae582d787117f53b0dde2c8f46d"
+    },
+    {
+      "path": "docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md",
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd"
+    },
+    {
+      "path": "docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md",
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666"
+    },
+    {
+      "path": "docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.3.md",
+      "sha256": "03656d699c3c31da8fd016926b86f7fe7371f830e07c24904f3d21d855687600"
+    }
+  ]
+}

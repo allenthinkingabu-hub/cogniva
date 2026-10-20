@@ -1,0 +1,863 @@
+{
+  "status": "synthetic_static_constraints_not_runtime_quality",
+  "valid": [
+    {
+      "id": "E-valid-ContextManifest",
+      "definition": "ContextManifest",
+      "value": {
+        "manifest_ref": "cm01",
+        "context_ref": "ctx01",
+        "run_ref": "run01",
+        "role": "LA-01",
+        "auth_revision": "ar01",
+        "context_revision": 1,
+        "model_profile_ref": "model01",
+        "token_counter_version": "synthetic-fixed",
+        "total_window_budget": 150,
+        "output_reserve": 30,
+        "safety_reserve": 20,
+        "fragments": [
+          {
+            "fragment_ref": "f-authority",
+            "source_ref": "java01",
+            "source_revision": "r1",
+            "kind": "authority_header",
+            "trust_level": "authoritative_record",
+            "protected": true,
+            "priority": 0,
+            "token_count": 15,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-current",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "current_request",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 30,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-negation",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "unresolved_constraint",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-recent",
+            "source_ref": "turn01",
+            "source_revision": "r1",
+            "kind": "recent_turn",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 1,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-history",
+            "source_ref": "summary01",
+            "source_revision": "r1",
+            "kind": "summary",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 2,
+            "token_count": 35,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "selected_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation",
+          "f-recent"
+        ],
+        "dropped_refs": [
+          "f-history"
+        ],
+        "protected_fact_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation"
+        ],
+        "summary_source_watermark": "sw01",
+        "decision": "ready"
+      }
+    },
+    {
+      "id": "E-valid-MemoryRecord",
+      "definition": "MemoryRecord",
+      "value": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-20T12:00:00Z"
+      }
+    },
+    {
+      "id": "E-valid-HandoffEnvelope",
+      "definition": "HandoffEnvelope",
+      "value": {
+        "handoff_ref": "h01",
+        "parent_task_ref": "parent01",
+        "task_ref": "task01",
+        "request_ref": "request01",
+        "run_ref": "run01",
+        "step_ref": "step01",
+        "sender_role": "Runtime",
+        "receiver_role": "LA-03",
+        "context_manifest_ref": "cm01",
+        "input_refs_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "expected_output_schema_ref": "ExplanationOutput",
+        "authorization_ref": "grant01",
+        "auth_revision": "ar01",
+        "budget_ref": "b01",
+        "deadline_at": "2026-10-20T12:00:00Z",
+        "fencing_token": 1,
+        "idempotency_key": "parent01-step01-r1",
+        "causation_ref": "decision01",
+        "limitations_refs": [
+          "lim01"
+        ]
+      }
+    },
+    {
+      "id": "E-valid-MCPServerBinding",
+      "definition": "MCPServerBinding",
+      "value": {
+        "server_ref": "knowledge-read",
+        "endpoint": "https://mcp.example.invalid/mcp",
+        "profile": "modern",
+        "protocol_version": "2026-07-28",
+        "enabled": true,
+        "approval_ref": "synthetic-approval01",
+        "auth_resource": "https://mcp.example.invalid/mcp",
+        "credential_ref": "secret-ref-only",
+        "allowed_tool_bindings": [
+          {
+            "server_tool_name": "find_learning_resources",
+            "domain_tool_ref": "find_resources",
+            "schema_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "read_only": true
+          }
+        ],
+        "timeout_ms": 2000,
+        "max_response_bytes": 65536
+      }
+    },
+    {
+      "id": "E-valid-SkillManifest",
+      "definition": "SkillManifest",
+      "value": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "active",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "references/routing.md"
+        ],
+        "scripts_enabled": false,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      }
+    },
+    {
+      "id": "E-valid-TelemetryRecord",
+      "definition": "TelemetryRecord",
+      "value": {
+        "span_name": "context.assemble",
+        "trace_ref": "tr01",
+        "span_ref": "sp01",
+        "parent_or_link_refs": [
+          "sp00"
+        ],
+        "correlation_ref": "req01",
+        "attributes": {
+          "learning.role": "LA-01",
+          "learning.context_manifest_ref": "cm01",
+          "learning.input_tokens": 85
+        }
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "E-invalid-handoff",
+      "definition": "HandoffEnvelope",
+      "value": {
+        "handoff_ref": "h01",
+        "parent_task_ref": "parent01",
+        "task_ref": "task01",
+        "request_ref": "request01",
+        "run_ref": "run01",
+        "step_ref": "step01",
+        "sender_role": "Runtime",
+        "receiver_role": "LA-03",
+        "input_refs_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "expected_output_schema_ref": "ExplanationOutput",
+        "authorization_ref": "grant01",
+        "auth_revision": "ar01",
+        "budget_ref": "b01",
+        "deadline_at": "2026-10-20T12:00:00Z",
+        "fencing_token": 1,
+        "idempotency_key": "parent01-step01-r1",
+        "causation_ref": "decision01",
+        "limitations_refs": [
+          "lim01"
+        ]
+      },
+      "reason": "缺上下文不可交接"
+    },
+    {
+      "id": "E-invalid-era",
+      "definition": "MCPServerBinding",
+      "value": {
+        "server_ref": "knowledge-read",
+        "endpoint": "https://mcp.example.invalid/mcp",
+        "profile": "modern",
+        "protocol_version": "2025-11-25",
+        "enabled": true,
+        "approval_ref": "synthetic-approval01",
+        "auth_resource": "https://mcp.example.invalid/mcp",
+        "credential_ref": "secret-ref-only",
+        "allowed_tool_bindings": [
+          {
+            "server_tool_name": "find_learning_resources",
+            "domain_tool_ref": "find_resources",
+            "schema_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "read_only": true
+          }
+        ],
+        "timeout_ms": 2000,
+        "max_response_bytes": 65536
+      },
+      "reason": "协议profile不匹配"
+    },
+    {
+      "id": "E-invalid-script",
+      "definition": "SkillManifest",
+      "value": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "active",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "references/routing.md"
+        ],
+        "scripts_enabled": true,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      },
+      "reason": "首发不执行技能脚本"
+    },
+    {
+      "id": "E-invalid-log",
+      "definition": "TelemetryRecord",
+      "value": {
+        "span_name": "context.assemble",
+        "trace_ref": "tr01",
+        "span_ref": "sp01",
+        "parent_or_link_refs": [
+          "sp00"
+        ],
+        "correlation_ref": "req01",
+        "attributes": {
+          "learning.role": "LA-01",
+          "learning.context_manifest_ref": "cm01",
+          "learning.input_tokens": 85,
+          "prompt": "private text"
+        }
+      },
+      "reason": "默认telemetry不可带正文"
+    },
+    {
+      "id": "E-invalid-secret",
+      "definition": "MemoryRecord",
+      "value": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-20T12:00:00Z",
+        "access_token": "secret"
+      },
+      "reason": "记忆不存令牌"
+    },
+    {
+      "id": "E-invalid-summary-promotion",
+      "definition": "MemoryRecord",
+      "value": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "authoritative_record",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-20T12:00:00Z"
+      },
+      "reason": "Derived summaries cannot become authoritative facts or authorization."
+    }
+  ],
+  "context_cases": [
+    {
+      "id": "CTX-01",
+      "manifest": {
+        "manifest_ref": "cm01",
+        "context_ref": "ctx01",
+        "run_ref": "run01",
+        "role": "LA-01",
+        "auth_revision": "ar01",
+        "context_revision": 1,
+        "model_profile_ref": "model01",
+        "token_counter_version": "synthetic-fixed",
+        "total_window_budget": 150,
+        "output_reserve": 30,
+        "safety_reserve": 20,
+        "fragments": [
+          {
+            "fragment_ref": "f-authority",
+            "source_ref": "java01",
+            "source_revision": "r1",
+            "kind": "authority_header",
+            "trust_level": "authoritative_record",
+            "protected": true,
+            "priority": 0,
+            "token_count": 15,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-current",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "current_request",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 30,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-negation",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "unresolved_constraint",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-recent",
+            "source_ref": "turn01",
+            "source_revision": "r1",
+            "kind": "recent_turn",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 1,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-history",
+            "source_ref": "summary01",
+            "source_revision": "r1",
+            "kind": "summary",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 2,
+            "token_count": 35,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "selected_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation",
+          "f-recent"
+        ],
+        "dropped_refs": [
+          "f-history"
+        ],
+        "protected_fact_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation"
+        ],
+        "summary_source_watermark": "sw01",
+        "decision": "ready"
+      },
+      "expected": "ready"
+    },
+    {
+      "id": "CTX-02",
+      "manifest": {
+        "manifest_ref": "cm01",
+        "context_ref": "ctx01",
+        "run_ref": "run01",
+        "role": "LA-01",
+        "auth_revision": "ar01",
+        "context_revision": 1,
+        "model_profile_ref": "model01",
+        "token_counter_version": "synthetic-fixed",
+        "total_window_budget": 110,
+        "output_reserve": 30,
+        "safety_reserve": 20,
+        "fragments": [
+          {
+            "fragment_ref": "f-authority",
+            "source_ref": "java01",
+            "source_revision": "r1",
+            "kind": "authority_header",
+            "trust_level": "authoritative_record",
+            "protected": true,
+            "priority": 0,
+            "token_count": 15,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-current",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "current_request",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 30,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-negation",
+            "source_ref": "msg01",
+            "source_revision": "r1",
+            "kind": "unresolved_constraint",
+            "trust_level": "untrusted_content",
+            "protected": true,
+            "priority": 0,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-recent",
+            "source_ref": "turn01",
+            "source_revision": "r1",
+            "kind": "recent_turn",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 1,
+            "token_count": 20,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "fragment_ref": "f-history",
+            "source_ref": "summary01",
+            "source_revision": "r1",
+            "kind": "summary",
+            "trust_level": "derived",
+            "protected": false,
+            "priority": 2,
+            "token_count": 35,
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "selected_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation",
+          "f-recent"
+        ],
+        "dropped_refs": [
+          "f-history"
+        ],
+        "protected_fact_refs": [
+          "f-authority",
+          "f-current",
+          "f-negation"
+        ],
+        "summary_source_watermark": "sw01",
+        "decision": "ready"
+      },
+      "expected": "context_insufficient"
+    }
+  ],
+  "memory_cases": [
+    {
+      "id": "MEM-01",
+      "record": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-20T12:00:00Z"
+      },
+      "scope": {
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route"
+      },
+      "now": "2026-10-19T12:00:00Z",
+      "expected_allowed": true
+    },
+    {
+      "id": "MEM-02",
+      "record": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal-other",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-20T12:00:00Z"
+      },
+      "scope": {
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route"
+      },
+      "now": "2026-10-19T12:00:00Z",
+      "expected_allowed": false
+    },
+    {
+      "id": "MEM-03",
+      "record": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "revoked",
+        "expires_at": "2026-10-20T12:00:00Z"
+      },
+      "scope": {
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route"
+      },
+      "now": "2026-10-19T12:00:00Z",
+      "expected_allowed": false
+    },
+    {
+      "id": "MEM-04",
+      "record": {
+        "memory_ref": "mem01",
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route",
+        "kind": "conversation_summary",
+        "trust_level": "derived",
+        "source_refs": [
+          "msg01"
+        ],
+        "source_revision": "r1",
+        "content_ref": "obj01",
+        "status": "active",
+        "expires_at": "2026-10-18T12:00:00Z"
+      },
+      "scope": {
+        "owner_ref": "user01",
+        "goal_ref": "goal01",
+        "purpose": "route"
+      },
+      "now": "2026-10-19T12:00:00Z",
+      "expected_allowed": false
+    }
+  ],
+  "mcp_cases": [
+    {
+      "id": "MCP-01",
+      "binding": {
+        "server_ref": "knowledge-read",
+        "endpoint": "https://mcp.example.invalid/mcp",
+        "profile": "modern",
+        "protocol_version": "2026-07-28",
+        "enabled": true,
+        "approval_ref": "synthetic-approval01",
+        "auth_resource": "https://mcp.example.invalid/mcp",
+        "credential_ref": "secret-ref-only",
+        "allowed_tool_bindings": [
+          {
+            "server_tool_name": "find_learning_resources",
+            "domain_tool_ref": "find_resources",
+            "schema_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "read_only": true
+          }
+        ],
+        "timeout_ms": 2000,
+        "max_response_bytes": 65536
+      },
+      "discovered_schema_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "token_resource": "https://mcp.example.invalid/mcp",
+      "expected_allowed": true
+    },
+    {
+      "id": "MCP-02",
+      "binding": {
+        "server_ref": "knowledge-read",
+        "endpoint": "https://mcp.example.invalid/mcp",
+        "profile": "modern",
+        "protocol_version": "2026-07-28",
+        "enabled": true,
+        "approval_ref": "synthetic-approval01",
+        "auth_resource": "https://mcp.example.invalid/mcp",
+        "credential_ref": "secret-ref-only",
+        "allowed_tool_bindings": [
+          {
+            "server_tool_name": "find_learning_resources",
+            "domain_tool_ref": "find_resources",
+            "schema_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "read_only": true
+          }
+        ],
+        "timeout_ms": 2000,
+        "max_response_bytes": 65536
+      },
+      "discovered_schema_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "token_resource": "https://mcp.example.invalid/mcp",
+      "expected_allowed": false
+    },
+    {
+      "id": "MCP-03",
+      "binding": {
+        "server_ref": "knowledge-read",
+        "endpoint": "https://mcp.example.invalid/mcp",
+        "profile": "modern",
+        "protocol_version": "2026-07-28",
+        "enabled": true,
+        "approval_ref": "synthetic-approval01",
+        "auth_resource": "https://mcp.example.invalid/mcp",
+        "credential_ref": "secret-ref-only",
+        "allowed_tool_bindings": [
+          {
+            "server_tool_name": "find_learning_resources",
+            "domain_tool_ref": "find_resources",
+            "schema_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "read_only": true
+          }
+        ],
+        "timeout_ms": 2000,
+        "max_response_bytes": 65536
+      },
+      "discovered_schema_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "token_resource": "https://other.invalid/mcp",
+      "expected_allowed": false
+    }
+  ],
+  "skill_cases": [
+    {
+      "id": "SK-01",
+      "manifest": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "active",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "references/routing.md"
+        ],
+        "scripts_enabled": false,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      },
+      "role": "LA-01",
+      "granted_tools": [
+        "read_goal_context"
+      ],
+      "expected_allowed": true
+    },
+    {
+      "id": "SK-02",
+      "manifest": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "active",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context",
+          "unapproved_tool"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "references/routing.md"
+        ],
+        "scripts_enabled": false,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      },
+      "role": "LA-01",
+      "granted_tools": [
+        "read_goal_context"
+      ],
+      "expected_allowed": false
+    },
+    {
+      "id": "SK-03",
+      "manifest": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "revoked",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "references/routing.md"
+        ],
+        "scripts_enabled": false,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      },
+      "role": "LA-01",
+      "granted_tools": [
+        "read_goal_context"
+      ],
+      "expected_allowed": false
+    },
+    {
+      "id": "SK-04",
+      "manifest": {
+        "name": "la01-coordinate-learning",
+        "description": "Coordinate authorized learning intents without losing constraints.",
+        "version": "1.0.0",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "signature_ref": "synthetic-signature01",
+        "approval_ref": "synthetic-approval01",
+        "license_ref": "license01",
+        "evaluation_ref": "eval-not-executed",
+        "status": "active",
+        "applicable_roles": [
+          "LA-01"
+        ],
+        "purpose": "route",
+        "required_tool_refs": [
+          "read_goal_context"
+        ],
+        "instructions_ref": "SKILL.md",
+        "reference_paths": [
+          "../../outside"
+        ],
+        "scripts_enabled": false,
+        "policy_ref": "p01",
+        "dependency_refs": []
+      },
+      "role": "LA-01",
+      "granted_tools": [
+        "read_goal_context"
+      ],
+      "expected_allowed": false
+    }
+  ],
+  "not_validated": [
+    "semantic_summary_fidelity",
+    "live_MCP_interop",
+    "actual_Skill_signature_chain",
+    "real_Token_counting",
+    "OpenTelemetry_backend"
+  ]
+}

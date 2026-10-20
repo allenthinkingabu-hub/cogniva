@@ -1,0 +1,81 @@
+"""Program-design template. Not an implemented application.
+Generate learning_agent.generated.contracts from the reviewed schemas first.
+Concrete adapters and production identity/policy configuration are not included.
+"""
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Any, Mapping, Protocol, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from learning_agent.generated.contracts import (
+        AgentInvocation, ToolInvocation, ToolResult, EvidenceQuery, EvidenceSet,
+        ProposalRequest, ProposalReceipt, RunCreateRequest, RunReceipt,
+    )
+
+@dataclass(frozen=True)
+class VerifiedContext:
+    context_ref: str
+    identity_ref: str
+    authorization_ref: str
+    input_refs: Mapping[str, Any]
+    allowed_tools: frozenset[str]
+    # Actual implementation validates this against the issued context and pinned policy.
+    deadline_monotonic: float
+
+@dataclass(frozen=True)
+class RoleOutput:
+    role: str
+    schema_ref: str
+    payload: Mapping[str, Any]
+    # Validate payload with the role-specific generated DTO and JSON Schema.
+
+@dataclass(frozen=True)
+class ModelCallSpec:
+    run_ref: str
+    step_ref: str
+    logical_call_index: int
+    request_hash: str
+    payload_ref: str
+    authorization_ref: str
+    model_profile_ref: str
+    fencing_token: int
+
+@dataclass(frozen=True)
+class ModelResult:
+    status: str  # succeeded/failed/unknown; implementation uses an enum.
+    invocation_ref: str
+    result_payload_ref: str | None
+    usage_ref: str | None
+
+@dataclass(frozen=True)
+class Lease:
+    run_ref: str
+    holder_ref: str
+    fencing_token: int
+    expires_at: str
+
+class AgentPort(Protocol):
+    async def execute(self, invocation: AgentInvocation, context: VerifiedContext) -> RoleOutput: ...
+
+class ToolPort(Protocol):
+    async def execute(self, request: ToolInvocation, context: VerifiedContext) -> ToolResult: ...
+
+class RetrieverPort(Protocol):
+    async def retrieve(self, query: EvidenceQuery, context: VerifiedContext) -> EvidenceSet: ...
+
+class ProposalPort(Protocol):
+    async def submit(self, proposal: ProposalRequest, idempotency_key: str) -> ProposalReceipt: ...
+
+class ModelGatewayPort(Protocol):
+    async def submit_or_lookup(self, spec: ModelCallSpec) -> ModelResult: ...
+
+class LeasePort(Protocol):
+    async def claim(self, run_ref: str, expected_token: int, holder_ref: str) -> Lease: ...
+    async def renew(self, lease: Lease) -> Lease: ...
+    async def release(self, lease: Lease) -> None: ...
+    async def get(self, run_ref: str) -> Lease: ...
+
+class RunRepositoryPort(Protocol):
+    async def create(self, request: RunCreateRequest, create_key: str) -> RunReceipt: ...
+    async def transition(self, run_ref: str, expected_revision: int,
+                         fencing_token: int, allowed_from: str, new_status: str) -> bool: ...

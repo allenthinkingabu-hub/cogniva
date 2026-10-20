@@ -1,0 +1,667 @@
+{
+  "status": "synthetic_design_fixtures",
+  "valid": [
+    {
+      "id": "valid_CoordinationOutput",
+      "definition": "CoordinationOutput",
+      "value": {
+        "workflow": "assist",
+        "question": null,
+        "reason_codes": [
+          "explain_request"
+        ]
+      }
+    },
+    {
+      "id": "valid_AnalysisOutput",
+      "definition": "AnalysisOutput",
+      "value": {
+        "observations": [
+          "最终提交C；可用序列包含A到C改选"
+        ],
+        "hypotheses": [
+          {
+            "knowledge_ref": "node_01",
+            "reason_code": "needs_discrimination_check",
+            "evidence_refs": [
+              "feature_02"
+            ],
+            "counterevidence_refs": [
+              "grade_01"
+            ],
+            "certainty": "tentative"
+          }
+        ],
+        "limitations": [
+          "改选不证明未掌握"
+        ],
+        "sufficiency": "sufficient"
+      }
+    },
+    {
+      "id": "valid_ExplanationOutput",
+      "definition": "ExplanationOutput",
+      "value": {
+        "answer_revision_ref": "answer_r3",
+        "summary": "依据审核答案给出讲解",
+        "sections": [
+          {
+            "claim": "合成教学示例，非法律内容",
+            "evidence_refs": [
+              "passage_01_r2"
+            ]
+          }
+        ],
+        "limitations": [],
+        "followup_node_refs": [
+          "node_01"
+        ]
+      }
+    },
+    {
+      "id": "valid_PlanOutput",
+      "definition": "PlanOutput",
+      "value": {
+        "mode": "initial",
+        "scope_node_refs": [
+          "node_01"
+        ],
+        "personal_supplements": [],
+        "tasks": [
+          {
+            "task_key": "task_01",
+            "kind": "question",
+            "node_ref": "node_01",
+            "resource_refs": [
+              "question_r1"
+            ],
+            "estimated_minutes": 10,
+            "reason_codes": [
+              "initial_learning"
+            ]
+          }
+        ],
+        "dependency_edges": [],
+        "gaps": [],
+        "requires_confirmation": true,
+        "reason_codes": [
+          "scope_selected"
+        ]
+      }
+    },
+    {
+      "id": "valid_PersonalOutput",
+      "definition": "PersonalOutput",
+      "value": {
+        "knowledge_proposals": [
+          {
+            "node_ref": "node_01",
+            "evidence_refs": [
+              "evidence_01"
+            ],
+            "reason_code": "new_eligible_evidence",
+            "proposed_action": "link_evidence"
+          }
+        ],
+        "profile_proposals": [],
+        "no_change_reasons": [
+          "insufficient_independent_evidence"
+        ]
+      }
+    },
+    {
+      "id": "valid_proposal",
+      "definition": "ProposalRequest",
+      "value": {
+        "proposal_id": "proposal_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "kind": "analysis",
+        "context_ref": "context_01",
+        "authorization_ref": "grant_01",
+        "fencing_token": 2,
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "submission_ref": "submission_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "output": {
+          "observations": [
+            "最终提交C；可用序列包含A到C改选"
+          ],
+          "hypotheses": [
+            {
+              "knowledge_ref": "node_01",
+              "reason_code": "needs_discrimination_check",
+              "evidence_refs": [
+                "feature_02"
+              ],
+              "counterevidence_refs": [
+                "grade_01"
+              ],
+              "certainty": "tentative"
+            }
+          ],
+          "limitations": [
+            "改选不证明未掌握"
+          ],
+          "sufficiency": "sufficient"
+        },
+        "policy_ref": "policy_01",
+        "correlation_id": "request_01"
+      }
+    },
+    {
+      "id": "valid_invocation",
+      "definition": "AgentInvocation",
+      "value": {
+        "schema_version": "1.0",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "role": "LA-02",
+        "context_ref": "context_01",
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "submission_ref": "submission_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "policy_ref": "policy_01",
+        "authorization_ref": "grant_01",
+        "budget_reservation_ref": "budget_01",
+        "deadline_at": "2026-10-19T02:00:00Z",
+        "fencing_token": 2,
+        "idempotency_key": "run01-step01"
+      }
+    },
+    {
+      "id": "valid_event",
+      "definition": "EventEnvelope",
+      "value": {
+        "event_id": "event_01",
+        "type": "AttemptGraded",
+        "schema_version": "1.0",
+        "occurred_at": "2026-10-19T01:00:00Z",
+        "correlation_id": "request_01",
+        "causation_id": "submission_01",
+        "aggregate_ref": "attempt_01",
+        "aggregate_revision": 1,
+        "payload_ref": "payload_01"
+      }
+    },
+    {
+      "id": "valid_behavior",
+      "definition": "BehaviorEvent",
+      "value": {
+        "event_id": "event_behavior_01",
+        "attempt_ref": "attempt_01",
+        "writer_epoch": 1,
+        "stream_id": "stream_01",
+        "seq": 1,
+        "type": "option_selected",
+        "monotonic_ms": 100,
+        "option_id": "A"
+      }
+    },
+    {
+      "id": "valid_receipt",
+      "definition": "ProposalReceipt",
+      "value": {
+        "proposal_id": "proposal_01",
+        "status": "accepted",
+        "business_revision_refs": [
+          "profile_08"
+        ],
+        "outcomes": [
+          {
+            "type": "profile",
+            "status": "updated",
+            "reason_codes": [
+              "new_eligible_evidence"
+            ],
+            "business_revision_ref": "profile_08"
+          }
+        ],
+        "correlation_id": "request_01"
+      }
+    },
+    {
+      "id": "valid_retrieval",
+      "definition": "EvidenceSet",
+      "value": {
+        "evidence_set_id": "es_01",
+        "context_ref": "context_01",
+        "manifest_ref": "release_12",
+        "index_generation": "idx_03",
+        "query_hash": "hash_01",
+        "retrieval_config_version": "rag_01",
+        "passages": [],
+        "personal_evidence_refs": [],
+        "sufficiency": "insufficient",
+        "limitations": [
+          "无适用依据"
+        ]
+      }
+    },
+    {
+      "id": "valid_tool",
+      "definition": "ToolInvocation",
+      "value": {
+        "tool_call_id": "tool_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "context_ref": "context_01",
+        "tool_name": "read_scope",
+        "arguments": {
+          "goal_ref": "goal_01"
+        },
+        "idempotency_key": "read-01"
+      }
+    },
+    {
+      "id": "valid_create_run",
+      "definition": "RunCreateRequest",
+      "value": {
+        "event_id": "event_01",
+        "workflow": "attempt",
+        "context_ref": "context_01",
+        "authorization_ref": "grant_01",
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "submission_ref": "submission_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "budget_reservation_ref": "budget_01",
+        "policy_ref": "policy_01",
+        "deadline_at": "2026-10-19T02:00:00Z"
+      }
+    },
+    {
+      "id": "valid_error",
+      "definition": "Error",
+      "value": {
+        "code": "version_conflict",
+        "message": "Input revision changed",
+        "retryable": false,
+        "correlation_id": "request_01"
+      }
+    },
+    {
+      "id": "valid_lease",
+      "definition": "RunLeaseRequest",
+      "value": {
+        "action": "claim",
+        "holder_ref": "worker_01",
+        "expected_fencing_token": 0,
+        "ttl_seconds": 30,
+        "authorization_ref": "grant_01"
+      }
+    },
+    {
+      "id": "valid_provider",
+      "definition": "ProviderExecutionRequest",
+      "value": {
+        "invocation_id": "inv_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "context_ref": "ctx_01",
+        "authorization_ref": "grant_01",
+        "fencing_token": 2,
+        "payload_ref": "payload_01",
+        "deadline_at": "2026-10-19T02:00:00Z"
+      }
+    },
+    {
+      "id": "valid_tool_result",
+      "definition": "ToolResult",
+      "value": {
+        "tool_call_id": "call01",
+        "tool_name": "read_scope",
+        "status": "succeeded",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01"
+        },
+        "data": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "scope_node_refs": [
+            "node01"
+          ],
+          "constraints_ref": "constraints01",
+          "gaps": []
+        }
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "reject_model_score",
+      "definition": "AnalysisOutput",
+      "value": {
+        "observations": [
+          "最终提交C；可用序列包含A到C改选"
+        ],
+        "hypotheses": [
+          {
+            "knowledge_ref": "node_01",
+            "reason_code": "needs_discrimination_check",
+            "evidence_refs": [
+              "feature_02"
+            ],
+            "counterevidence_refs": [
+              "grade_01"
+            ],
+            "certainty": "tentative"
+          }
+        ],
+        "limitations": [
+          "改选不证明未掌握"
+        ],
+        "sufficiency": "sufficient",
+        "score": 100
+      },
+      "expected_rejection": "模型分析不能添加分数字段"
+    },
+    {
+      "id": "reject_missing_submission",
+      "definition": "ProposalRequest",
+      "value": {
+        "proposal_id": "proposal_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "kind": "analysis",
+        "context_ref": "context_01",
+        "authorization_ref": "grant_01",
+        "fencing_token": 2,
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "output": {
+          "observations": [
+            "最终提交C；可用序列包含A到C改选"
+          ],
+          "hypotheses": [
+            {
+              "knowledge_ref": "node_01",
+              "reason_code": "needs_discrimination_check",
+              "evidence_refs": [
+                "feature_02"
+              ],
+              "counterevidence_refs": [
+                "grade_01"
+              ],
+              "certainty": "tentative"
+            }
+          ],
+          "limitations": [
+            "改选不证明未掌握"
+          ],
+          "sufficiency": "sufficient"
+        },
+        "policy_ref": "policy_01",
+        "correlation_id": "request_01"
+      },
+      "expected_rejection": "题目分析提案必须关联提交"
+    },
+    {
+      "id": "reject_wrong_role_output",
+      "definition": "ProposalRequest",
+      "value": {
+        "proposal_id": "proposal_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "kind": "analysis",
+        "context_ref": "context_01",
+        "authorization_ref": "grant_01",
+        "fencing_token": 2,
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "submission_ref": "submission_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "output": {
+          "mode": "initial",
+          "scope_node_refs": [
+            "node_01"
+          ],
+          "personal_supplements": [],
+          "tasks": [
+            {
+              "task_key": "task_01",
+              "kind": "question",
+              "node_ref": "node_01",
+              "resource_refs": [
+                "question_r1"
+              ],
+              "estimated_minutes": 10,
+              "reason_codes": [
+                "initial_learning"
+              ]
+            }
+          ],
+          "dependency_edges": [],
+          "gaps": [],
+          "requires_confirmation": true,
+          "reason_codes": [
+            "scope_selected"
+          ]
+        },
+        "policy_ref": "policy_01",
+        "correlation_id": "request_01"
+      },
+      "expected_rejection": "analysis与plan输出不能混用"
+    },
+    {
+      "id": "reject_unknown_role",
+      "definition": "AgentInvocation",
+      "value": {
+        "schema_version": "1.0",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "role": "LA-99",
+        "context_ref": "context_01",
+        "input_refs": {
+          "goal_ref": "goal_01",
+          "manifest_ref": "release_12",
+          "goal_bundle_ref": "bundle_03",
+          "attempt_ref": "attempt_01",
+          "submission_ref": "submission_01",
+          "behavior_snapshot_revision": 2,
+          "evidence_watermark": 8,
+          "profile_revision": 7,
+          "plan_revision": 3
+        },
+        "policy_ref": "policy_01",
+        "authorization_ref": "grant_01",
+        "budget_reservation_ref": "budget_01",
+        "deadline_at": "2026-10-19T02:00:00Z",
+        "fencing_token": 2,
+        "idempotency_key": "run01-step01"
+      },
+      "expected_rejection": "角色必须登记"
+    },
+    {
+      "id": "reject_zero_seq",
+      "definition": "BehaviorEvent",
+      "value": {
+        "event_id": "event_behavior_01",
+        "attempt_ref": "attempt_01",
+        "writer_epoch": 1,
+        "stream_id": "stream_01",
+        "seq": 0,
+        "type": "option_selected",
+        "monotonic_ms": 100,
+        "option_id": "A"
+      },
+      "expected_rejection": "seq从1开始"
+    },
+    {
+      "id": "reject_missing_option",
+      "definition": "BehaviorEvent",
+      "value": {
+        "event_id": "event_behavior_01",
+        "attempt_ref": "attempt_01",
+        "writer_epoch": 1,
+        "stream_id": "stream_01",
+        "seq": 1,
+        "type": "option_selected",
+        "monotonic_ms": 100
+      },
+      "expected_rejection": "选择事件需选项"
+    },
+    {
+      "id": "reject_uncited_claim",
+      "definition": "ExplanationOutput",
+      "value": {
+        "answer_revision_ref": "answer_r3",
+        "summary": "依据审核答案给出讲解",
+        "sections": [
+          {
+            "claim": "合成教学示例，非法律内容",
+            "evidence_refs": []
+          }
+        ],
+        "limitations": [],
+        "followup_node_refs": [
+          "node_01"
+        ]
+      },
+      "expected_rejection": "正式讲解段落需证据引用"
+    },
+    {
+      "id": "reject_model_mastery_probability",
+      "definition": "PersonalOutput",
+      "value": {
+        "knowledge_proposals": [
+          {
+            "node_ref": "node_01",
+            "evidence_refs": [
+              "evidence_01"
+            ],
+            "reason_code": "new_eligible_evidence",
+            "proposed_action": "link_evidence"
+          }
+        ],
+        "profile_proposals": [],
+        "no_change_reasons": [
+          "insufficient_independent_evidence"
+        ],
+        "mastery_probability": 0.99
+      },
+      "expected_rejection": "LLM不直接输出权威掌握概率"
+    },
+    {
+      "id": "reject_tool_extra_argument",
+      "definition": "ToolInvocation",
+      "value": {
+        "tool_call_id": "tool_01",
+        "run_id": "run_01",
+        "step_id": "step_01",
+        "context_ref": "context_01",
+        "tool_name": "read_scope",
+        "arguments": {
+          "goal_ref": "goal_01",
+          "sql": "select private"
+        },
+        "idempotency_key": "read-01"
+      },
+      "expected_rejection": "读工具禁止任意SQL参数"
+    },
+    {
+      "id": "reject_initial_without_confirmation",
+      "definition": "PlanOutput",
+      "value": {
+        "mode": "initial",
+        "scope_node_refs": [
+          "node_01"
+        ],
+        "personal_supplements": [],
+        "tasks": [
+          {
+            "task_key": "task_01",
+            "kind": "question",
+            "node_ref": "node_01",
+            "resource_refs": [
+              "question_r1"
+            ],
+            "estimated_minutes": 10,
+            "reason_codes": [
+              "initial_learning"
+            ]
+          }
+        ],
+        "dependency_edges": [],
+        "gaps": [],
+        "requires_confirmation": false,
+        "reason_codes": [
+          "scope_selected"
+        ]
+      },
+      "expected_rejection": "首次范围/路线需要学生确认"
+    },
+    {
+      "id": "reject_unknown_tool_result_field",
+      "definition": "ToolResult",
+      "value": {
+        "tool_call_id": "call01",
+        "tool_name": "read_scope",
+        "status": "succeeded",
+        "input_refs": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01"
+        },
+        "data": {
+          "goal_ref": "goal01",
+          "manifest_ref": "release01",
+          "scope_node_refs": [
+            "node01"
+          ],
+          "constraints_ref": "constraints01",
+          "gaps": [],
+          "other_student_records": [
+            "private01"
+          ]
+        }
+      },
+      "expected_rejection": "工具只返回注册结构，不任意附加私人资料"
+    }
+  ],
+  "not_covered": [
+    "actual authorization",
+    "semantic support",
+    "current revision comparison",
+    "plan acyclicity",
+    "production performance"
+  ]
+}

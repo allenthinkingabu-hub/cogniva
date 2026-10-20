@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-18",
+  "purpose": "保留4A重构前原架构与关联需求，内容逐字节归档",
+  "files": [
+    {
+      "path": "docs/architecture/.DS_Store",
+      "sha256": "50b92f27e942e39b9a459d46e8562f5b770c8fadc8e840e471d05b3f6335119c"
+    },
+    {
+      "path": "docs/architecture/通用Agentic学习与考试平台-总体架构设计-v0.1.md",
+      "sha256": "38e1d082d8c07d03b820002bd7143a1ee5af9ae6d096d22b51b770748c3e65bf"
+    },
+    {
+      "path": "docs/architecture/运行与恢复手册-v0.1.md",
+      "sha256": "5d601944934e0171b93684f1d06fae25c511ba2e5dbbeaef4f3f1ecc192b4ab8"
+    },
+    {
+      "path": "docs/architecture/多Agent协作与RAG知识库设计-v0.1.md",
+      "sha256": "fa741b00bd90ce27695291e8fafc2c8f1cbec7ec36e6c86fe7c5352872d48984"
+    },
+    {
+      "path": "docs/architecture/adr/架构决策记录-v0.1.md",
+      "sha256": "983ace96c70e00216325ff2ca053165a103d4e3fd516dbac2290b2a3ed98a399"
+    },
+    {
+      "path": "docs/architecture/contracts/核心数据与接口契约-v0.1.md",
+      "sha256": "3b96822578761c7b851cba1fd7ea1c0e9785ba8ef28b5bdb227d2c02645e6539"
+    },
+    {
+      "path": "docs/architecture/verification/check_architecture_docs.py",
+      "sha256": "47e41c506dd32c7ab99623adb059198265c5338f7b312d1a6749b8c692ce0d6e"
+    },
+    {
+      "path": "docs/architecture/verification/requirement-index.json",
+      "sha256": "130be5388a1f1886558502388e3fa79894d32ee033aeb6941aeba7badc161103"
+    },
+    {
+      "path": "docs/architecture/verification/文档检查报告-v0.1.md",
+      "sha256": "d687dbcc571f40ed62a38ac603ad52ade3c1565eb039a6b88d4cca7d31879a5e"
+    },
+    {
+      "path": "docs/architecture/verification/需求追溯与验证矩阵-v0.1.md",
+      "sha256": "7617b3e2ccef71cecc256740d994960063a06e46e7a233b7afb2238bfb120abd"
+    },
+    {
+      "path": "docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.1.md",
+      "sha256": "5a4cd3e4e7c37b0d2cd6a1a873fb3f593cbf3cba146f51c18ef343176adcb328"
+    },
+    {
+      "path": "docs/requirements/通用Agentic学习与考试平台-系统需求规格说明书-v0.2.md",
+      "sha256": "27afb11ba81ba4aa8618756a2592b02707ab529738be860032ee3a5af30004fd"
+    },
+    {
+      "path": "docs/requirements/法考Agentic学习平台-系统需求规格说明书-v0.2.md",
+      "sha256": "ec00affc6f6ac0dfbd7bf172945ac890a29c48acae3966416ebda146688bd666"
+    }
+  ]
+}

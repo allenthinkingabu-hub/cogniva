@@ -1,0 +1,123 @@
+{
+  "catalog_version": "1.0",
+  "status": "design_review_not_production_approved",
+  "templates": [
+    {
+      "template_ref": "assist.explain.v1",
+      "intent": "explain",
+      "required_capabilities": [
+        "explain"
+      ],
+      "required_preconditions": [
+        "learning_target_available"
+      ],
+      "steps": [
+        {
+          "step_id": "explain",
+          "executor": "LA-03",
+          "depends_on": []
+        },
+        {
+          "step_id": "save_explanation",
+          "executor": "Java",
+          "depends_on": [
+            "explain"
+          ]
+        }
+      ],
+      "confirmation_policy": "none_for_read_only_explanation"
+    },
+    {
+      "template_ref": "assist.replan.v1",
+      "intent": "replan",
+      "required_capabilities": [
+        "propose_plan"
+      ],
+      "required_preconditions": [
+        "learning_target_available",
+        "planning_inputs_sufficient"
+      ],
+      "steps": [
+        {
+          "step_id": "propose_plan",
+          "executor": "LA-04",
+          "depends_on": []
+        },
+        {
+          "step_id": "save_plan_candidate",
+          "executor": "Java",
+          "depends_on": [
+            "propose_plan"
+          ]
+        }
+      ],
+      "confirmation_policy": "Java_checks_scope_time_budget_change"
+    },
+    {
+      "template_ref": "assist.explain_replan.v1",
+      "intent": "explain_and_replan",
+      "required_capabilities": [
+        "explain",
+        "analyze_submission",
+        "update_personal",
+        "propose_plan"
+      ],
+      "required_preconditions": [
+        "learning_target_available",
+        "submission_evidence_available",
+        "planning_inputs_sufficient"
+      ],
+      "steps": [
+        {
+          "step_id": "analyze",
+          "executor": "LA-02",
+          "depends_on": []
+        },
+        {
+          "step_id": "explain",
+          "executor": "LA-03",
+          "depends_on": [
+            "analyze"
+          ]
+        },
+        {
+          "step_id": "personal",
+          "executor": "LA-05",
+          "depends_on": [
+            "analyze"
+          ]
+        },
+        {
+          "step_id": "commit_personal",
+          "executor": "Java",
+          "depends_on": [
+            "personal"
+          ]
+        },
+        {
+          "step_id": "propose_plan",
+          "executor": "LA-04",
+          "depends_on": [
+            "commit_personal"
+          ],
+          "bind_confirmed_personal_from": "commit_personal"
+        },
+        {
+          "step_id": "save_plan_candidate",
+          "executor": "Java",
+          "depends_on": [
+            "propose_plan"
+          ]
+        },
+        {
+          "step_id": "save_explanation",
+          "executor": "Java",
+          "depends_on": [
+            "explain"
+          ]
+        }
+      ],
+      "confirmation_policy": "Java_checks_scope_time_budget_change"
+    }
+  ]
+}

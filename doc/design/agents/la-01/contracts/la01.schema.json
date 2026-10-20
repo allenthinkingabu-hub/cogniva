@@ -1,0 +1,817 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LA-01 local design contracts 1.0",
+  "$comment": "InputRefs and Error are verified mirrors of upstream 1.0 definitions. Candidate and compiled plan are separate types; this does not modify CoordinationOutput.",
+  "$defs": {
+    "InputRefs": {
+      "type": "object",
+      "properties": {
+        "goal_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "goal_bundle_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "draft_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "draft_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "attempt_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "submission_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "behavior_snapshot_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence_watermark": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "profile_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "plan_revision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "goal_ref",
+        "manifest_ref"
+      ],
+      "additionalProperties": false
+    },
+    "ClientContext": {
+      "type": "object",
+      "properties": {
+        "goal_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "attempt_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "node_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "page_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "AssistRequest": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "client_message_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "client_context": {
+          "$ref": "#/$defs/ClientContext"
+        }
+      },
+      "required": [
+        "text",
+        "client_message_id"
+      ],
+      "additionalProperties": false
+    },
+    "ScopeCandidate": {
+      "type": "object",
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "goal_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "node_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 50,
+          "minItems": 0
+        },
+        "is_current": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "label",
+        "goal_ref",
+        "manifest_ref",
+        "node_refs",
+        "is_current"
+      ],
+      "additionalProperties": false
+    },
+    "CycleSummary": {
+      "type": "object",
+      "properties": {
+        "cycle_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "partial",
+            "completed",
+            "failed"
+          ]
+        },
+        "confirmed_result_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 20,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "cycle_ref",
+        "revision",
+        "state",
+        "confirmed_result_refs"
+      ],
+      "additionalProperties": false
+    },
+    "CoordinationContext": {
+      "type": "object",
+      "properties": {
+        "context_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "message_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "session_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "input_refs": {
+          "$ref": "#/$defs/InputRefs"
+        },
+        "current_scope_candidate_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "scope_candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScopeCandidate"
+          },
+          "maxItems": 20,
+          "minItems": 1
+        },
+        "allowed_template_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "assist.explain.v1",
+              "assist.replan.v1",
+              "assist.explain_replan.v1"
+            ]
+          },
+          "maxItems": 3,
+          "minItems": 0
+        },
+        "capability_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "explain",
+              "analyze_submission",
+              "update_personal",
+              "propose_plan"
+            ]
+          },
+          "maxItems": 4,
+          "minItems": 0
+        },
+        "precondition_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "learning_target_available",
+              "submission_evidence_available",
+              "planning_inputs_sufficient"
+            ]
+          },
+          "maxItems": 3,
+          "minItems": 0
+        },
+        "page_action": {
+          "type": "string",
+          "enum": [
+            "free_text",
+            "explain_option",
+            "next_question",
+            "submit_answer",
+            "confirm_plan"
+          ]
+        },
+        "cycle_summary": {
+          "$ref": "#/$defs/CycleSummary"
+        },
+        "policy_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "auth_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "context_ref",
+        "message_ref",
+        "text",
+        "session_ref",
+        "input_refs",
+        "current_scope_candidate_id",
+        "scope_candidates",
+        "allowed_template_refs",
+        "capability_refs",
+        "precondition_refs",
+        "page_action",
+        "policy_ref",
+        "auth_revision",
+        "context_revision",
+        "deadline_at"
+      ],
+      "additionalProperties": false
+    },
+    "IntentProposal": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "enum": [
+            "explain",
+            "replan",
+            "explain_and_replan",
+            "clarify",
+            "unsupported"
+          ]
+        },
+        "scope_candidate_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 1,
+          "minItems": 0
+        },
+        "clarification_question": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 20,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "intent",
+        "scope_candidate_ids",
+        "clarification_question",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "intent": {
+                "const": "clarify"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "clarification_question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "scope_candidate_ids": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "intent": {
+                "enum": [
+                  "explain",
+                  "replan",
+                  "explain_and_replan"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "scope_candidate_ids": {
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "clarification_question": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "intent": {
+                "const": "unsupported"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "scope_candidate_ids": {
+                "maxItems": 0
+              },
+              "clarification_question": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StepBinding": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "executor": {
+          "type": "string",
+          "enum": [
+            "LA-02",
+            "LA-03",
+            "LA-04",
+            "LA-05",
+            "Java"
+          ]
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 10,
+          "minItems": 0
+        },
+        "input_refs": {
+          "$ref": "#/$defs/InputRefs"
+        },
+        "bind_confirmed_personal_from": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "step_id",
+        "executor",
+        "depends_on",
+        "input_refs"
+      ],
+      "additionalProperties": false
+    },
+    "CoordinationPlan": {
+      "type": "object",
+      "properties": {
+        "plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "decision_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "template_ref": {
+          "type": "string",
+          "enum": [
+            "assist.explain.v1",
+            "assist.replan.v1",
+            "assist.explain_replan.v1"
+          ]
+        },
+        "catalog_version": {
+          "const": "1.0"
+        },
+        "context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auth_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "input_refs": {
+          "$ref": "#/$defs/InputRefs"
+        },
+        "scope_candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "step_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StepBinding"
+          },
+          "maxItems": 8,
+          "minItems": 1
+        },
+        "budget_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requires_student_confirmation": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plan_ref",
+        "decision_ref",
+        "request_ref",
+        "template_ref",
+        "catalog_version",
+        "context_revision",
+        "auth_revision",
+        "input_refs",
+        "scope_candidate_id",
+        "step_bindings",
+        "budget_ref",
+        "deadline_at",
+        "requires_student_confirmation"
+      ],
+      "additionalProperties": false
+    },
+    "ClarificationQuestion": {
+      "type": "object",
+      "properties": {
+        "question_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "choice_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 20,
+          "minItems": 0
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "question_ref",
+        "text",
+        "choice_refs",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
+    "ClarificationAnswer": {
+      "type": "object",
+      "properties": {
+        "question_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "expected_context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "choice_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "question_ref",
+        "expected_context_revision"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "answer"
+          ],
+          "not": {
+            "required": [
+              "choice_ref"
+            ]
+          }
+        },
+        {
+          "required": [
+            "choice_ref"
+          ],
+          "not": {
+            "required": [
+              "answer"
+            ]
+          }
+        }
+      ]
+    },
+    "CancelRequest": {
+      "type": "object",
+      "properties": {
+        "expected_request_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "expected_request_revision"
+      ],
+      "additionalProperties": false
+    },
+    "AssistReceipt": {
+      "type": "object",
+      "properties": {
+        "request_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "routing",
+            "waiting_input",
+            "executing",
+            "completed",
+            "partial",
+            "failed",
+            "cancelling",
+            "cancelled",
+            "superseded",
+            "unsupported"
+          ]
+        },
+        "result_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 30,
+          "minItems": 0
+        },
+        "clarification": {
+          "$ref": "#/$defs/ClarificationQuestion"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 20,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "request_ref",
+        "request_revision",
+        "status",
+        "result_refs",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "waiting_input"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "clarification"
+            ]
+          }
+        }
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "invalid_schema",
+            "unauthorized",
+            "forbidden",
+            "not_found",
+            "version_conflict",
+            "idempotency_conflict",
+            "invalid_scope",
+            "resource_gap",
+            "rate_limited",
+            "evidence_insufficient",
+            "provider_unavailable",
+            "budget_exhausted",
+            "result_unknown",
+            "internal_error"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "correlation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "details": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "current_revision_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "correlation_id"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

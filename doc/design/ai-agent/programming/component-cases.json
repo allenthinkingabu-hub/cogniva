@@ -1,0 +1,563 @@
+{
+  "status": "test_specifications_not_runtime_results",
+  "cases": [
+    {
+      "id": "PC-01",
+      "component": "ContractBoundary",
+      "scenario": "额外字段/宽松类型",
+      "input": {
+        "role": "LA-02",
+        "output_extra_field": "score",
+        "revision_value": true
+      },
+      "expected": [
+        "拒绝未知字段及bool冒充revision整数"
+      ],
+      "invariants": [
+        "模型不能改分"
+      ],
+      "requirement_refs": [
+        "AR-03",
+        "AC-62"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-02",
+      "component": "ConfirmGoalBundle",
+      "scenario": "并发确认",
+      "input": {
+        "draft_revision": 3,
+        "concurrent_edit_to": 4
+      },
+      "expected": [
+        "409返回当前差异",
+        "新范围/初始路线均不激活"
+      ],
+      "invariants": [
+        "共同生效"
+      ],
+      "requirement_refs": [
+        "IR-08",
+        "AC-65"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-03",
+      "component": "SubmitAttempt",
+      "scenario": "事件批次不可用",
+      "input": {
+        "final_answer": [
+          "C"
+        ],
+        "behavior_service": "unavailable"
+      },
+      "expected": [
+        "答案保存并规则评分",
+        "quality=unavailable",
+        "创建四项pending"
+      ],
+      "invariants": [
+        "核心提交独立"
+      ],
+      "requirement_refs": [
+        "NFR-37",
+        "AC-69"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-04",
+      "component": "FeatureExtractor",
+      "scenario": "直接改选",
+      "input": {
+        "events": [
+          "select A",
+          "select C"
+        ],
+        "final_answer": [
+          "C"
+        ]
+      },
+      "expected": [
+        "changed_count=1",
+        "最终答案来自Submission"
+      ],
+      "invariants": [
+        "行为不改变分数"
+      ],
+      "requirement_refs": [
+        "AC-61",
+        "AC-62"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-05",
+      "component": "FeatureExtractor",
+      "scenario": "取消再选与缺序号",
+      "input": {
+        "events": [
+          "seq1 select A",
+          "seq3 clear",
+          "seq4 select C"
+        ]
+      },
+      "expected": [
+        "changed_count=0",
+        "cleared_count=1",
+        "保留候选变化并标gaps"
+      ],
+      "invariants": [
+        "不填造seq2",
+        "不推断未犹豫"
+      ],
+      "requirement_refs": [
+        "AC-66",
+        "AC-67"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-06",
+      "component": "BehaviorSnapshot",
+      "scenario": "迟到边界",
+      "input": {
+        "cutoff": 4,
+        "late_seq": [
+          3,
+          5
+        ],
+        "epoch": "same"
+      },
+      "expected": [
+        "窗口内仅补seq3",
+        "拒绝seq5进入本次分析"
+      ],
+      "invariants": [
+        "不重交答案或重判分"
+      ],
+      "requirement_refs": [
+        "AC-66",
+        "AC-68"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-07",
+      "component": "InboxConsumer",
+      "scenario": "重复投递",
+      "input": {
+        "event_id": "event01",
+        "deliveries": 2,
+        "payload_hash": "same"
+      },
+      "expected": [
+        "一个Inbox/run/dispatch",
+        "两次可安全ack"
+      ],
+      "invariants": [
+        "不重复逻辑任务"
+      ],
+      "requirement_refs": [
+        "NFR-04",
+        "MAC-09"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-08",
+      "component": "InboxConsumer",
+      "scenario": "同event不同hash",
+      "input": {
+        "event_id": "event01",
+        "payload_hashes": [
+          "h1",
+          "h2"
+        ]
+      },
+      "expected": [
+        "第二次隔离告警",
+        "不覆盖已登记run"
+      ],
+      "invariants": [
+        "不得以最后写覆盖"
+      ],
+      "requirement_refs": [
+        "AR-03"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-09",
+      "component": "LeasePort",
+      "scenario": "旧Worker回执",
+      "input": {
+        "current_token": 4,
+        "proposal_token": 3
+      },
+      "expected": [
+        "Java拒绝旧token",
+        "保留审计，不写有效画像/计划"
+      ],
+      "invariants": [
+        "旧执行者不能覆盖新状态"
+      ],
+      "requirement_refs": [
+        "NFR-39",
+        "AC-68"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-10",
+      "component": "AttemptWorkflow",
+      "scenario": "讲解失败个人分支成功",
+      "input": {
+        "explain": "failed",
+        "personal": "accepted",
+        "plan": "accepted"
+      },
+      "expected": [
+        "保留个人/计划收据",
+        "讲解failed和run partial可见"
+      ],
+      "invariants": [
+        "不回滚答案或成功支路"
+      ],
+      "requirement_refs": [
+        "MAC-10",
+        "AC-68"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-11",
+      "component": "AttemptWorkflow",
+      "scenario": "个人水位未确认",
+      "input": {
+        "personal": "pending",
+        "plan_input_watermark": "old"
+      },
+      "expected": [
+        "不声称基于新画像重排",
+        "按批准旧水位降级或等待"
+      ],
+      "invariants": [
+        "输入依赖明确"
+      ],
+      "requirement_refs": [
+        "NFR-31"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-12",
+      "component": "ProposalDispatcher",
+      "scenario": "Java提交成功但回执丢失",
+      "input": {
+        "first_request": "committed_response_lost",
+        "retry_key": "same"
+      },
+      "expected": [
+        "返回原收据",
+        "同payload无重复任务/证据"
+      ],
+      "invariants": [
+        "副作用幂等"
+      ],
+      "requirement_refs": [
+        "NFR-04",
+        "MAC-09"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-13",
+      "component": "ModelGateway",
+      "scenario": "供应商结果未知",
+      "input": {
+        "provider_call": "sent",
+        "connection": "lost"
+      },
+      "expected": [
+        "Invocation unknown",
+        "不自动增加call_index重发",
+        "查询/对账"
+      ],
+      "invariants": [
+        "不重复收费承诺",
+        "父预算保留"
+      ],
+      "requirement_refs": [
+        "NFR-17",
+        "AR-01"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-14",
+      "component": "ProviderBegin",
+      "scenario": "租约过期与在途",
+      "input": {
+        "begin": "granted",
+        "lease_after_send": "expired"
+      },
+      "expected": [
+        "记录在途结果/费用",
+        "后继采纳仍检查当前授权/版本"
+      ],
+      "invariants": [
+        "跨服务租约查询不假称原子取消外呼"
+      ],
+      "requirement_refs": [
+        "NFR-31"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-15",
+      "component": "RAGScope",
+      "scenario": "跨用户缓存",
+      "input": {
+        "cached_user": "u1",
+        "request_user": "u2"
+      },
+      "expected": [
+        "不能命中私人生成结果",
+        "按当前授权检索"
+      ],
+      "invariants": [
+        "先授权后召回"
+      ],
+      "requirement_refs": [
+        "NFR-30"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-16",
+      "component": "RAGRevocation",
+      "scenario": "旧索引回滚",
+      "input": {
+        "generation": "old",
+        "passage": "currently_revoked"
+      },
+      "expected": [
+        "当前deny仍阻断",
+        "不得复活撤销资料"
+      ],
+      "invariants": [
+        "撤销优先缓存TTL"
+      ],
+      "requirement_refs": [
+        "NFR-33"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-17",
+      "component": "RankFusion",
+      "scenario": "跨通道去重",
+      "input": {
+        "lexical": [
+          "p1",
+          "p1",
+          "p2"
+        ],
+        "vector": [
+          "p2",
+          "p3"
+        ],
+        "rrf_k": 60
+      },
+      "expected": [
+        "每通道同revision只计一次",
+        "score按去重rank融合"
+      ],
+      "invariants": [
+        "相似分数不等于可信度"
+      ],
+      "requirement_refs": [
+        "NFR-27"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-18",
+      "component": "ContextAssembler",
+      "scenario": "Token超限",
+      "input": {
+        "size": "over_budget",
+        "required": [
+          "permissions",
+          "question",
+          "limitations"
+        ]
+      },
+      "expected": [
+        "先裁非关键历史",
+        "关键本身超限则降级/分解"
+      ],
+      "invariants": [
+        "限制不可被裁掉"
+      ],
+      "requirement_refs": [
+        "AR-02"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-19",
+      "component": "PersonalPolicy",
+      "scenario": "同题重复和提示",
+      "input": {
+        "same_question_attempts": 5,
+        "saw_answer": true
+      },
+      "expected": [
+        "保留练习事实但不当5份独立掌握证据"
+      ],
+      "invariants": [
+        "不凭LLM给权威概率"
+      ],
+      "requirement_refs": [
+        "NFR-12",
+        "AC-67"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-20",
+      "component": "CycleCollector",
+      "scenario": "四项全部不变",
+      "input": {
+        "outcomes": [
+          "no_change",
+          "no_change",
+          "no_change",
+          "no_change"
+        ]
+      },
+      "expected": [
+        "四项原因齐全",
+        "run可完成并给下一步"
+      ],
+      "invariants": [
+        "不强制改四份数据"
+      ],
+      "requirement_refs": [
+        "AC-63",
+        "AC-68"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-21",
+      "component": "RunRecovery",
+      "scenario": "检查点在模型调用后重入",
+      "input": {
+        "checkpoint": "before_delivery",
+        "invocation": "existing_succeeded"
+      },
+      "expected": [
+        "复用持久逻辑调用/结果",
+        "只补未确认提案"
+      ],
+      "invariants": [
+        "不重新收费调用"
+      ],
+      "requirement_refs": [
+        "NFR-31"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-22",
+      "component": "ReleaseDeployment",
+      "scenario": "旧图检查点",
+      "input": {
+        "run_graph": "g1",
+        "new_worker_graph": "g2"
+      },
+      "expected": [
+        "路由g1兼容池或显式迁移/暂停"
+      ],
+      "invariants": [
+        "不直接用g2解释g1状态"
+      ],
+      "requirement_refs": [
+        "NFR-34"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-23",
+      "component": "Settings",
+      "scenario": "生产启用mock",
+      "input": {
+        "environment": "prod",
+        "mock_provider": true
+      },
+      "expected": [
+        "启动校验拒绝该AI配置",
+        "Java独立基础服务可继续"
+      ],
+      "invariants": [
+        "不可伪装生产AI"
+      ],
+      "requirement_refs": [
+        "NFR-18"
+      ],
+      "test_level": "unit",
+      "execution_status": "not_executed_specification"
+    },
+    {
+      "id": "PC-24",
+      "component": "ScaffoldSmoke",
+      "scenario": "最小纵向链路",
+      "input": {
+        "data": "synthetic",
+        "provider": "mock"
+      },
+      "expected": [
+        "JavaOutbox→PythonInbox/run→图→proposal→Java收据",
+        "trace贯通",
+        "重复/故障/越权断言"
+      ],
+      "invariants": [
+        "只证明工程链，不证明教学质量"
+      ],
+      "requirement_refs": [
+        "FR-CORE-06",
+        "NFR-14"
+      ],
+      "test_level": "integration",
+      "execution_status": "not_executed_specification"
+    }
+  ],
+  "production_quality_gates_ref": "../../学生持续学习-AI-Agent群详细设计-v1.0.md"
+}
