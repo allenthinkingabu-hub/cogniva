@@ -13,6 +13,15 @@
 
 ## 1. 架构定位：LangGraph 与 Harness 宿主的权责边界
 
+### 1.0 企业级 Agent Harness 脚手架必须具备的 7 大核心特性与设计基准
+构建一个企业级、专业、主流且严格符合 Harness 规范的 Python AI Agent 框架脚手架（Scaffold），绝不能停留在网上常见的“几个 LangChain Chain 拼装成的玩具 Demo”，而必须是一个高可用、高确定性、强隔离、具备故障自愈与审计能力的企业级分布式系统宿主（Host）。我们首先梳理企业级 Agent Harness 脚手架必须先认知：LangGraph 与 Harness 的权责边界
+- 开源框架（如 LangGraph / Deep Agent）的角色：
+它是**“有向图执行与局部检查点引擎”**（StateGraph、Node 调度、条件边、短时内存检查点）。
+- Harness（宿主）的角色：
+它是**“企业级外层控制环与受控运行时（Control Ring & Host）”**。
+核心铁律：外部大模型不可信、工具网络不可信、开源框架自身不具备分布式租约和业务幂等能力。
+因此，所有的 LangGraph 节点和状态流转，都必须被嵌入并受控于 Harness 的 9 阶段生命周期 Hook 与安全闸门。
+
 在构建企业级 AI Agent 系统时，必须明确区分 **“图执行引擎”** 与 **“企业级受控宿主（Harness）”** 的本质差异。
 
 ```
@@ -43,6 +52,20 @@
                     └────────────────────────────────────────────────────────┘
 ```
 
+1. 不可绕过的执行内核与 9 阶段生命周期 Hooks（规范 8.1 节）
+脚手架必须原生提供 advance(run, fencing_token) 驱动循环与 9 个不可绕过的拦截点：
+
+on_run_load：加载不可变版本 Profile，校验租户、租约（lease）与删除墓碑（Tombstone）；
+before_context：校验学生授权时效与目的（purpose），剔除越权片段；
+before_model：Token 计数预测、出网目的地检查、原子预占模型预算；
+after_model：校验结构化 JSON Schema、记录实际 Token/用量、拦截非法提权；
+before_action：安全核心闸门。只有宿主能从模型候选构造 AuthorizedToolCall，模型自己填写 permit=true 必须被代码阻断；
+after_action：持久化 operation_ref、哈希校验、处理网络未知超时（标记 unknown）；
+before_checkpoint：使用单调自增 fencing_token 与 CAS 乐观锁持久化状态，防止脏写；
+before_finalize：汇总已达成目标与待确认/未完成项，生成聚合收据；
+after_finalize：Outbox 异步发布终态与脱敏审计日志。
+
+
 ### 1.1 开源框架（LangChain / LangGraph / Deep Agent）的定位
 - **开源框架的角色**：是算法与执行的**“有向图引擎与局部调度器”**（StateGraph、Node/Edge 拓扑、条件分支、短时检查点）。
 - **Happy-Path 致命假设**：开源库默认假设网络不中断、Worker 不会宕机（Crash）、外部大模型不超时、模型可以自由决定调用何种工具（模型自授权）。
@@ -54,6 +77,7 @@
   1. **大模型绝对不可信**：模型输出的不是“命令（Command）”，而仅仅是“候选提案（Candidate Proposal）”；
   2. **权限由宿主裁决**：只有宿主代码在不可绕过的 `before_action` 闸门校验当前身份、配额与版本后，才能构造合法的受控动作；
   3. **分布式可靠性**：通过租约（Lease）、CAS 乐观锁防脑裂（Fencing Token）、消息去重（Inbox）与事务外发（Outbox），确保系统在任何节点宕机时可自愈恢复，不丢失状态，不产生重复业务副作用。
+
 
 ---
 
