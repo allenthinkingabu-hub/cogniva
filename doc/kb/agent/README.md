@@ -20,7 +20,9 @@ doc/kb/agent/
 ├── 03-AI-Agent-端到端完全落地详细设计与工程实现指南-v1.0.md   # [工程施工] 4大套件代码模型、DDL、自包含RAG与EvalOps
 └── deep-dive/                                                # [分层专项深度解构系列 (Deep Dive Series)]
     ├── 01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md         # [L1 中文深度篇] 异构适配、动态路由、语义缓存与流式背压
-    └── 01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md # [L1 English Deep Dive] Resilience, Backpressure & Latency
+    ├── 01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md # [L1 English Deep Dive] Resilience, Backpressure & Latency
+    └── cases/                                                # [生产故障 RCA 实战案例库 (STAR+L 模型)]
+        └── 01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md   # [Case 01] 首字延迟暴增/429爆发/对冲双发与200ms自愈
 ```
 
 ---
@@ -55,6 +57,9 @@ doc/kb/agent/
   * **顶尖专家思维映射**：未被显式要求的深水区、原始 RFC/源码素材、专用工具链（llmperf/Toxiproxy）、独立于人的客观量化指标；
   * **四大子系统深度解构**：异构协议驱动适配器、SLA/Cost/429 动态加权路由与断路器、防越权防漂移 L1-L3 向量语义缓存、高并发流式背压与主动中断传播机制；
   * **生产落地自查清单**：高可用切换、附加延迟、缓存安全、审计对账与内存背压自愈验证。
+* **[01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md](./deep-dive/cases/01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md)**
+  * **核心回答**：**How to Survive Real LLM Incidents（真实生产环境暴击下，如何用 RCA 与 STAR+L 讲好实战故事）**；
+  * **核心内容**：复盘黑五大促美东节点首字延迟跳变至 32s、HTTP 429 连环雪崩事故，拆解 1500ms 对冲双发（Hedged Requests）、P95 滑窗断路器与主动级联取消机制。
 
 ---
 
