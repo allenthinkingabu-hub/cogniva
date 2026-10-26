@@ -76,6 +76,10 @@
   3. **语义缓存（Semantic Cache）**：利用稠密嵌入向量对高频只读请求建立缓存（相似度 $\ge 0.95$ 直接返回），大幅降低延迟与 Token 开销（注意：含个人上下文的私有请求禁止跨租户复用）；
   4. **流式传输与背压控制（Backpressure）**：全异步 Server-Sent Events (SSE) / WebSocket 传输，保证网络抖动时支持客户端断线重连与流式中断。
 
+> 💡 **生产级专项深度解构**：针对 L1 层的内核设计、专家高阶自述、防越权语义缓存架构及流式背压实践，请参阅：  
+> * 🇨🇳 中文深度篇：[01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md](./deep-dive/01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md)  
+> * 🇬🇧 英文深度篇：[01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md](./deep-dive/01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md)
+
 ---
 
 ### L2. 受控宿主运行时层 (Harness & Control Ring Kernel)

@@ -78,6 +78,10 @@
   3. **Semantic Caching**: Employs dense vector embeddings to cache read-only, high-frequency query responses (cosine similarity $\ge 0.95$). Significantly cuts down latency and Token expenses. *(Strict invariant: Private user contexts must never cross tenant isolation boundaries).*
   4. **Streaming Backpressure & Resiliency**: Provides asynchronous Server-Sent Events (SSE) and WebSocket conduits, maintaining heartbeat reconciliation and client reconnection resilience amidst transient network drops.
 
+> 💡 **Production Deep Dive Reference**: For in-depth kernel architecture, expert interview pitches, multi-tier anti-bleed semantic cache design, and streaming backpressure, see:  
+> * 🇬🇧 English Deep Dive: [01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md](./deep-dive/01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md)  
+> * 🇨🇳 Chinese Deep Dive: [01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md](./deep-dive/01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md)
+
 ---
 
 ### L2. Controlled Host Runtime (Harness & Control Ring Kernel)
