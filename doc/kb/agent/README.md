@@ -67,4 +67,6 @@ doc/kb/agent/
 
 * 原 `doc/kb/Harness.md` 已全面升级并演进为 `02-AI-Agent-Harness-受控宿主深度原理解析-v1.0.md`；
 * 原 `doc/kb/AI-Agent-架构知识体系全景.md` 已全面补充并演进为 `01-AI-Agent-企业级架构知识体系全景指南-v1.0.md`；
-* 整体知识体系为 [AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md](../../architecture/AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md) 提供上位架构支撑与理论基石。
+* 整体知识体系为 [AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md](../../architecture/AI-Agent-Harness-企业级通用脚手架详细设计-v1.0.md) 提供上位架构支撑与理论基石；
+* **业务落地映射**：参见 [01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md](../ecommerce/architect/01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md) / [English Edition](../ecommerce/architect/01-Cross-Border-ECommerce-Multi-Agent-Ecosystem-Architecture.md)，解构 6 大专业 Agent 协同与传统 OMS/WMS 系统共存方案。
+
