@@ -22,7 +22,9 @@ doc/kb/agent/
     ├── 01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md         # [L1 中文深度篇] 异构适配、动态路由、语义缓存与流式背压
     ├── 01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md # [L1 English Deep Dive] Resilience, Backpressure & Latency
     └── cases/                                                # [生产故障 RCA 实战案例库 (STAR+L 模型)]
-        └── 01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md   # [Case 01] 首字延迟暴增/429爆发/对冲双发与200ms自愈
+        ├── 01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md   # [Case 01] 首字延迟暴增/429爆发/对冲双发与200ms自愈
+        ├── 01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md # [Case 02] 慢客户端积压/Pod内存打满OOMKilled与内核背压
+        └── 01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md # [Case 03] 首月$18万天价账单/L1-L3防越权语义缓存/削减69%成本
 ```
 
 ---
@@ -58,8 +60,11 @@ doc/kb/agent/
   * **四大子系统深度解构**：异构协议驱动适配器、SLA/Cost/429 动态加权路由与断路器、防越权防漂移 L1-L3 向量语义缓存、高并发流式背压与主动中断传播机制；
   * **生产落地自查清单**：高可用切换、附加延迟、缓存安全、审计对账与内存背压自愈验证。
 * **[01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md](./deep-dive/cases/01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md)**
-  * **核心回答**：**How to Survive Real LLM Incidents（真实生产环境暴击下，如何用 RCA 与 STAR+L 讲好实战故事）**；
-  * **核心内容**：复盘黑五大促美东节点首字延迟跳变至 32s、HTTP 429 连环雪崩事故，拆解 1500ms 对冲双发（Hedged Requests）、P95 滑窗断路器与主动级联取消机制。
+  * **核心痛点**：首字延迟暴增至 32s、HTTP 429 连环雪崩事故复盘与 200ms 无感降级；
+* **[01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md](./deep-dive/cases/01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md)**
+  * **核心痛点**：弱网慢客户端积压导致 32GB 内存打满 OOMKilled，内核级套接字监听与 HTTP/2 流控背压自愈；
+* **[01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md](./deep-dive/cases/01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md)**
+  * **核心痛点**：快时尚品牌首月 $187,000 天价账单事故，L1-L3 防越权语义缓存、Prompt Caching 对齐与 69% 成本压降。
 
 ---
 

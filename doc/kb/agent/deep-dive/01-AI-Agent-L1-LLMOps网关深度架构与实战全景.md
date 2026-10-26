@@ -36,8 +36,8 @@ SLA 达到 99.95%，同时整体算力成本节约了近三分之一。”
 
 > 🔍 **三大核心痛点 · 生产级真实 RCA 实战拆解**：
 > 1. **稳定性抖动（长尾延迟/429/静默挂起）**：👉 [01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md](./cases/01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md) *(STAR+L 深度复盘)*
-> 2. **长连接背压吞吐瓶颈（慢客户端/内存OOM）**：*(待分解)*
-> 3. **Token 成本失控（重复Prompt/无效重试）**：*(待分解)*
+> 2. **长连接背压吞吐瓶颈（慢客户端/内存OOM）**：👉 [01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md](./cases/01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md) *(STAR+L 深度复盘)*
+> 3. **Token 成本失控（重复Prompt/无效重试）**：👉 [01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md](./cases/01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md) *(STAR+L 深度复盘)*
 
 ---
 
@@ -237,6 +237,8 @@ $$\text{Score} = w_1 \cdot \frac{1}{\text{P95 Latency}} + w_2 \cdot \frac{1}{\te
 [命中: 直接返回] / [未命中: 透传上游并异步写入]
 ```
 
+> 📌 **真实生产案例与 RCA 复盘**：详见 [01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md](./cases/01-L1-Case-03-Token成本失控与语义缓存对账-RCA实战.md)，还原某快时尚品牌首月遭遇 $187,000 天价账单后，通过 L1-L3 语义缓存与 Prompt Caching 削减 69% 成本的救亡全过程。
+
 ---
 
 ### 4. 流式背压控制与内核级长连接治理 (Streaming Backpressure Control)
@@ -251,6 +253,8 @@ $$\text{Score} = w_1 \cdot \frac{1}{\text{P95 Latency}} + w_2 \cdot \frac{1}{\te
 2. **客户端断线的主动切断（Cancellation Propagation）**：
    - 监听客户端连接断开事件（`client disconnect / RST`）；
    - 一旦客户端断开，网关立即向 LLM 供应商或 vLLM 发送终止信号（如取消 HTTP/2 Stream），**毫秒级中断上游推理，避免无效 Token 产生高额计费**。
+
+> 📌 **真实生产案例与 RCA 复盘**：详见 [01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md](./cases/01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md)，还原东南亚双十一 6,200 个移动端弱网连接撑爆 Pod 内存触发 OOMKilled 的排查与内核级背压自愈实录。
 
 ---
 
