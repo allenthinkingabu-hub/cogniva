@@ -14,7 +14,8 @@
 ```text
 doc/kb/agent/
 ├── README.md                                                 # [当前索引] 知识库结构与版本指南
-├── 01-AI-Agent-企业级架构知识体系全景指南-v1.0.md             # [L1-L7 全景理论] 顶层战略蓝图与技术选型决策
+├── 01-AI-Agent-企业级架构知识体系全景指南-v1.0.md             # [L1-L7 全景理论 (中文版)] 顶层战略蓝图与技术选型决策
+├── 01-AI-Agent-Enterprise-Architecture-Knowledge-System-Guide-v1.0.md # [L1-L7 Architecture (English Edition)] Global Panorama
 ├── 02-AI-Agent-Harness-受控宿主深度原理解析-v1.0.md           # [核心机理] 9阶段生命周期、CAS防脑裂与状态机
 └── 03-AI-Agent-端到端完全落地详细设计与工程实现指南-v1.0.md   # [工程施工] 4大套件代码模型、DDL、自包含RAG与EvalOps
 ```
@@ -23,10 +24,11 @@ doc/kb/agent/
 
 ## 三份核心文档的定位与阅读指引
 
-### 1. [01-AI-Agent-企业级架构知识体系全景指南-v1.0.md](./01-AI-Agent-企业级架构知识体系全景指南-v1.0.md)
+### 1. [01-AI-Agent-企业级架构知识体系全景指南-v1.0.md](./01-AI-Agent-企业级架构知识体系全景指南-v1.0.md) / [English Edition](./01-AI-Agent-Enterprise-Architecture-Knowledge-System-Guide-v1.0.md)
 * **核心回答**：**What & Why（是什么、为什么、业界全局技术选型是什么、认知边界在哪里）**；
 * **适用受众**：架构师、技术评审委员会、高阶求职/晋升答辩、技术管理者；
 * **核心内容**：L1~L7 架构分层大图、四大认知模式（ReAct/Plan-and-Solve/Reflection）、四层知识库模型、生产级 4 大典型反模式、架构演进决策矩阵。
+* **语言版本**：提供中文完整版与面向跨国团队/顶会的专业英文版（100% 完整对应）。
 
 ### 2. [02-AI-Agent-Harness-受控宿主深度原理解析-v1.0.md](./02-AI-Agent-Harness-受控宿主深度原理解析-v1.0.md)
 * **核心回答**：**Why Harness & How It Guards（为什么必须有 Harness、它如何解决生产环境 5 大痛点）**；
