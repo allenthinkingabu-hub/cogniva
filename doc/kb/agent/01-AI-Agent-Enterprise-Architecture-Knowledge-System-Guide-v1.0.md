@@ -146,26 +146,43 @@
 ---
 
 ### L6. Zero-Trust Security & Compliance Governance (Guardrails)
-* **Positioning**: Provides defense-in-depth across the lifecycle, protecting against adversarial injection and privacy leaks.
-* **Core Guardrails**:
-  * **Input Ingestion Defenses**: Sanitizes direct jailbreak instructions; tags external scraped web pages/untrusted files as untrusted content, neutralizing Indirect Prompt Injection vectors.
-  * **Principle of Least Privilege (PoLP)**: Dynamically binds only the necessary tool whitelist to each child task execution scope.
-  * **Output Structural Integrity**: Enforces strict Pydantic/JSON Schema validation gates; redacts Personally Identifiable Information (PII) via regex/NER engines.
-  * **Immutable Audit Trail**: Ensures every operational mutation generates a cryptographically signed execution receipt, persisted with 100% durability.
+* **Positioning**: Provides defense-in-depth across the lifecycle, protecting against adversarial injection, authorization bypass, and data leaks. **"Deployment is the beginning of long-term governance and adversarial defense"**—the non-deterministic nature of LLMs and side-effects of real tool executions demand continuous verification across static analysis and runtime enforcement.
+* **Core Defenses & Engineering Practice**:
+  * **Shift-Left Red Teaming**: Employs **AIG (AI-Infra-Guard by Tencent Zhuque Lab)** to automatically scan Agent configurations, jailbreak resistance, and supply chain vulnerabilities across MCP (Model Context Protocol) and Skills integrations;
+  * **Runtime Verifiable Guardrails**: Integrates **Clawval / ClawGuard** within isolated sandboxes or TEE (Trusted Execution Environments) to enforce deterministic security policies and cryptographic receipts before critical irreversible mutations (financial transactions, bulk data deletions);
+  * **Input Ingestion Defenses**: Sanitizes direct jailbreak instructions; tags external scraped web pages/untrusted files as untrusted content, neutralizing Indirect Prompt Injection vectors;
+  * **Principle of Least Privilege (PoLP)**: Dynamically binds only the necessary tool whitelist to each child task execution scope;
+  * **Output Structural Integrity**: Enforces strict Pydantic/JSON Schema validation gates; redacts Personally Identifiable Information (PII) via regex/NER engines;
+  * **Immutable Audit Trail**: Ensures every operational mutation generates a cryptographically signed execution receipt (Run Receipt), persisted with 100% durability.
 
 ---
 
 ### L7. Observability & Continuous EvalOps Pipeline
-* **Positioning**: Pierces the Agent black box, creating a data flywheel for prompt engineering and behavioral alignment.
+* **Positioning**: Pierces the Agent black box, overcoming **multi-step error cascade** and **model/environment drift**, driving continuous behavioral alignment.
+* **Core Challenges & Mitigations**:
+  * **Multi-Step Error Cascade**: Minor hallucinations or deviations in early planning steps compound exponentially across multi-turn tool loops; requires end-to-end trajectory logging and replay diagnostics;
+  * **Model & Environment Drift**: Silent provider updates, external API schema shifts, and evolving user distribution can degrade once-accurate agents; continuous regression suites replace point-in-time checks;
+  * **Prompts as Test Cases Methodology**: System prompts and guardrails are treated as first-class, version-controlled unit tests (cf. [Prompts as Test Cases](https://www.youtube.com/watch?v=cRZpVUKEde4)), gated automatically on CI/CD pipelines.
 * **Standardized Observability**:
-  * Conforms to **OpenTelemetry** semantic conventions, establishing hierarchical span traces: `TraceId` $\to$ `RunId` $\to$ `StepId` $\to$ `ModelCallId` $\to$ `ToolCallId`.
+  * Conforms to **OpenTelemetry** semantic conventions, establishing hierarchical span traces: `TraceId` $\to$ `RunId` $\to$ `StepId` $\to$ `ModelCallId` $\to$ `ToolCallId`;
   * Logs granular token consumption, latency overhead, intermediate payload diffs, and exception stack traces.
-* **Continuous EvalOps Automation**:
-  * **Golden Benchmark Datasets**: Curates comprehensive evaluation suites covering nominal operations and edge-case failure modes.
-  * **Dual Evaluation Pipeline**:
-    * Deterministic Rules (Schema adherence, tool argument accuracy, constraint violation checks).
-    * LLM-as-a-Judge (Utilizing the G-Eval framework to score Faithfulness, Answer Relevance, and Hallucination Index).
-  * **CI/CD Quality Gates**: Automatically executes offline benchmark suites on pull requests; regressions in accuracy or spikes in hallucination block merging.
+* **Continuous EvalOps & Dynamic Optimization Pipeline**:
+  * **Automated Evaluation Framework**: Leverages **OpenJudge** for automated benchmark scoring combining deterministic rules with LLM-as-a-Judge (G-Eval criteria);
+  * **Dynamic Error Self-Correction (AI Reflexion)**: Equips agents with runtime self-reflection capabilities, triggering a reflection-critic loop upon intermediate step failure to dynamically adjust remaining trajectories;
+  * **Multi-Agent Runtime Base**: Couples with **AgentScope** (open-sourced by Alibaba) for distributed agent communication, modular topology orchestration, and fault-tolerant lifecycle management.
+
+#### 💡 Open-Source Ecosystem Collaboration Matrix
+
+| Tool / Framework | Core Positioning & Capability | Role in Governance Architecture | Recommended Adoption Stage |
+| :--- | :--- | :--- | :--- |
+| **AIG (AI-Infra-Guard)** | AI red-teaming & security vulnerability scanner | **Shift-Left Security & Red Teaming**: Automated vulnerability scanning for Agent prompts, MCP/Skills supply chain, and jailbreaks | **Phase 1 (Baseline Security)**: Pre-deployment gates and release scanning |
+| **OpenJudge** | Automated evaluation & benchmark scoring framework | **Quality Benchmarking**: Offline golden test suites, shadow traffic evaluation, and near-real-time referee scoring | **Phase 1 (Visibility)**: Establish quantitative task success rates |
+| **AgentScope** | Multi-Agent distributed runtime foundation | **Runtime Substrate**: Flexible multi-agent communication, isolated state orchestration, and lifecycle hooks | **Phase 2 (Substrate)**: High-concurrency multi-agent coordination |
+| **Clawval / ClawGuard** | Verifiable runtime guardrails & sandbox security | **Runtime Hard Gate**: Enforcing security policies in TEE/sandboxes with verifiable cryptographic proof | **Phase 3 (Enforcement)**: High-risk tool invocation interception |
+| **AI Reflexion** | Reflective cognitive pattern & self-correction | **Dynamic Self-Healing**: Enables run-time post-mortem reflection and trajectory replanning upon failures | **Phase 3 (Self-Healing)**: Mitigates long-chain compound failures |
+
+> 💡 **Deep-Dive Engineering Guide**: For full architecture designs on post-launch long-term governance, red-team defenses with AIG, OpenJudge test suites, ClawGuard verifiable sandboxes, and Prompts-as-Test-Cases CI/CD implementation, refer to:  
+> * [02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md](./deep-dive/02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md)
 
 ---
 

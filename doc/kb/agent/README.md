@@ -21,6 +21,7 @@ doc/kb/agent/
 └── deep-dive/                                                # [分层专项深度解构系列 (Deep Dive Series)]
     ├── 01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md         # [L1 中文深度篇] 异构适配、动态路由、语义缓存与流式背压
     ├── 01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md # [L1 English Deep Dive] Resilience, Backpressure & Latency
+    ├── 02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md # [L6-L7 深度篇] 生产长效治理、开源协同(AIG/OpenJudge/ClawGuard/Reflexion)、Prompts as Test Cases与防漂移
     ├── cases/                                                # [生产故障 RCA 实战案例库 (STAR+L 模型)]
     │   ├── 01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md   # [Case 01] 首字延迟暴增/429爆发/对冲双发与200ms自愈
     │   ├── 01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md # [Case 02] 慢客户端积压/Pod内存打满OOMKilled与内核背压
@@ -73,6 +74,14 @@ doc/kb/agent/
   * **顶尖专家思维映射**：未被显式要求的深水区、原始 RFC/源码素材、专用工具链（llmperf/Toxiproxy）、独立于人的客观量化指标；
   * **四大子系统深度解构**：异构协议驱动适配器、SLA/Cost/429 动态加权路由与断路器、防越权防漂移 L1-L3 向量语义缓存、高并发流式背压与主动中断传播机制；
   * **生产落地自查清单**：高可用切换、附加延迟、缓存安全、审计对账与内存背压自愈验证。
+* **[02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md](./deep-dive/02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md)**
+  * **核心回答**：**Post-Launch Reliability & Adversarial Defense（生产上线后长效治理、开源协同矩阵、Prompt代码化测试、防模型漂移与自愈指标）**；
+  * **适用受众**：系统架构师、AI 安全工程师、质量/EvalOps 工程师、高阶答辩者；
+  * **核心内容**：
+    * **一分钟高段位面试应答应答**：针对“上线后为何更需要持续评测与安全管控”的标准闭环话术；
+    * **四大痛点解构**：多步推理早期错误级联、底层模型/环境静默漂移、越狱注入与 MCP 供应链风险、执行不可逆副作用；
+    * **开源协同矩阵**：AIG（安全左移/红队扫描）、OpenJudge（质量评测打分）、AgentScope（多智能体调度底座）、ClawGuard（沙箱/TEE 运行时可验证护栏）、AI Reflexion（动态复盘与容错重规划）；
+    * **工程化闭环**：Prompts as Test Cases 体系与 CI/CD 影子评测门禁，以及全量 SRE 量化验收指标清单。
 * **[01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md](./deep-dive/cases/01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md)**
   * **核心痛点**：首字延迟暴增至 32s、HTTP 429 连环雪崩事故复盘与 200ms 无感降级；
 * **[01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md](./deep-dive/cases/01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md)**
