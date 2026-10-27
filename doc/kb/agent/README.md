@@ -40,6 +40,8 @@ doc/kb/agent/
         ├── 03-L1-Sys3-防越权向量语义缓存与控费-系统功能设计说明书-v1.0.md # [系统 3 FSD] L1-L3时序/RediSearch Schema/防漂移/Prompt对齐/Disruptor
         ├── 04-L1-Sys4-全异步流式背压与长连接治理-系统功能设计说明书-v1.0.md # [系统 4 FSD] 内核背压传导/32KB有界模型/5ms级联取消/AC自动机
         └── 05-L1-Admin-网关管理控制台与运营平台-系统功能设计说明书-v1.0.md # [控制面 FSD] 物理隔离拓扑/500ms热更发布/Playground布局/配额Schema
+    └── plans/                                                # [面向 AI 施工的工程落地执行计划书]
+        └── 00-L1-LLMOps网关全工程AI落地施工总计划-v1.0.md      # [AI 施工总计划] 8大里程碑/TDD单向递进/严格DoD/原子Commit指南
 ```
 
 ---
@@ -112,6 +114,8 @@ doc/kb/agent/
   * **核心定位**：系统 4 功能设计（FSD），解构 Netty Socket 发送缓冲与 HTTP/2 流控背压联动、固定 32KB 有界内存模型、5ms 级联取消与 Aho-Corasick 流式敏感词审查。
 * **[05-L1-Admin-网关管理控制台与运营平台-系统功能设计说明书-v1.0.md](./deep-dive/designs/05-L1-Admin-网关管理控制台与运营平台-系统功能设计说明书-v1.0.md)**
   * **核心定位**：控制面管理平台功能设计（FSD），解构控制面与数据面物理隔离拓扑、租户三维配额模型、Nacos 500ms 热更发布时序与跨端 Playground 双栏/抽屉交互布局。
+* **[00-L1-LLMOps网关全工程AI落地施工总计划-v1.0.md](./deep-dive/plans/00-L1-LLMOps网关全工程AI落地施工总计划-v1.0.md)**
+  * **核心定位**：面向 AI Coding 智能体与工程团队的端到端实施总计划书（AI Execution Roadmap），拆解 8 大里程碑（M0~M7）、明确任务依赖、严格 TDD 驱动与各阶段确定性完成定义（DoD）。
 
 ---
 
