@@ -84,19 +84,25 @@
 
 ### L2. 受控宿主运行时层 (Harness & Control Ring Kernel)
 * **定位**：**Agent 的“操作系统内核（Kernel）”**。负责约束、托管和安全驱动上层的无状态推理图。
-* **核心防线**：
-  1. **不可绕过的 9 阶段执行控制环（9 Lifecycle Hooks）**：
-     * `on_run_load`：验证租户身份、时效租约（Lease）与软删除墓碑（Tombstone）；
+* **核心防线（五大标星机制）**：
+  1. **【★ 9 阶段生命周期钩子（9 Lifecycle Hooks Pipeline）】**：
+     * `on_run_load`：验证租户身份、时效租约（Lease 30s）与软删除墓碑（Tombstone）；
      * `before_context`：依据用户授权目的（Purpose）对敏感数据切片执行合规脱敏与过滤；
      * `before_model`：预测 Token 用量，出网域名白名单核验，**原子预占模型算力预算**；
-     * `after_model`：Pydantic Schema 强类型反序列化校验，剥离模型非法生成的提权标识；
+     * `after_model`：Pydantic Schema 强类型反序列化校验，物理剥离模型非法生成的提权标识；
      * `before_action`：**核心安全门禁**，由宿主严格基于用户身份构造 `AuthorizedToolCall`，模型自行填写的 `permit=true` 直接被代码阻断；
      * `after_action`：强制绑定全局唯一不可变操作键（`operation_ref`），遭遇网络未知超时先标 `unknown` 并转入对账流程，严禁盲目重试非幂等操作；
      * `before_checkpoint`：单调递增 `fencing_token` + 数据库 CAS 乐观锁持久化状态，杜绝分布式脑裂与覆盖写；
-     * `before_finalize`：汇总已完成与未完成目标，生成只读全局 Run Receipt（审计收据）；
-     * `after_finalize`：基于 Outbox 模式异步发布终态事件与不可篡改审计日志。
-  2. **确定性业务优先原则**：
-     * 涉及金钱计算、客观评分、用户鉴权与状态机跃迁，必须由确定性代码执行，坚决不委托给概率论大模型。
+     * `before_finalize`：汇总已完成与未完成目标，生成只读全局 Merkle Run Receipt（审计收据）；
+     * `after_finalize`：基于 Transactional Outbox 模式异步发布终态事件与不可篡改审计日志。
+  2. **【★ 算力原子预算预占（before_model Quota Reservation）】**：
+     * 在调用大模型前依据入参预估 Token，并在分布式 Redis 账本中原子预扣，设置步数与 Wall-clock 硬限额，从底层掐死死循环盗刷。
+  3. **【★ 工具副作用拦截与幂等 operation_ref（before/after_action Gateway）】**：
+     * 剥夺模型自主授权权，由宿主签发带短时 STS 凭据的 `AuthorizedToolCall` 拦截权限漂移；对外呼强制计算 SHA256 唯一幂等键，超时未知态挂起转对账，杜绝非幂等重复执行。
+  4. **【★ Fencing Token 与 CAS 防脑裂持久化（before_checkpoint CAS Engine）】**：
+     * 配合 30s 分布式租约，每次更新执行 `fencing_token + 1` CAS 乐观锁校验，多节点竞争或 Worker 假死恢复时脏写发生率为 0，支持毫秒级断点续跑。
+  5. **【★ 确定性业务状态机与 Outbox 审计收据（Deterministic Machine & Run Receipt）】**：
+     * 涉及金钱计算、客观评分、用户鉴权与状态机跃迁，必须由确定性代码执行，坚决不委托给概率论大模型；终态收据防篡改存证并通过 Outbox 至少一次可靠广播。
 > * 🇨🇳 中文深度篇：[03-AI-Agent-L2-受控宿主运行时Harness与执行控制环深度架构与实战全景.md](./deep-dive/03-AI-Agent-L2-受控宿主运行时Harness与执行控制环深度架构与实战全景.md)
 
 ---
