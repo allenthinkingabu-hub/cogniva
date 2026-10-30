@@ -182,7 +182,8 @@
 | **AI Reflexion** | Reflective cognitive pattern & self-correction | **Dynamic Self-Healing**: Enables run-time post-mortem reflection and trajectory replanning upon failures | **Phase 3 (Self-Healing)**: Mitigates long-chain compound failures |
 
 > 💡 **Deep-Dive Engineering Guide**: For full architecture designs on post-launch long-term governance, red-team defenses with AIG, OpenJudge test suites, ClawGuard verifiable sandboxes, and Prompts-as-Test-Cases CI/CD implementation, refer to:  
-> * [02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md](./deep-dive/02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md)
+> * 🛡️ **L6 Security Deep-Dive**: [06-AI-Agent-L6-零信任安全与对抗防御实战全景.md](./deep-dive/06-AI-Agent-L6-零信任安全与对抗防御实战全景.md) (Shift-left red teaming, Dual-Context isolation, ClawGuard & cryptographic receipts)  
+> * 📊 **L7 EvalOps Deep-Dive**: [07-AI-Agent-L7-生产上线后长效评测调优与可观测性实战全景.md](./deep-dive/07-AI-Agent-L7-生产上线后长效评测调优与可观测性实战全景.md) (Prompts-as-Test-Cases, OpenJudge G-Eval scoring, AI Reflexion self-healing & OpenTelemetry)
 
 ---
 

@@ -21,7 +21,10 @@ doc/kb/agent/
 └── deep-dive/                                                # [分层专项深度解构系列 (Deep Dive Series)]
     ├── 01-AI-Agent-L1-LLMOps网关深度架构与实战全景.md         # [L1 中文深度篇] 异构适配、动态路由、语义缓存与流式背压
     ├── 01-AI-Agent-L1-LLMOps-Gateway-Architecture-Deep-Dive.md # [L1 English Deep Dive] Resilience, Backpressure & Latency
-    ├── 02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md # [L6-L7 深度篇] 生产长效治理、开源协同(AIG/OpenJudge/ClawGuard/Reflexion)、Prompts as Test Cases与防漂移
+    ├── 03-AI-Agent-L2-受控宿主运行时Harness与执行控制环深度架构与实战全景.md # [L2 深度篇] 9阶段执行控制环、CAS乐观锁防脑裂、沙箱隔离
+    ├── 04-AI-Agent-L3-认知范式与动态编排架构深度工程实战全景.md # [L3 深度篇] 认知路由、DAG动态规划、分层受控状态图与HITL闭环
+    ├── 06-AI-Agent-L6-零信任安全与对抗防御实战全景.md         # [L6 深度篇] 生产安全纵深防御、AIG红队扫描、MCP供应链审计、ClawGuard沙箱与可信凭证
+    ├── 07-AI-Agent-L7-生产上线后长效评测调优与可观测性实战全景.md # [L7 深度篇] 生产长效治理、Prompts as Test Cases、OpenJudge打分、AI Reflexion与OTel追踪
     ├── cases/                                                # [生产故障 RCA 实战案例库 (STAR+L 模型)]
     │   ├── 01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md   # [Case 01] 首字延迟暴增/429爆发/对冲双发与200ms自愈
     │   ├── 01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md # [Case 02] 慢客户端积压/Pod内存打满OOMKilled与内核背压
@@ -76,14 +79,22 @@ doc/kb/agent/
   * **顶尖专家思维映射**：未被显式要求的深水区、原始 RFC/源码素材、专用工具链（llmperf/Toxiproxy）、独立于人的客观量化指标；
   * **四大子系统深度解构**：异构协议驱动适配器、SLA/Cost/429 动态加权路由与断路器、防越权防漂移 L1-L3 向量语义缓存、高并发流式背压与主动中断传播机制；
   * **生产落地自查清单**：高可用切换、附加延迟、缓存安全、审计对账与内存背压自愈验证。
-* **[02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md](./deep-dive/02-AI-Agent-L6-L7-生产上线后长效评测调优与安全对抗实战全景.md)**
-  * **核心回答**：**Post-Launch Reliability & Adversarial Defense（生产上线后长效治理、开源协同矩阵、Prompt代码化测试、防模型漂移与自愈指标）**；
-  * **适用受众**：系统架构师、AI 安全工程师、质量/EvalOps 工程师、高阶答辩者；
-  * **核心内容**：
-    * **一分钟高段位面试应答应答**：针对“上线后为何更需要持续评测与安全管控”的标准闭环话术；
-    * **四大痛点解构**：多步推理早期错误级联、底层模型/环境静默漂移、越狱注入与 MCP 供应链风险、执行不可逆副作用；
-    * **开源协同矩阵**：AIG（安全左移/红队扫描）、OpenJudge（质量评测打分）、AgentScope（多智能体调度底座）、ClawGuard（沙箱/TEE 运行时可验证护栏）、AI Reflexion（动态复盘与容错重规划）；
-    * **工程化闭环**：Prompts as Test Cases 体系与 CI/CD 影子评测门禁，以及全量 SRE 量化验收指标清单。
+* **[03-AI-Agent-L2-受控宿主运行时Harness与执行控制环深度架构与实战全景.md](./deep-dive/03-AI-Agent-L2-受控宿主运行时Harness与执行控制环深度架构与实战全景.md)**
+  * **核心回答**：**Microkernel & Control Loop（受控宿主微内核、9 阶段执行控制环、Fencing Token 防脑裂、确定性业务优先）**；
+  * **适用受众**：系统架构师、分布式系统工程师、高阶研发；
+  * **核心内容**：9 阶段生命周期时序、CAS 乐观锁与租约状态机、`AuthorizedToolCall` 权限契约与 Run Receipt 出箱机制。
+* **[04-AI-Agent-L3-认知范式与动态编排架构深度工程实战全景.md](./deep-dive/04-AI-Agent-L3-认知范式与动态编排架构深度工程实战全景.md)**
+  * **核心回答**：**Cognition & Dynamic Orchestration（四大认知范式路由、DAG 拓扑规划、LangGraph 分层受控状态图、Multi-Agent 通信隔离与防死循环）**；
+  * **适用受众**：系统架构师、多智能体协同研发、算法工程专家；
+  * **核心内容**：ReAct 循环控制与步数衰减、Plan-and-Solve 拓扑生成与 Replanning 门禁、分层受控状态图最大深度限制、Human-in-the-Loop 挂起恢复状态机。
+* **[06-AI-Agent-L6-零信任安全与对抗防御实战全景.md](./deep-dive/06-AI-Agent-L6-零信任安全与对抗防御实战全景.md)**
+  * **核心回答**：**Zero-Trust Guardrails & Adversarial Defense（生产安全纵深防御、AIG 红队渗透、Dual-Context 隔离、ClawGuard 运行时受控沙箱）**；
+  * **适用受众**：系统架构师、AI 安全工程师、风控/合规专家；
+  * **核心内容**：间接注入防护、MCP 供应链漏洞扫描、短时 STS 凭证注入、Human-in-the-Loop 策略门禁与带密码学签名的 Verifiable Receipts。
+* **[07-AI-Agent-L7-生产上线后长效评测调优与可观测性实战全景.md](./deep-dive/07-AI-Agent-L7-生产上线后长效评测调优与可观测性实战全景.md)**
+  * **核心回答**：**Continuous EvalOps & Observability（长效质量标尺、多步推理错误累积治理、模型静默漂移、自适应自愈反思环）**；
+  * **适用受众**：系统架构师、EvalOps 工程师、SRE 稳定性专家；
+  * **核心内容**：Prompts as Test Cases 敏捷工程化、OpenJudge 自动化评测与 G-Eval 交叉裁判、AI Reflexion 动态纠偏状态机与 OpenTelemetry 轨迹级分布式追踪。
 * **[01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md](./deep-dive/cases/01-L1-Case-01-稳定性抖动与SLA容灾降级-RCA实战.md)**
   * **核心痛点**：首字延迟暴增至 32s、HTTP 429 连环雪崩事故复盘与 200ms 无感降级；
 * **[01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md](./deep-dive/cases/01-L1-Case-02-长连接背压吞吐瓶颈与内存OOM-RCA实战.md)**
