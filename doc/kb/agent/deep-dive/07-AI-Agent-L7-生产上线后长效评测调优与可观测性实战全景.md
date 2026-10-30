@@ -28,9 +28,8 @@ Agent 上线绝不是终点，而是对抗非确定性、外部环境漂移与�
 2. 敏捷工程化之 Prompts as Test Cases：
    将 System Prompts 与护栏规则全部作为 Git 仓库代码管理，研发提交 PR 时由 CI/CD 自动拉起 
    500+ 离线 Golden Benchmark 跑批，准确率下降超过 1.0% 直接阻断合入（Merge Rejected）；
-3. 自动化裁判与影子评测（OpenJudge & LLM-as-a-Judge）：
-   采用 OpenJudge 搭建多模型交叉裁判体系（规避自我同质偏见），基于 G-Eval 准则对线上影子流量
-   准实时量化事实忠实度（Faithfulness）、意图相关度与轨迹效率指标；
+3. 自动化裁判与标尺体系（OpenJudge & Deepeval 六大基线指标）：
+   针对 Agent 决策链路，确立“轨迹级 4 大（计划质量 PlanQuality、计划遵循度 PlanAdherence、任务完成度 TaskCompletion、步骤效率 StepEfficiency）+ 组件级 2 大（工具正确性 ToolCorrectness、参数正确性 ArgumentCorrectness）”的量化标尺，采用多模型交叉裁判体系（规避自我同质偏见），对离线用例与线上影子流量准实时打分；
 4. 运行期自适应自愈（AI Reflexion 反思循环）：
    在 AgentScope 底座上打通 Reflexion 循环，当工具执行失败或推理遇阻时，Agent 自主提取 Critique 便签
    并回填至短期工作记忆，实现动态轨迹重规划，同时设最大 2 次反思硬熔断。
@@ -50,13 +49,16 @@ Agent 上线绝不是终点，而是对抗非确定性、外部环境漂移与�
 | 维度 | 常规团队做法（低阶反模式） | 顶尖专家工业级实践 (Unrequested but Critical) |
 | :--- | :--- | :--- |
 | **测试认知** | 研发人员随手在 Web UI 输入 5 个 Prompt 测试没问题即宣布“发版” | **Prompts as Test Cases**：将提示词与测试断言代码化，构建包含确定性断言与语义裁判的黄金测试集（Golden Benchmark），纳入 CI/CD 自动化回归流水线。 |
+| **指标维度** | 沿用传统 RAG 文本相似度指标或单纯正则匹配 | **两大层级 × 六大基线指标（2 Tiers × 6 Metrics）**：划分轨迹级（计划质量/遵循度/完成度/步骤效率）与组件级（工具正确性/参数正确性），实现状态机与语义双重打分。 |
 | **漂移感知** | 只能等待用户提工单投诉“今天 AI 回答变笨了” | **持续影子流量评测（Shadow Traffic Eval）**：生产流量异步镜像复制一份到待评测环境，使用小模型或交叉模型准实时对比输出差异与 KL 散度。 |
-| **打分标准** | 依赖单纯的正则包含或人工主观打分 | **确定性指标 + G-Eval 语义量表打分（OpenJudge）**：Schema 校验 100%、工具参数准确率（Tool F1）与结合 CoT 逻辑推导的事实忠实度（Faithfulness）综合加权。 |
+| **打分标准** | 依赖同模型自评（如 GPT-4 打分 GPT-4） | **交叉裁判矩阵 + Deepeval / OpenJudge 落地**：Claude 评测 DeepSeek、OpenAI 评测开源模型，结合 G-Eval 准则与单项量表消除自恋偏差。 |
 | **链路追踪** | 仅打印简单的应用运行日志（Log 文本流） | **轨迹级分布式链路追踪（OpenTelemetry & OpenInference）**：将 Agent 思考决策、工具调用、状态暂存按 Span 树拓扑串联，记录每一步的 Token 消耗、网络耗时与状态快照。 |
 | **容错纠偏** | 工具调用失败直接抛出异常、挂起或盲目死循环重试 | **认知自适应自省（AI Reflexion）**：捕获失败 Observation，动态生成自我反省 Critique，并在工作记忆中重规划接续 DAG，兼顾熔断防死循环。 |
 
 ### 2. 顶尖专家遵循的核心理论与工业级标准
 
+* **Snowflake Agent GPA & RigorBench 理论体系**：正式确立了自主智能体评测的基准范式，将传统的“文本生成相似度”跃升为对“计划生成、状态流转、工具调用与长程收敛”的多阶段可审计度量；
+* **Deepeval 开源工程化标准**：工业级 LLM/Agent 单元测试框架，原生封装了 Agent 轨迹级与组件级核心 Metric 类库，提供断言级 CI/CD 集成；
 * **G-Eval 评测准则**：由微软提出并被顶级评测框架采用的思维链评估准则，利用能力更强的 Judge 模型按照多维量表给出概率加权打分，大幅降低主观方差；
 * **OpenInference 语义约定（Semantic Conventions）**：基于 OpenTelemetry 扩展的标准 AI 可观测性规范，标准化定义 `llm.input_messages`, `llm.output_messages`, `agent.tool_call`, `agent.thought` 等 Span 属性；
 * **Agent 轨迹熵与效率指数（Trajectory Efficiency Index）**：量化 Agent 达成目标所需的最少步骤数与实际耗费步骤数的比值，严惩无意义的死循环漫步。
@@ -228,21 +230,98 @@ if __name__ == "__main__":
 
 ---
 
-### 2. OpenJudge 自动化打分与 G-Eval 准则落地
+### 2. 两大层级 × 六大 Agent 基线指标体系与 OpenJudge/Deepeval 落地
 
-评测绝不能仅靠肉眼主观打分，必须结合“确定性指标”与“语义裁判指标”两层体系：
+#### 为什么传统 RAG 评测指标无法直接评估 Agent？
+传统 RAG 评测体系（如 Ragas、Ares）通常聚焦在“检索三元组”与四大指标（事实忠实度 Faithfulness、答案相关性 Answer Relevance、上下文精确率 Context Precision 与召回率 Context Recall）。这一套指标适用于**单轮、单向的线性信息检索流**。
+
+然而，AI Agent 的本质是**动态图状态机与环境交互闭环**（Plan $\to$ Tool Execution $\to$ Observation $\to$ Replanning）。Agent 不仅要生成文本，更要驱动外部物理世界产生副作用。因此，必须将评测维度从“单次文本生成”升维至**“状态机多步轨迹审计（Trajectory Audit）与微观决策组件断言”**。
 
 ```
-                ┌──────────────────────────────────────────┐
-                │          OpenJudge 综合打分架构          │
-                └──────────────────────────────────────────┘
-                                      │
-              ┌───────────────────────┴───────────────────────┐
-              ▼                                               ▼
-    【第一层：确定性硬指标 (100% Pass)】             【第二层：LLM-as-a-Judge 语义裁判 (G-Eval)】
-    * Pydantic / JSON Schema 契约校验               * 事实忠实度 (Faithfulness >= 0.95)
-    * 工具选择与参数匹配度 (Tool F1 >= 0.92)         * 意图相关性 (Relevance >= 0.90)
-    * 状态机转移合法性 (Transition Validity)         * 轨迹效率指数 (Trajectory Efficiency >= 0.85)
+                ┌────────────────────────────────────────────────────────┐
+                │          两大层级 × 六大 Agent 基线评测指标矩阵           │
+                └────────────────────────────────────────────────────────┘
+                                            │
+         ┌──────────────────────────────────┴──────────────────────────────────┐
+         ▼                                                                     ▼
+┌─────────────────────────────────┐                   ┌─────────────────────────────────┐
+│ 【层级一：轨迹级指标 (Trajectory-Level)】│                   │ 【层级二：组件级指标 (Component-Level)】 │
+│   * PlanQuality (计划质量)       │                   │   * ToolCorrectness (工具正确性) │
+│   * PlanAdherence (计划遵循度)   │                   │   * ArgumentCorrectness (参数精度)│
+│   * TaskCompletion (任务完成度)   │                   │                                 │
+│   * StepEfficiency (步骤效率比)   │                   │                                 │
+└─────────────────────────────────┘                   └─────────────────────────────────┘
+```
+
+#### 六大基线指标的精确定义、数学公式与判定准则：
+
+| 指标层级 | 基线指标名称 | 学术基准与工业定义 | 核心量化逻辑 / 数学公式 | 生产硬门禁阈值 |
+| :--- | :--- | :--- | :--- | :--- |
+| **轨迹级**<br>*(宏观链路)* | **1. 计划质量<br>(PlanQuality)** | 评估 Agent 生成的初始 Plan / DAG 是否具备完备性、因果合理性与前置依赖清晰度（来源：Snowflake Agent GPA）。 | $\text{PlanScore} = \frac{\text{有效且无冲突的步骤数}}{\text{总规划步骤数}}$，结合 CoT 裁判模型判定规划可行性。 | $\ge 0.90$ |
+| **轨迹级**<br>*(宏观链路)* | **2. 计划遵循度<br>(PlanAdherence)** | 评估 Agent 在实际执行 Tool Call 过程中，各步骤动作是否严格遵守前置规划，严惩中途“擅自走样、越权横跳”。 | $\text{AdherenceScore} = 1 - \frac{\text{偏离或未授权动作数}}{\text{总实际动作数}}$。 | $\ge 0.95$ |
+| **轨迹级**<br>*(宏观链路)* | **3. 任务完成度<br>(TaskCompletion)** | 评估 Agent 最终端到端输出是否真正达成用户原始目标（区分“表面敷衍回答”与“真实闭环解决”）。 | 基于业务确定性状态机校验（如工单状态是否变为 `RESOLVED`、订单退款事务是否成功提交）。 | $\ge 0.92$ |
+| **轨迹级**<br>*(宏观链路)* | **4. 步骤效率比<br>(StepEfficiency)** | 评估 Agent 达成目标所需的最优步骤数与实际消耗步骤数的比值，严厉惩罚死循环与漫无目的的无效探索。 | $\text{Efficiency} = \frac{\min(N_{\text{optimal}}, N_{\text{actual}})}{N_{\text{actual}}} \in (0, 1]$。若陷入死循环则降为 0。 | $\ge 0.85$ |
+| **组件级**<br>*(微观单步)* | **5. 工具调用正确性<br>(ToolCorrectness)** | 评估在当前 Observation 上下文环境下，模型选取的 Tool 是否最匹配，调用时机是否合规。 | $\text{ToolPrecision} = \frac{\text{正确选取的工具调用数}}{\text{发起的工具调用总数}}$。 | $\ge 0.95$ |
+| **组件级**<br>*(微观单步)* | **6. 参数提取准确性<br>(ArgumentCorrectness)** | 评估模型传入 Tool 的入参参数是否 100% 匹配 Schema 约束，且参数值是否准确推导，严查参数幻觉。 | $\text{ArgF1} = \frac{2 \times P_{\text{arg}} \times R_{\text{arg}}}{P_{\text{arg}} + R_{\text{arg}}}$，强类型校验字段类型与业务合法值。 | $\ge 0.98$ |
+
+---
+
+#### 基于 Deepeval 框架的代码级实战：
+
+在敏捷回归测试与 CI/CD 自动化流水线中，可通过集成 **Deepeval** 框架的原生 Agent Metric 类库实现自动化断言跑批：
+
+```python
+# tests/agent_eval/deepeval_agent_runner.py
+import pytest
+from deepeval import assert_test
+from deepeval.test_case import LLMTestCase, ToolCall
+from deepeval.metrics import (
+    PlanQualityMetric,
+    PlanAdherenceMetric,
+    ToolCorrectnessMetric,
+    ArgumentCorrectnessMetric,
+    TaskCompletionMetric
+)
+
+def test_refund_agent_trajectory():
+    # 1. 模拟抓取一条真实 Agent 执行轨迹 (Trajectory)
+    user_input = "我的订单 20261029-994182 发错货了，请帮我退款并取消后续配送。"
+    
+    agent_generated_plan = [
+        "1. 查询订单详情与发货状态",
+        "2. 校验退款资格与限额",
+        "3. 调用退款接口执行退款操作",
+        "4. 调用物流接口拦截后续配送"
+    ]
+    
+    actual_tool_calls = [
+        ToolCall(name="query_order", input_parameters={"order_id": "20261029-994182"}),
+        ToolCall(name="verify_eligibility", input_parameters={"order_id": "20261029-994182", "reason": "WRONG_ITEM"}),
+        ToolCall(name="execute_refund", input_parameters={"order_id": "20261029-994182", "amount": 299.0}),
+        ToolCall(name="cancel_delivery", input_parameters={"order_id": "20261029-994182"})
+    ]
+    
+    agent_final_output = "已为您成功办理订单 20261029-994182 的全额退款 (¥299.0)，并已通知顺丰速运拦截包裹。"
+
+    test_case = LLMTestCase(
+        input=user_input,
+        actual_output=agent_final_output,
+        tools_called=actual_tool_calls,
+        context=agent_generated_plan
+    )
+
+    # 2. 组装轨迹级与组件级核心指标评测套件
+    plan_quality = PlanQualityMetric(threshold=0.85, model="claude-3-5-sonnet")
+    plan_adherence = PlanAdherenceMetric(threshold=0.90, model="claude-3-5-sonnet")
+    tool_correctness = ToolCorrectnessMetric(threshold=0.95)
+    arg_correctness = ArgumentCorrectnessMetric(threshold=0.95)
+    task_completion = TaskCompletionMetric(threshold=0.90, model="claude-3-5-sonnet")
+
+    # 3. 执行断言 (任意指标不达标自动抛出 AssertionError 阻断流水线)
+    assert_test(
+        test_case=test_case,
+        metrics=[plan_quality, plan_adherence, tool_correctness, arg_correctness, task_completion]
+    )
 ```
 
 #### 规避裁判同质化偏见（Self-Enhancement Bias）：
@@ -350,11 +429,14 @@ Trace: trace_id_99a8f2701b (端到端总耗时: 3.42s, Token 消耗: 4,210)
 | 治理维度 | 核心监控指标 (Prometheus Metric) | 企业级生产目标 | 验收断言与告警阈值 |
 | :--- | :--- | :--- | :--- |
 | **测试基准** | `agent_golden_benchmark_accuracy` | **$\ge 92.5\%$** | 每次 CI/CD 评测，整体准确率较上一基线版本衰退不得超过 $-1.0\%$。 |
-| **Schema 合规** | `agent_schema_compliance_rate` | **$100\%$** | 输出参数不匹配 Pydantic 强类型的比例严格为 0。 |
+| **计划质量** | `agent_plan_quality_score` | **$\ge 0.90$** | 轨迹级评测：初始 Plan/DAG 逻辑依赖与有效步骤完备率 $< 90\%$ 触发报警。 |
+| **计划遵循度** | `agent_plan_adherence_score` | **$\ge 0.95$** | 轨迹级评测：执行动作偏离或未授权越权调用率 $> 5\%$ 阻断合入。 |
+| **任务完成度** | `agent_task_completion_rate` | **$\ge 92\%$** | 轨迹级评测：端到端业务终态真实解决率必须达到 $92\%$ 以上。 |
+| **步骤效率比** | `agent_step_efficiency_index` | **$\ge 0.85$** | 轨迹级评测：最优步数与实际消耗步数比值，惩罚无效重试与死循环漫游。 |
+| **工具正确性** | `agent_tool_correctness_precision` | **$\ge 0.95$** | 组件级评测：工具选取的精确率低于 $95\%$ 触发算法回退。 |
+| **参数准确度** | `agent_argument_accuracy_f1` | **$\ge 0.98$** | 组件级评测：参数 Schema 违规与传参语义幻觉率必须 $< 2\%$。 |
 | **模型漂移** | `agent_answer_drift_divergence` | **KL 散度 $\le 0.05$** | 影子流量输出语义相似度偏离告警，触发模型版本回滚或 Prompt 热更修复。 |
-| **事实忠实度** | `agent_faithfulness_score` | **$\ge 0.95$** | OpenJudge 裁判打分，回答内容违背检索上下文（产生幻觉）的比例 $< 5\%$。 |
 | **自愈成功率** | `agent_reflexion_recovery_rate` | **$\ge 75\%$** | 触发 Reflexion 的失败步骤中，至少 75% 能在 2 轮内自主修复完成任务。 |
-| **轨迹效率比** | `agent_trajectory_efficiency_index` | **$\ge 0.85$** | 惩罚无效重试和漫无目的探索，实际步数接近理论最优步数。 |
 | **全链路采样** | `agent_trace_capture_coverage` | **$100\%$** | 生产线上所有 Agent 任务 100% 生成并持久化完整 OpenTelemetry Span 树。 |
 
 ---
