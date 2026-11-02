@@ -179,7 +179,10 @@ In the Cogniva AI Agent Controlled Host Runtime (L2 Harness), the first physical
 
 * 🔗 **Direct Implementation Links**:
   * [Hook 1 on_run_load Admission Barrier & Distributed Lease Implementation](../agent/deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md)
+  * [Hook 7 before_checkpoint Concurrency Consistency & CAS Fencing Token Guard](../agent/deep-dive/topics/01-lifecycle-hooks/10-Hook7-before_checkpoint-并发一致性与CAS乐观锁防脑裂落地实战.md)
   * [Appendix: Zombie Run Mechanism & Tombstone Verification (ASD-STE100)](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-僵尸任务产生机理与墓碑机制-STE100规范解构.md)
+  * [Appendix: Resume Run vs. Failover Recovery Deep Dive](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-断点续跑与故障转移接管深度解构.md)
+  * [Appendix: State & Checkpoint Rehydration Architecture & Implementation Overview](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md)
 
 ---
 
