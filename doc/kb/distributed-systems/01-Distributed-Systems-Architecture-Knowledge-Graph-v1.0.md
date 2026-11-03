@@ -151,14 +151,14 @@ Under **[Pillar III: Distributed Computing Runtime & Scheduling Control]**, ther
 
 ## 4. Practical Mapping: AI Agent Harness Implementation
 
-In the Cogniva AI Agent Controlled Host Runtime (L2 Harness), the first physical admission gate [`on_run_load`](../agent/deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md) implements these three peer control paradigms directly:
+In the Cogniva AI Agent Controlled Host Runtime (L2 Harness), the first physical admission gate [`on_run_load`](../agent/deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md) implements these three peer control paradigms directly alongside state recovery and policy freezing:
 
 ```
 [Kafka Event Enters Harness Worker]
                  │
                  ▼
 ┌────────────────────────────────────────────────────────┐
-│  【Hook 1: on_run_load Admission Pipeline】            │
+│  【Hook 1: on_run_load Admission & State Pipeline】     │
 │                                                        │
 │  Gate 1: 【Distributed Flow Control】(Feature 4)        │
 │  * Mechanism: Tenant concurrency counter & SLA limit   │
@@ -171,6 +171,14 @@ In the Cogniva AI Agent Controlled Host Runtime (L2 Harness), the first physical
 │  Gate 3: 【Distributed Lifecycle Control】(Feature 3)  │
 │  * Mechanism: Soft-deletion tombstone verification     │
 │  * Target: Temporal validity; abort on tombstone hit   │
+│                                                        │
+│  Step 4: 【Distributed State Snapshot & Recovery】(F 5) │
+│  * Mechanism: Checkpoint rehydration (PG + S3 Blob)    │
+│  * Target: Failover recovery and resume run support    │
+│                                                        │
+│  Step 5: 【Policy Snapshot & Deterministic Freezing】   │
+│  * Mechanism: Immutable FrozenRunContext locking       │
+│  * Target: Determinism, auditability & replayability   │
 └────────────────────────────┬───────────────────────────┘
                              │
                              ▼ (All Gates Passed)
@@ -178,11 +186,12 @@ In the Cogniva AI Agent Controlled Host Runtime (L2 Harness), the first physical
 ```
 
 * 🔗 **Direct Implementation Links**:
-  * [Hook 1 on_run_load Admission Barrier & Distributed Lease Implementation](../agent/deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md)
+  * [Hook 1 on_run_load Admission Barrier & Distributed Lease Implementation](../agent/deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md) (with full 8-step pipeline, policy freeze scenarios, and ASD-STE100 specs)
   * [Hook 7 before_checkpoint Concurrency Consistency & CAS Fencing Token Guard](../agent/deep-dive/topics/01-lifecycle-hooks/10-Hook7-before_checkpoint-并发一致性与CAS乐观锁防脑裂落地实战.md)
-  * [Appendix: Zombie Run Mechanism & Tombstone Verification (ASD-STE100)](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-僵尸任务产生机理与墓碑机制-STE100规范解构.md)
-  * [Appendix: Resume Run vs. Failover Recovery Deep Dive](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-断点续跑与故障转移接管深度解构.md)
   * [Appendix: State & Checkpoint Rehydration Architecture & Implementation Overview](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md)
+  * [Appendix: Resume Run vs. Failover Recovery Deep Dive](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-断点续跑与故障转移接管深度解构.md)
+  * [Appendix: Zombie Run Mechanism & Tombstone Verification (ASD-STE100)](../agent/deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-僵尸任务产生机理与墓碑机制-STE100规范解构.md)
+  * [Production Case Study: E-Commerce Dispute Resolution Agent 9-Stage Control Loop (STAR-L)](../agent/deep-dive/topics/01-lifecycle-hooks/02-跨境电商售后争议退赔Agent-控制环与防重对账-STAR-L实战.md)
 
 ---
 

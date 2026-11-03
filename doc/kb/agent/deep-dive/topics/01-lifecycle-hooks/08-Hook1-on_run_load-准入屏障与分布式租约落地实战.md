@@ -136,15 +136,26 @@
     ```
   * 若为初次执行（Fresh Run），则完成初始 `RunState` 的初始化构建；
   * 若为中断恢复（Resume Run），则恢复之前的思维链上下文、已批准但未提交的 Action 状态，确保 Worker 能够无缝进入下一步，杜绝重复从第 1 步盲跑。
+* 🌐 **分布式知识图谱理论映射**：本功能在分布式系统体系中横跨三大支柱，是分布式计算与高可用架构的交叉核心：
+  * **【支柱 IV：分布式存储与数据管理 (Storage & Replication)】**：状态分片快照与冷热混合存储模型（PostgreSQL JSONB + MinIO/S3 Blob 分流）；
+  * **【支柱 V：分布式容错与韧性工程 (Fault Tolerance & Resilience)】**：节点假死/崩溃后备用节点通过检查点进行状态自愈与故障转移接管（Failover Recovery）；
+  * **【支柱 III：分布式生命周期控制 (Lifecycle Control)】**：长周期人机协同（HITL）任务计划内挂起与恢复的断点续跑（Resume Run）就绪中枢。
+  * 详见 [01-分布式系统架构体系全景知识图谱-v1.0.md](../../../../distributed-systems/01-分布式系统架构体系全景知识图谱-v1.0.md#四-穿透实战ai-agent-harness-在本知识图谱中的落地点映射)。
 * 📖 **深度机制穿透**：详见技术附录 [08-附录-断点续跑与故障转移接管深度解构.md](./appendix/08-附录-断点续跑与故障转移接管深度解构.md)，深入剖析人机协同挂起恢复的“断点续跑”与节点突发猝死自愈的“故障转移接管”四大接盘步骤。
 * 🛠️ **完整工程实现落地**：详见技术附录 [08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md](./appendix/08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md)，涵盖 PostgreSQL JSONB DDL、工具防重账本（Tool Ledger）、Pydantic v2 高速水化流水线与 Python 代码示范。
 
 #### 6. 功能六：配置版本快照与决策策略固化（Policy & Config Snapshot Freezing）
 * **核心职责**：保障该 Run 全生命周期内的**确定性、可审计性与可复现性（Deterministic Playback）**。
-* **业务痛点**：若任务在多轮执行过程中，运营在后台动态修改了 Prompt 模板、LLM 模型温度或工具调用白名单，会导致同一任务前后策略撕裂，事后审计无法对账。
+* **业务痛点**：若长周期任务（如等待人机审批 2 小时）在多轮执行过程中，运营在后台动态修改了 Prompt 模板、LLM 模型温度或工具调用白名单，会导致同一任务前后策略撕裂，产生逻辑精神分裂甚至引发严重资损。
 * **做法**：
   * 从配置中心读取当前商户绑定的策略配置，在 `on_run_load` 阶段完成“快照固化（Freeze）”；
-  * 将 `prompt_template_version`、`model_id` (如 `claude-3-5-sonnet@20241022`)、`tool_whitelist_hash` 和 `risk_thresholds` 写入当前 Run 的专属元数据，在本次 Run 结束前该配置全局只读、绝不允许动态热漂移。
+  * 将 `prompt_template_version`、`model_id` (如 `claude-3-5-sonnet@20241022`)、`tool_whitelist_hash` 和 `risk_thresholds` 写入当前 Run 专属的不可变上下文（`FrozenRunContext`），在本次 Run 结束前该配置全局只读、绝不允许动态热漂移。
+* 📖 **深度原理与 STE100 规范穿透（专属技术附录）**：  
+  详见技术附录 [08-附录-配置版本快照与决策策略固化-STE100规范与实战全景.md](./appendix/08-附录-配置版本快照与决策策略固化-STE100规范与实战全景.md)，深度解构：
+  * 结合智能手表 ($180) 售后争议真实场景剖析 2 小时审批等待期间配置热漂移的四大车祸；
+  * 深度拆解 **确定性（Determinism）、可审计性（Auditability）、可复现性（Reproducibility）** 的企业级内涵；
+  * 基于国际标准 **ASD-STE100（Simplified Technical English）** 的完整技术规范解构；
+  * 基于 Pydantic v2 的生产级 `FrozenRunContext` 代码骨架实现。
 
 #### 7. 功能七：分布式链路追踪与环境指纹注入（Distributed Tracing & Context Setup）
 * **核心职责**：构建不可变执行上下文（`Immutable RunContext`），实现全链路可观测性穿透。
