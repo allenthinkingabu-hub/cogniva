@@ -285,7 +285,11 @@ AI Agent 记忆工程底座与经典分布式系统理论的**精密微观原语
 * 💾 **穿透检查点反序列化附录**：[08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md](./deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-历史检查点与状态反序列化架构设计与工程落地全景.md)
 * 💼 **穿透电商售后退赔真实业务实战**：[02-跨境电商售后争议退赔Agent-控制环与防重对账-STAR-L实战.md](./deep-dive/topics/01-lifecycle-hooks/02-跨境电商售后争议退赔Agent-控制环与防重对账-STAR-L实战.md)
 * 🛡️ **穿透 Hook 7 状态落盘门禁**：[10-Hook7-before_checkpoint-并发一致性与CAS乐观锁防脑裂落地实战.md](./deep-dive/topics/01-lifecycle-hooks/10-Hook7-before_checkpoint-并发一致性与CAS乐观锁防脑裂落地实战.md)
+* 🧠 **下钻记忆工程核心专题【03-memory-engine】**：
+  * 📑 [专题 03 总揽与实战索引](./deep-dive/topics/03-memory-engine/00-专题总揽与实战索引.md)
+  * 🏛️ [01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md](./deep-dive/topics/03-memory-engine/01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md)
 * 📋 **回溯控制环专题总揽**：[00-专题总揽与实战索引.md](./deep-dive/topics/01-lifecycle-hooks/00-专题总揽与实战索引.md)
 
 ---
 *本文档为 Cogniva 架构体系核心知识图谱，由企业级 AI Agent 架构基础设施与认知存储团队联合维护。*
+
