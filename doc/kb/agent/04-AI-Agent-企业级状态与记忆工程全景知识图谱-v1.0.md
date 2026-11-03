@@ -5,6 +5,7 @@
 > **体系定位**：连接 L2 受控宿主运行时（物理执行引擎）与 L4 记忆层级（认知知识组织）的顶层全景知识图谱  
 > **上级主架构**：[01-AI-Agent-企业级架构知识体系全景指南-v1.0.md](./01-AI-Agent-企业级架构知识体系全景指南-v1.0.md)（L2 宿主运行时与 L4 记忆持久化）  
 > **分布式理论穿透**：[01-分布式系统架构体系全景知识图谱-v1.0.md](../distributed-systems/01-分布式系统架构体系全景知识图谱-v1.0.md)  
+> **记忆工程底座专题下钻**：[专题 03 总揽与实战索引](./deep-dive/topics/03-memory-engine/00-专题总揽与实战索引.md) | [01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md](./deep-dive/topics/03-memory-engine/01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md)  
 > **生产落地实战穿透**：[Hook 1 on_run_load 准入屏障实战](./deep-dive/topics/01-lifecycle-hooks/08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md) | [双轨架构深度解构附录](./deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-不可变上下文与追加状态双轨架构深度解构.md) | [状态仅追加账本附录](./deep-dive/topics/01-lifecycle-hooks/appendix/08-附录-状态仅追加账本与事件溯源架构深度解构.md)
 
 ---
