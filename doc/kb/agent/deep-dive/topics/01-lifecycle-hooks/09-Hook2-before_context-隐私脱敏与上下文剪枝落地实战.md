@@ -153,6 +153,7 @@
       .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
   ```
 * **熔断处置**：若检查到买家已行使 GDPR“拒绝数据处理权（Right to Object）”或未签署数据处理同意书，门禁立即终止执行并转人工处理。
+  > 💡 **深度法理剖析与 STE100 规范**：关于欧盟 GDPR 长臂管辖客体目标原则、第 21/22 条对自动化决策的绝对红线与 Java 21 转人工落地代码，详见专属技术附录：[09-附录-GDPR长臂管辖与拒绝权转人工机制-STE100规范全景.md](./appendix/09-附录-GDPR长臂管辖与拒绝权转人工机制-STE100规范全景.md)。
 
 #### 3. 功能三：三轨高性能 PII 动态脱敏与掩码引擎（Multi-Track PII Tokenization Engine）
 * **核心职责**：在毫秒级内，对上下文中的敏感个人身份（PII）与金融支付数据（PCI-DSS）实施无遗漏动态掩码。
@@ -166,16 +167,26 @@
 * **核心职责**：构建单次 Run 独占的安全反向映射表，防止彩虹表逆向推理推断出真实买家身份，并确保随生命周期物理自绝。
 * **设计细节**：
   * **随机加盐（Per-Run Salting）**：针对同一买家的信用卡号，不同工单 Run 采用不同的随机 Nonce 计算映射，杜绝跨工单代号碰撞；
-  * **内存私有化存储**：
-    ```python
-    class EphemeralPiIVault:
-        def __init__(self, run_id: str, salt: str):
-            self.run_id = run_id
-            self.salt = salt
-            self._vault: Dict[str, str] = {}  # 仅存于 Worker 私有内存堆
-            
-        def register(self, token_placeholder: str, raw_pii: str) -> None:
-            self._vault[token_placeholder] = raw_pii
+  * **内存私有化存储（Java 21 范式）**：
+    ```java
+    public final class EphemeralPiiVault {
+        private final String runId;
+        private final String salt;
+        private final Map<String, String> vault = new ConcurrentHashMap<>(); // 仅存于 Worker 私有内存堆
+
+        public EphemeralPiiVault(String runId, String salt) {
+            this.runId = Objects.requireNonNull(runId);
+            this.salt = Objects.requireNonNull(salt);
+        }
+
+        public void register(String tokenPlaceholder, String rawPii) {
+            this.vault.put(tokenPlaceholder, rawPii);
+        }
+
+        public Optional<String> resolve(String tokenPlaceholder) {
+            return Optional.ofNullable(this.vault.get(tokenPlaceholder));
+        }
+    }
     ```
   * **安全红线**：该对象所属内存严禁持久化入库，严禁序列化进日志输出流。
 
@@ -398,6 +409,7 @@ flowchart TD
 * ➡️ **穿透后续直接门禁**：[01-内核级控制环原理与电梯演说.md](./01-内核级控制环原理与电梯演说.md#三-9-阶段系统调用门禁syscall-gates逐层判定全景表)（即将下钻：Hook 3 `before_model` 模型配额与路由熔断门禁）
 * 📂 **专属深度技术附录 1**：[09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md](./appendix/09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md)（深入掌握脱水元数据至 Java 21 物理模具的水化全流程）
 * 📂 **专属深度技术附录 2**：[09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md](./appendix/09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md)（深入掌握巴黎客诉真实攻防、Java 21 堆内存保险库与 ASD-STE100 国际技术规范）
+* 📂 **专属深度技术附录 3**：[09-附录-GDPR长臂管辖与拒绝权转人工机制-STE100规范全景.md](./appendix/09-附录-GDPR长臂管辖与拒绝权转人工机制-STE100规范全景.md)（深入掌握 GDPR 第 21/22 条法理、长臂管辖机制、Java 21 转人工落地与 ASD-STE100 国际技术规范）
 * 🛡️ **穿透 L6 零信任安全层与动态脱敏**：[06-L6-AIG规则扫描与L2-Harness提权防御-纵深防御深度解析.md](./06-L6-AIG规则扫描与L2-Harness提权防御-纵深防御深度解析.md)
 * 💼 **穿透电商售后退赔真实业务架构**：[01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md](../../../ecommerce/architect/01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md)
 * 🧠 **穿透 L4 企业级状态与记忆工程底座**：[01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md](../03-memory-engine/01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md)
