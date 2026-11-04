@@ -136,16 +136,21 @@
 
 ### 维度二：数据合规与隐私安全防御门禁 (Data Privacy & Compliance Barrier)
 
+> 📖 **电商退赔实战与 STE100 国际规范穿透（专属技术附录）**：  
+> 详见技术附录 [09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md](./appendix/09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md)，以法国巴黎智能手表客诉为例穿透四大关卡、Java 21 堆内存加盐保险库与 ASD-STE100 国际技术规范。
+
 #### 2. 功能二：授权目的声明绑定与用户同意权核验（Purpose Code Binding & Consent Matrix）
 * **核心职责**：贯彻 GDPR 第 5 条“目的限制原则”（Purpose Limitation），强制执行“最小必要上下文”鉴权。
 * **业务场景**：售后退赔 Agent 在调解智能手表客诉时，其合法目的仅为 `PURPOSE_AFTER_SALE_ARBITRATION`。系统依据商户配置的字段权限矩阵，对 CRM 吐出的宽表数据实施物理裁剪：
   * **保留项**：订单实付金额（$180）、妥投物流轨迹、质检图分析特征、过去 90 天内的维权纠纷率；
   * **强力剥离项**：买家在平台的加购浏览痕迹、非关联类目的历史购物明细、售前闲聊记录。
-* **规则原语**：
-  ```python
-  # 最小必要字段白名单过滤
-  allowed_fields = consent_matrix.get_allowed_fields(purpose_code="PURPOSE_AFTER_SALE_ARBITRATION")
-  sanitized_user_profile = {k: v for k, v in raw_crm_profile.items() if k in allowed_fields}
+* **规则原语（Java 21 范式）**：
+  ```java
+  // 最小必要字段白名单过滤流水线
+  Set<String> allowedFields = consentMatrix.getAllowedFields("PURPOSE_AFTER_SALE_ARBITRATION");
+  Map<String, Object> sanitizedUserProfile = rawCrmProfile.entrySet().stream()
+      .filter(entry -> allowedFields.contains(entry.getKey()))
+      .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
   ```
 * **熔断处置**：若检查到买家已行使 GDPR“拒绝数据处理权（Right to Object）”或未签署数据处理同意书，门禁立即终止执行并转人工处理。
 
@@ -391,7 +396,8 @@ flowchart TD
 
 * ⬅️ **回溯前序门禁**：[08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md](./08-Hook1-on_run_load-准入屏障与分布式租约落地实战.md)（掌握租约竞争、环境就绪与 Fencing Token 体系）
 * ➡️ **穿透后续直接门禁**：[01-内核级控制环原理与电梯演说.md](./01-内核级控制环原理与电梯演说.md#三-9-阶段系统调用门禁syscall-gates逐层判定全景表)（即将下钻：Hook 3 `before_model` 模型配额与路由熔断门禁）
-* 📂 **专属深度技术附录**：[09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md](./appendix/09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md)（深入掌握脱水元数据至 Java 21 物理模具的水化全流程）
+* 📂 **专属深度技术附录 1**：[09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md](./appendix/09-附录-配置元数据水化与物理Prompt模具架构设计与Java落地全景.md)（深入掌握脱水元数据至 Java 21 物理模具的水化全流程）
+* 📂 **专属深度技术附录 2**：[09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md](./appendix/09-附录-数据合规与隐私安全防御门禁-电商售后退赔实战与STE100规范全景.md)（深入掌握巴黎客诉真实攻防、Java 21 堆内存保险库与 ASD-STE100 国际技术规范）
 * 🛡️ **穿透 L6 零信任安全层与动态脱敏**：[06-L6-AIG规则扫描与L2-Harness提权防御-纵深防御深度解析.md](./06-L6-AIG规则扫描与L2-Harness提权防御-纵深防御深度解析.md)
 * 💼 **穿透电商售后退赔真实业务架构**：[01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md](../../../ecommerce/architect/01-跨境电商多AI-Agent生态体系业务架构与集成落地指南.md)
 * 🧠 **穿透 L4 企业级状态与记忆工程底座**：[01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md](../03-memory-engine/01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md)
