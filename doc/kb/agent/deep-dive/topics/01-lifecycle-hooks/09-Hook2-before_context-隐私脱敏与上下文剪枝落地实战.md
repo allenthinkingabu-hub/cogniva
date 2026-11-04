@@ -85,25 +85,65 @@ flowchart TD
     H2_Out -.->|生命周期终结清理| H8_In
 ```
 
-### 1. 上游输入契约（Inflow Contract from Hook 1 `on_run_load`）
+### 1. 核心架构澄清：Hook 1 宿主运行级上下文 vs Hook 2 模型认知级 Prompt
+
+在企业级 Agent 架构中，最常见的概念混淆就是“把系统上下文与提示词上下文混为一谈”。在此必须给出严格的架构定界：
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│ 【Hook 1: on_run_load】产出宿主运行级上下文 (FrozenRunContext)         │
+│  • 记录当前商户绑定的策略快照：prompt_template_version = "refund_v2.1.0" │
+│  • 记录安全合规等级：pii_mask_level = "STRICT_PCI_DSS"                │
+│  • 记录大模型配置：model_id = "claude-3-5-sonnet@20241022"            │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │ (以只读不可变元数据，交付给 Hook 2)
+                                   ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 【Hook 2: before_context】拿着上述模具，真正进行数据水化、清洗与组装    │
+│  1. 依据 Hook 1 的 prompt_template_version，去模板仓库提取模板内容；     │
+│  2. 读取买家上传的事实、CRM 记录与 Hook 1 水化的 ToolLedger 工具账本；   │
+│  3. 依据 Hook 1 的 pii_mask_level，对真实的卡号与住址实施三轨掩码；    │
+│  4. 将清洗后的数据填入模板插值槽，套上 XML 防注入沙箱；               │
+│  5. 产出最终送给模型的认知 Prompt: SanitizedContext 交付给 Hook 3！   │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 两大 Context 的本质维度对照表
+
+| 维度 | Hook 1 维度的“上下文”<br/>`FrozenRunContext` (宿主运行级上下文) | Hook 2 维度的“上下文 / Prompt”<br/>`SanitizedContext` (模型认知级上下文) |
+| :--- | :--- | :--- |
+| **所属体系** | **操作系统与分布式调度层 (Infrastructure / Ring-0)** | **大模型认知工程与安全沙箱层 (Cognitive Engine / Ring-3)** |
+| **形象类比** | 相当于 Linux 操作系统的 **进程控制块 (PCB)** 或 Web 的 `HttpServletRequest` | 相当于投喂给大模型大脑的 **“视网膜感官文本输入 (Retinal Prompt)”** |
+| **核心内容** | • 租户隔离身份：`tenant_id: "STORE_US_01"`<br/>• 分布式链路指纹：`trace_id`, `run_id`, W3C `traceparent`<br/>• 宿主节点物理指纹：`worker_pod_ip`, `node_name`<br/>• **策略快照元数据**：`prompt_template_version: "refund_v2.1.0"`、`model_id` | • 真正渲染好的自然语言文本与消息数组：`messages = [...]`<br/>• 经过 Purpose 矩阵过滤剔除后的当前工单事实<br/>• 经过 Luhn/AC/NER 掩码后的代号：`{{CREDIT_CARD_01}}`<br/>• 被 XML `<untrusted_external_evidence>` 沙箱包裹的买家留言 |
+| **是否包含具体 Prompt?** | ❌ **绝对没有！** 只保存 Prompt 模板的**版本号与策略哈希** | ✅ **就是最终送给模型的具体 Prompt 文本！** |
+| **执行粒度差异** | **Run 级别（一次性）**：单次工单任务启动或节点故障转移接管时执行 1 次 | **Step 级别（多轮高频循环）**：在 ReAct 控制环中，每一轮模型推理前都要执行 1 次 |
+
+> [!IMPORTANT]
+> **为什么 Hook 1 坚决不能组装 Prompt？**  
+> 1. **生命周期粒度不匹配**：如果在一个包含“质检识别 ➔ 策略仲裁 ➔ 财务退款”的多轮 Agent 中，Hook 1 在任务刚拾取时就组装了 Prompt，那么当进入 Step 2（质检工具返回了划痕评分）时，由于 Hook 1 早已执行完毕，系统将**无法动态刷新下一轮包含最新质检结果的 Prompt**！  
+> 2. **零无效开销原则**：Prompt 组装伴随着昂贵的正则扫描、AC 自动机遍历与 RAG 检索。如果在 Hook 1 组装，一旦紧接着在功能三核查数据库发现买家在 1 秒前已经撤单（命中墓碑 `Tombstone`），之前的 Prompt 组装算力将彻底白白浪费。
+
+---
+
+### 2. 上游输入契约（Inflow Contract from Hook 1 `on_run_load`）
 * **进入前置条件（Pre-conditions）**：
   * **绝对单主保证**：当前 Worker 必须已持有合法的 Redis 30s 分布式租约，且后台心跳守护线程正在每 10s 续期，严禁无租约节点执行上下文构建；
   * **配置快照只读冻结**：接收已固化的 `FrozenRunContext`，明确本次 Run 所绑定的 `prompt_template_version`、大模型主备路由策略、脱敏安全规则级别与字段掩码矩阵（Masking Matrix）；
   * **基础状态就绪**：接收已完成反序列化的 `RunState`，包括当前执行步数（`step_count`）、历史工具执行记账（`ToolLedger`）及分布式排他隔离版本号（`fencing_token`）。
 
-### 2. 本级加工与副作用隔离边界（Local Mutation & Isolation Boundaries）
+### 3. 本级加工与副作用隔离边界（Local Mutation & Isolation Boundaries）
 * **数据流隔离铁律**：
   * **只读消费外部输入**：对从 CRM、OMS、买家上传的原始事件数据（`InboundEvent`）仅具备**只读消费权限**；
   * **私有产生 `EphemeralPiIVault`**：在当前 Worker 进程堆内存（Heap）内分配临时加盐映射表，**严禁落盘入库、严禁跨 Worker 广播、严禁写入任何外部共享缓存（如 Redis）**；
   * **状态增量追加**：向 `RunState.metadata` 写入生成的不可变上下文指纹（`context_digest`）与精确 Token 预算估算指标，严禁覆写历史既有状态。
 
-### 3. 下游直接交付契约（Outflow Contract to Hook 3 `before_model`）
+### 4. 下游直接交付契约（Outflow Contract to Hook 3 `before_model`）
 * **移交保证（Post-conditions）**：
   * **纯净脱敏沙箱**：交付不可变对象 `SanitizedContext`。该上下文必须做到：**0 真实明文 PII、0 零宽隐藏伪装字符、所有不可信证据均被封闭在具有防脱逸声明的 XML 沙箱内**；
   * **精准 Token 预算**：向下游输出经自适应压缩后的实际 Token 体积，使 Hook 3 在请求外部 LLM 供应商之前，能够 100% 精确完成前置租户 Token 限流与模型厂商并发配额预扣减；
   * **零资损熔断保障**：若在 Hook 2 阶段触发合规违规抛出异常，流程在入模前当场物理熔断，**保证 0 Token 计费、0 外部 API 交互、0 资金泄露**。
 
-### 4. 远期闭环握手契约（Far-reaching Lifecycle Handshakes）
+### 5. 远期闭环握手契约（Far-reaching Lifecycle Handshakes）
 * **与 Hook 4 (`after_model`) 握手**：
   * Hook 2 创建的 `EphemeralPiIVault` 挂载在内存上下文；当模型推理完毕在 Hook 4 产出响应时，Hook 4 读取该 Vault 校验模型回包中的代号是否在合法注册列表内（防模型自行幻觉捏造代号），并在内网边界完成最终受控回填；
 * **与 Hook 8 (`after_finalize`) 握手**：
