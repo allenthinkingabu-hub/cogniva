@@ -201,11 +201,13 @@ flowchart TD
 #### 6. 功能六：物理 Wall-Clock 定时器挂载（Physical Wall-Clock Deadline）
 * **核心职责**：提供抗死锁的绝对时间防御边界。
 * **技术实现**：
-  * 严禁依赖异步任务内部的软检查点。Harness 在发起底层 Socket 连接前，启动系统级高精度物理时钟定时器：
+  * 严禁依赖异步任务内部的软检查点。Harness 在发起底层 Socket 连接前，启动系统级高精度物理单调时钟定时器：
     ```python
     deadline = time.monotonic() + timeout_seconds  # 例如智能手表售后决策超时硬阈值为 15.0 秒
     ```
-  * 一旦时钟触达 Deadline，无论底层模型计算进行到何种阶段，立即在操作系统层面强制打断阻塞。
+  * 一旦时钟触达 Deadline，无论底层模型计算进行到何种阶段，看守线程立即通过销毁底层操作系统 `SocketChannel` 与发送物理中断强制打断阻塞。
+  > 💡 **物理 Wall-Clock 定时器挂载与抗死锁边界全景深潜**：关于三大时钟概念比对、大模型外呼三大网络黑洞（TCP半开/流式僵死/线程池耗尽）、Alice 划痕争议惊魂 15 秒救险推演与 Netty 高性能时间轮 Java 21 生产级实现，详见专属技术附录：[11-附录-物理Wall-Clock定时器挂载与抗死锁边界全景-STE100规范全景.md](./appendix/11-附录-物理Wall-Clock定时器挂载与抗死锁边界全景-STE100规范全景.md)。
+
 
 #### 7. 功能七：HTTP/2 RST_STREAM 级联切断协议（Cascading Cancellation Protocol）
 * **核心职责**：跨节点级联释放算力，杜绝“客户端已取消，GPU 还在空转解码”的行业通病。
