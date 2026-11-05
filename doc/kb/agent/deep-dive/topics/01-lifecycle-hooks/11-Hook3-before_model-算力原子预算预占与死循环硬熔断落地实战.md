@@ -103,13 +103,15 @@
 * **核心职责**：精准测量输入上下文开销，锁定最大输出预算敞口。
 * **业务落地**：
   * 针对售后争议调解场景，输入端包含：系统提示词模具、多模态质检特征分、买家脱敏留言以及《跨境物流超时赔付条款 v3.2》；
-  * 使用 Rust 绑定的高性能 `tiktoken` 库在内存中进行纳秒级精确分词：
-    $$\text{input\_tokens} = \text{tiktoken}(\text{SanitizedContext.rendered\_prompt})$$
-  * 根据当前决策步骤的业务意图，**动态约束最大允许输出**：
-    * 若当前为“抽取买家核心纠纷诉求”：硬约束 `max_tokens = 500`；
-    * 若当前为“多方逆向经济学研判（货值 vs 运费博弈）”：硬约束 `max_tokens = 2000`；
-  * 计算该次请求的最大敞口预算：
+  * **分词器技术实现**：可采用纯 Java 21 原生高性能库（如生产级 `jtokkit`，单次耗时约 40~60 微秒，零 JNI 跨语言与跨平台开销）或 Rust 绑定的 `tiktoken-rs` 在本地内存中精确度量输入 Token：
+    $$\text{input\_tokens} = \text{bpe\_tokenize}(\text{SanitizedContext.rendered\_prompt})$$
+  * **业务阶段感知型 MaxTokens 动态约束**：根据当前决策步骤的业务意图，**动态约束最大允许输出**（严禁全局写死，防止配额假性枯竭）：
+    * 若当前为“抽取买家核心纠纷诉求”：硬约束 `max_tokens = 300`；
+    * 若当前为“多方逆向经济学研判（货值 vs 运费博弈）”：硬约束 `max_tokens = 1500`；
+    * 若当前为“执行退款指令下发”：硬约束 `max_tokens = 150`；
+  * **锁定最大风险敞口预算**：
     $$\text{reserved\_tokens} = \text{input\_tokens} + \text{max\_tokens}$$
+  > 💡 **Token 动态预估与 MaxTokens 约束全景深潜**：关于预估原理、阶段感知型约束矩阵、Java 21 生产级源码落地（`PreFlightTokenEstimator.java`）与 ASD-STE100 国际技术规范，详见专属技术附录：[11-附录-Token动态预估与MaxTokens约束体系-STE100规范全景.md](./appendix/11-附录-Token动态预估与MaxTokens约束体系-STE100规范全景.md)。
 
 #### 4. 功能四：Redis Lua 两阶段原子预占算力账本（Two-Phase Quota Lua Barrier）
 * **核心职责**：消除高并发并发写冲突，保证租户账户 100% 财务精确，绝不超扣超卖。
