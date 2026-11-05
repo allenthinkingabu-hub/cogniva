@@ -140,6 +140,8 @@
         raise LoopExceededException("Agent execution terminated by remaining_steps hard limit.")
     ```
   * 步数耗尽立刻中断流程，将工单无缝挂起并升级为高优先级人工客诉。
+  > 💡 **单调递减步数计数器与死循环硬熔断全景深潜**：关于图灵停机问题在 AI 时代的投影、双十字交叉锁定矩阵（算力 X 轴 vs 步数 Y 轴）、开源 LangChain 崩溃复盘与 Java 21 生产级代码实现，详见专属技术附录：[11-附录-单调递减步数计数器与死循环硬熔断机制-STE100规范全景.md](./appendix/11-附录-单调递减步数计数器与死循环硬熔断机制-STE100规范全景.md)。
+
 
 ---
 
