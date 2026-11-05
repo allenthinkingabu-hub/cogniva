@@ -113,39 +113,19 @@
     $$\text{reserved\_tokens} = \text{input\_tokens} + \text{max\_tokens}$$
   > 💡 **Token 动态预估与 MaxTokens 约束全景深潜**：关于预估原理、阶段感知型约束矩阵、Java 21 生产级源码落地（`PreFlightTokenEstimator.java`）与 ASD-STE100 国际技术规范，详见专属技术附录：[11-附录-Token动态预估与MaxTokens约束体系-STE100规范全景.md](./appendix/11-附录-Token动态预估与MaxTokens约束体系-STE100规范全景.md)。
 
-#### 4. 功能四：Redis Lua 两阶段原子预占算力账本（Two-Phase Quota Lua Barrier）
-* **核心职责**：消除高并发并发写冲突，保证租户账户 100% 财务精确，绝不超扣超卖。
-* **核心原语（Lua 脚本原子执行）**：
-  ```lua
-  -- KEYS[1]: 租户实时可用算力额度 Key (tenant:quota:{tenant_id})
-  -- KEYS[2]: 当前 Run 临时预占存根 Key (run:reservation:{run_id}:{step_idx})
-  -- ARGV[1]: 本次请求最大预占量 (reserved_tokens)
-  -- ARGV[2]: 单次单步最大允许硬阈值 (step_ceiling, 如 4096)
-  
-  local current_balance = tonumber(redis.call('GET', KEYS[1]) or 0)
-  local reservation = tonumber(ARGV[1])
-  local ceiling = tonumber(ARGV[2])
-  
-  -- 1. 检查是否超过单步物理硬上限 (防超长投毒)
-  if reservation > ceiling then
-      return -2
-  end
-  
-  -- 2. 检查租户账户可用余额是否充足
-  if current_balance < reservation then
-      return -1 -- 余额不足，熔断！
-  end
-  
-  -- 3. 原子扣减总账本，并记录预占存根 (设置 5 分钟安全 TTL，防崩溃泄漏)
-  redis.call('DECRBY', KEYS[1], reservation)
-  redis.call('SET', KEYS[2], reservation, 'EX', 300)
-  return 1 -- 预占成功放行
-  ```
-* **两阶段平账闭环（Two-Phase Settlement）**：
-  * **Phase 1（前置预占）**：在 `before_model` 按照最大敞口扣减（如预占 2,500 Tokens）；
-  * **Phase 2（后置多退少补）**：当 L1 网关返回模型实际响应报文时，从 Header 中提取真实消耗 `Usage: {total_tokens: 1600}`。在 Step 结束时执行平账：
-    $$\text{refund\_amount} = 2500 - 1600 = 900 \text{ Tokens}$$
-    调用 Lua 脚本将 900 Tokens 原子归还给 `tenant:quota:{tenant_id}`，并清理临时预占存根。
+#### 4. 功能四：基于双轨账本的 Token 流量计费系统（Ledger-based Token Billing System）
+* **核心职责**：兼顾高并发极致吞吐与企业资金绝对安全，通过不可变账本方式实现算力资产的全生命周期计量与风控闭环。
+* **业务落地体系（三步确定性闭环）**：
+  * **第一阶段：乐观预算准入与弹性容忍 (Optimistic Allowance & Elastic Cushion)**：
+    * 利用功能三测出的输入 Token 与意图基准输出，在 `before_model` 执行轻量级准入校验；
+    * 允许微秒级的时间差与适度误差，结合商户弹性透支硬底线（Hard Floor，如限制最大欠费不超过 -$2.00），在毫秒级内通过 Redis Lua 快速放行，杜绝假性死锁与并发误杀；
+  * **第二阶段：真实 Usage 后置精准平账 (Post-settlement & Exact Settle)**：
+    * 模型推理完毕后，从网关响应报文中提取真实 Usage（如 `total_tokens: 4220`），直接原子扣减商户账本总额；
+    * 采用银行复式记账法，同步写入数据库只增不改的仅追加明细账本（Append-Only Journal，禁止任何 UPDATE/DELETE）；
+  * **第三阶段：终局负余额即刻物理硬熔断 (Negative Balance Circuit Breaker)**：
+    * 一旦平账后发现 `balance < 0`（“真超了”），系统立刻将该租户状态置为 `LOCKED`，强行掐死当前 Agent 的后续 Step 执行；
+    * 退赔工单无缝挂起转人工审核（`PENDING_MANUAL_REVIEW`）并触发商户充值 Webhook，将资损严格限制在单次调用范围内。
+  > 💡 **分布式 Token 流量计费系统与账本架构深潜**：关于高并发无锁设计、Redis Lua 脚本原语、双轨不可变流水表设计、Java 21 源码落地与 ASD-STE100 国际技术规范，详见专属技术附录：[11-附录-分布式高并发Token流量计费系统与账本架构设计全景.md](./appendix/11-附录-分布式高并发Token流量计费系统与账本架构设计全景.md)。
 
 #### 5. 功能五：单调递减步数计数器与死循环硬熔断（Remaining Steps Hard Ceiling）
 * **核心职责**：与算力配额构成“双十字交叉锁定”，彻底消灭“高净值账户无限死循环”的漏洞。
