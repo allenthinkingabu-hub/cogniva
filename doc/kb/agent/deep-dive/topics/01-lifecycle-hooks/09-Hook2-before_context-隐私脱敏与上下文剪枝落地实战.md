@@ -225,39 +225,67 @@
 
 ### 维度三：上下游流水线交互契约：数据流与控制流拓扑握手 (Pipeline Contract & Topology Handshake)
 
-在企业级 L2 受控宿主运行时（Harness）微内核中，Hook 绝对不是孤立的函数，而是环环相扣的控制环节点。Hook 2 在整套生命周期中扮演着 **“承上启下、数据洗髓”** 的核心枢纽作用：
+在企业级 L2 受控宿主运行时（Harness）微内核中，Hook 绝对不是孤立的函数，而是环环相扣的确定性控制环节点。Hook 2 在整套生命周期中扮演着 **“承上启下、数据洗髓、认知封包”** 的核心枢纽作用。
+
+为了保障高并发与强合规场景下的确定性，必须将 **功能 1 至 功能 9 的完整处理时序与跨 Hook 握手契约** 固化为严格的数据流与控制流拓扑：
 
 ```mermaid
 flowchart TD
-    subgraph Hook1 ["Hook 1: on_run_load (准入与水化完成)"]
-        H1_Out["交付物:<br/>1. Redis 30s 分布式租约 (心跳守护中)<br/>2. 固化配置快照 FrozenRunContext<br/>3. 水化恢复的状态 RunState (含 ToolLedger)"]
+    subgraph Hook1 ["Hook 1: on_run_load (准入与水化就绪)"]
+        H1_Out["交付物:<br/>1. Redis 30s 分布式租约 (后台心跳续期中)<br/>2. 固化配置快照 FrozenRunContext (含模具版本与脱敏策略)<br/>3. 水化恢复的 RunState (含 ToolLedger 工具账本)"]
     end
 
-    subgraph Hook2 ["【Hook 2: before_context 核心流水线】"]
-        H2_In["1. 接收输入: InboundEvent + 上游状态"]
-        H2_Proc["2. 本级核心处理:<br/>• Purpose 最小必要鉴权<br/>• 三轨 PII 掩码 + 加盐 Vault 建立<br/>• 间接注入消杀 + XML 角色隔离沙箱<br/>• 多级记忆拉取 + Token 预算自适应剪枝"]
-        H2_Check{"3. 合规与注入门禁检查?"}
-        H2_Abort["4. 抛出 ComplianceViolationException<br/>(熔断自杀，通知 Hook 1 释放租约并记录审计)"]
-        H2_Out["5. 生成本级交付契约物:<br/>• 脱敏沙箱上下文 SanitizedContext<br/>• SHA-256 上下文指纹 context_digest<br/>• 私有内存代币库 EphemeralPiIVault"]
+    subgraph Hook2 ["【Hook 2: before_context 完整九大功能控制环流水线】"]
+        direction TB
+        
+        subgraph H2_P1 ["阶段一：前驱承接与模具解析"]
+            F1["【功能 1】租约存活核验 & 配置模具解析<br/>• 租约看门狗校验 (防GC假死)<br/>• 模具AST预编译与插槽就绪"]
+        end
+
+        subgraph H2_P2 ["阶段二：合规清洗与隐私代币化 (安全防线)"]
+            F2["【功能 2】Purpose 目的代码鉴权<br/>• 最小必要上下文过滤 (剔除闲聊与无关历史)"]
+            F3["【功能 3】三轨 PII 动态脱敏掩码<br/>• 正则/Luhn + AC自动机 + 本地NER"]
+            F4["【功能 4】加盐临时代币保险库<br/>• 堆内存私有 EphemeralPiiVault 注册"]
+            F5["【功能 5】数据主权出境物理门禁<br/>• Schrems II 校验 (违规就地触发本地自建模型降级)"]
+            F2 --> F3 --> F4 --> F5
+        end
+
+        subgraph H2_P3 ["阶段三：认知装配与算力剪枝 (认知防线)"]
+            F6["【功能 6】多级记忆/知识分片水化<br/>• Working(质检92%) + Episodic(优质买家) + Semantic(3C穿戴红线)"]
+            F7["【功能 7】Token 预算分配与 DoW 盾剪枝<br/>• 香农熵消杀 + 报关证据结构降维 + 动态滑动窗口折叠"]
+            F6 --> F7
+        end
+
+        subgraph H2_P4 ["阶段四：数字存证与契约交接 (交付闭环)"]
+            F8["【功能 8】SHA-256 上下文指纹签名<br/>• 计算 context_digest 注入 RunState & OTel 指标"]
+            F9["【功能 9】交付封包与代币库跨周期挂载<br/>• 生成不可变 SanitizedContext<br/>• 挂载 EphemeralPiiVault 句柄至线程上下文"]
+            F8 --> F9
+        end
+
+        H2_In["接收输入: InboundEvent + 上游 RunState"] --> F1
+        F1 --> F2
+        F5 --> F6
+        F7 --> F8
+
+        H2_Gate{"合规/注入/主权<br/>门禁核验?"}
+        F5 -.->|违规| H2_Gate
+        H2_Abort["抛出 ComplianceViolationException<br/>(物理熔断自绝，释放租约，记录法务审计日志)"]
+        H2_Gate -- 触发硬阻断 --> H2_Abort
     end
 
     subgraph DownstreamDirect ["直接下游: Hook 3 before_model"]
-        H3_In["接收交付:<br/>• 消费纯净 SanitizedContext<br/>• 依据预估 Token 预扣减供应商配额<br/>• 驱动模型路由与高可用熔断"]
+        H3_In["接收交付:<br/>• 消费纯净不可变 SanitizedContext<br/>• 依据真实预估 Token 预占 Redis 算力预算<br/>• 执行 TPM 令牌桶平滑与网络沙箱准入"]
     end
 
-    subgraph DownstreamFar ["远期闭环生命周期"]
-        H4_In["Hook 4: after_model<br/>• 消费 EphemeralPiIVault 核验代号合法性 (防模型幻觉)<br/>• 执行内网安全回填"]
-        H8_In["Hook 8: after_finalize<br/>• 执行内存物理零化 (Zeroization)<br/>• 彻底销毁 EphemeralPiIVault 销毁凭证"]
+    subgraph DownstreamFar ["远期生命周期闭环握手"]
+        H4_In["Hook 4: after_model<br/>• 消费 EphemeralPiiVault 白名单校验模型回包<br/>• 拦截代号幻觉，执行内网边界安全回填"]
+        H8_In["Hook 8: after_finalize<br/>• 触发内存置零钩子 (Memory Zeroization)<br/>• 物理销毁堆内存加盐代币保险库"]
     end
 
     H1_Out --> H2_In
-    H2_In --> H2_Proc
-    H2_Proc --> H2_Check
-    H2_Check -- 发现不可逆违规/越狱注入 --> H2_Abort
-    H2_Check -- 全门禁通过 --> H2_Out
-    H2_Out --> H3_In
-    H2_Out -.->|私有内存引用挂载| H4_In
-    H2_Out -.->|生命周期终结清理| H8_In
+    F9 --> H3_In
+    F9 -.->|跨周期句柄挂载| H4_In
+    F9 -.->|终态销毁钩子绑定| H8_In
 ```
 
 #### 1. 核心架构澄清：Hook 1 宿主运行级上下文 vs Hook 2 模型认知级 Prompt
@@ -301,7 +329,7 @@ flowchart TD
 #### 2. 上游输入契约（Inflow Contract from Hook 1 `on_run_load`）
 * **进入前置条件（Pre-conditions）**：
   * **绝对单主保证**：当前 Worker 必须已持有合法的 Redis 30s 分布式租约，且后台心跳守护线程正在每 10s 续期，严禁无租约节点执行上下文构建；
-  * **配置快照只读冻结**：接收已固化的 `FrozenRunContext`，明确本次 Run 所绑定的 `prompt_template_version`、大模型主备路由策略、脱敏安全规则级别与字段掩码矩阵（Masking Matrix）；
+  * **配置快照只读冻结**：接收已固化的 `FrozenRunContext`，明确本次 Run 所绑定的 `prompt_template_version`、脱敏安全规则级别与字段掩码矩阵（Masking Matrix）；
   * **基础状态就绪**：接收已完成反序列化的 `RunState`，包括当前执行步数（`step_count`）、历史工具执行记账（`ToolLedger`）及分布式排他隔离版本号（`fencing_token`）。
 
 #### 3. 本级加工与副作用隔离边界（Local Mutation & Isolation Boundaries）
@@ -313,71 +341,301 @@ flowchart TD
 #### 4. 下游直接交付契约（Outflow Contract to Hook 3 `before_model`）
 * **移交保证（Post-conditions）**：
   * **纯净脱敏沙箱**：交付不可变对象 `SanitizedContext`。该上下文必须做到：**0 真实明文 PII、0 零宽隐藏伪装字符、所有不可信证据均被封闭在具有防脱逸声明的 XML 沙箱内**；
-  * **精准 Token 预算**：向下游输出经自适应压缩后的实际 Token 体积，使 Hook 3 在请求外部 LLM 供应商之前，能够 100% 精确完成前置租户 Token 限流与模型厂商并发配额预扣减；
+  * **精准 Token 预算**：向下游输出经功能 7 自适应压缩后的实际 Token 体积，使 Hook 3 在请求外部 LLM 供应商之前，能够 100% 精确完成前置租户 Token 限流与模型厂商并发配额预扣减；
   * **零资损熔断保障**：若在 Hook 2 阶段触发合规违规抛出异常，流程在入模前当场物理熔断，**保证 0 Token 计费、0 外部 API 交互、0 资金泄露**。
 
 #### 5. 远期闭环握手契约（Far-reaching Lifecycle Handshakes）
 * **与 Hook 4 (`after_model`) 握手**：
   * Hook 2 创建的 `EphemeralPiIVault` 挂载在内存上下文；当模型推理完毕在 Hook 4 产出响应时，Hook 4 读取该 Vault 校验模型回包中的代号是否在合法注册列表内（防模型自行幻觉捏造代号），并在内网边界完成最终受控回填；
 * **与 Hook 8 (`after_finalize`) 握手**：
-  * 在当前工单处理完成（无论成功、失败还是熔断）进入终态生命周期时，Hook 8 负责触发安全擦除例程，对堆内存中的 `EphemeralPiIVault` 执行内存覆写置零（Memory Zeroization），防止内存泄露被 Dump 攻击。
+  * 在当前工单处理完成（无论成功、失败还是熔断）进入终态生命周期时，Hook 8 负责触发安全擦除例程，对堆内存中的 `EphemeralPiIVault` 执行内存覆写置零（Memory Zeroization），彻底消除数据常驻风险。
 
 ---
 
 ### 维度四：认知装配与下游交付闭环 (Cognitive Assembly & Pipeline Handover)
 
+在完成了前置的模具解析（功能 1）与隐私合规消杀（功能 2~5）之后，Hook 2 进入认知工程的核心地带：**将多级记忆、业务政策与当前事实精准拼装为黄金上下文，实施香农熵剪枝防范算力盗刷，签发不可篡改数字出生证明，并安全交接给下游 Hook 3**。
+
 #### 6. 功能六：多级记忆/知识分片按需拉取水化（Multi-Tier Memory & Context Rehydration）
-* **核心职责**：打通 L4 记忆体系，精准装配支撑当前判决的核心业务事实。
-* **三级组装模型**：
-  * **即时执行记忆（Working Memory）**：从 Hook 1 传入的 `ToolLedger` 中提取当前工单最新的视觉质检 API 返回结果（如：*“表盘轻度划痕置信度 92%，出库底图完好”*）；
-  * **长期情景记忆摘要（Episodic Summary）**：从向量存储检索该买家过去 180 天的信用特征（*“近半年申请退换货 1 次，属于低风险优质买家”*），抛弃原始冗长聊天明细；
-  * **类目专属业务政策 RAG 切片（Semantic Policy）**：仅检索针对“3C数码-智能穿戴”类目的最新争议调解红线，杜绝无关服装、美妆条款混入。
+* **核心职责**：打通 L4 记忆体系（Memory Engine），依据当前工单决策需要，将分散在即时执行账本、长期向量数据库与类目规则库中的碎片化信息，按需水化为高密度的结构化认知上下文。
+* **业务场景驱动（法国买家 Alice 智能手表划痕案）**：
+  * **即时执行记忆（Working Memory）**：从 Hook 1 传递的 `ToolLedger` 中提取刚刚完成的视觉质检 API 结果：`{"defect_type": "surface_scratch", "confidence": 0.92, "factory_status": "INTACT"}`；
+  * **长期情景记忆摘要（Episodic Memory）**：从向量数据库拉取该买家在平台过去 180 天的信用画像摘要：`"Alice Dupont 近半年交易 6 单，售后维权 1 次，无恶意拒付记录，属于优质低风险买家"`，坚决抛弃原始 30 轮寒暄闲聊；
+  * **类目专属政策 RAG 切片（Semantic Policy）**：仅检索针对“3C数码-智能穿戴”类目的争议仲裁红线：*“轻微外观刮蹭且逆向国际运费超过 $30 时，优先提供最高 30%（即 $54）的折价补贴仅退款，避免退货产生净亏损”*。
+* **Java 21 生产级落地源码 (`MultiTierMemoryRehydrator.java`)**：
+  ```java
+  package com.cogniva.agent.harness.context;
+
+  import java.util.List;
+  import java.util.Map;
+  import java.util.Objects;
+
+  /**
+   * Hook 2 功能六：多级记忆按需水化组装器
+   * 聚合 Working Memory、Episodic Summary 与 Semantic RAG 切片
+   */
+  public final class MultiTierMemoryRehydrator {
+
+      public record RehydratedMemoryContext(
+              String workingMemoryBlock,
+              String episodicSummaryBlock,
+              String semanticPolicyBlock
+      ) {
+          public String formatAsXmlPrompt() {
+              return """
+                  <authoritative_policy_rag>
+                  %s
+                  </authoritative_policy_rag>
+                  <buyer_episodic_profile>
+                  %s
+                  </buyer_episodic_profile>
+                  <current_execution_ledger>
+                  %s
+                  </current_execution_ledger>
+                  """.formatted(semanticPolicyBlock, episodicSummaryBlock, workingMemoryBlock);
+          }
+      }
+
+      public static RehydratedMemoryContext rehydrate(
+              String orderCategory,
+              String buyerId,
+              List<Map<String, Object>> toolLedgerEntries,
+              MemoryEngineClient memoryClient) {
+
+          Objects.requireNonNull(orderCategory, "orderCategory required");
+          Objects.requireNonNull(memoryClient, "memoryClient required");
+
+          // 1. 水化 Working Memory (仅提取当前工单已执行工具的关键事实)
+          String workingMemory = toolLedgerEntries.stream()
+                  .filter(entry -> "visual_defect_inspector".equals(entry.get("tool_name")))
+                  .findFirst()
+                  .map(entry -> "Defect Detection: " + entry.get("output_payload"))
+                  .orElse("Defect Detection: NO_PRIOR_INSPECTION");
+
+          // 2. 水化 Episodic Memory (从向量库仅拉取结构化买家信用摘要)
+          String episodicSummary = memoryClient.queryEpisodicSummary(buyerId);
+
+          // 3. 水化 Semantic RAG Policy (精准挂载类目仲裁专属政策切片)
+          String policySlice = memoryClient.queryCategoryPolicy(orderCategory, "DISPUTE_COMPENSATION_POLICY");
+
+          return new RehydratedMemoryContext(workingMemory, episodicSummary, policySlice);
+      }
+
+      public interface MemoryEngineClient {
+          String queryEpisodicSummary(String buyerId);
+          String queryCategoryPolicy(String category, String policyKey);
+      }
+  }
+  ```
+* 📖 **深度架构穿透**：详见技术专题库 [01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md](../03-memory-engine/01-企业级AI-Agent记忆工程底座-核心原理与分布式实战全景.md)。
+
+---
 
 #### 7. 功能七：硬约束 Token 预算与 DoW 算力防盗刷剪枝（Token Budget Allocation & DoW Shield）
-* **核心职责**：将上下文精确控制在 LLM 的黄金注意力窗口内，杜绝长文本“中段迷失”，根除 DoW（Denial of Wallet）高熵分词爆炸与文本投毒，严格兜底 API 算力成本。
+* **核心职责**：将最终 Prompt 精确夹持在黄金注意力窗口（Attention Window）内，根除由于超长输入引发的“中段迷失（Lost-in-the-Middle）”，同时前置消杀香农熵超标的 Base64 乱码与 50,000 字报关长文，粉碎针对企业云钱包的 DoW 恶意算力耗尽攻击。
 * **分级预算配额矩阵（Token Quota Matrix）**：
   
-  | 上下文区块 (Context Block) | 硬约束 Token 上限 | 溢出剪枝与压缩策略 |
+  | 上下文区块 (Context Block) | 硬约束 Token 上限 | 溢出剪枝与降维压缩策略 |
   | :--- | :--- | :--- |
-  | **System Prompt & 核心政策** | 1,500 Tokens | 静态模板预编译，超出直接报错阻断发布 |
-  | **多模态质检结果与关键证据** | 1,200 Tokens | 仅保留置信度最高的前 3 项；超长报关单执行结构降维抽取 |
-  | **买家历史交互账本** | 1,000 Tokens | **自适应滑动窗口**：保留最新 2 轮，其余执行抽象摘要折叠 |
+  | **System Prompt & 核心政策** | 1,500 Tokens | 静态模板预编译，超出直接抛出编译异常阻断构建 |
+  | **多模态质检结果与证据** | 1,200 Tokens | 仅保留置信度最高的前 3 项；超长报关单执行结构降维抽取（150 字节 JSON） |
+  | **买家历史交互账本** | 1,000 Tokens | **自适应滑动窗口（Sliding Window）**：保留最新 2 轮，其余折叠为摘要 |
   | **不可信外部买家留言** | 500 Tokens | 字符截断至 2,000 字符，香农熵超过 4.5 物理替换消杀 |
   | **预留模型推理与思维链 (CoT)**| 2,000 Tokens | 锁定在安全配额空间内，与 Hook 3 动态夹持联动 |
 
-* **自适应修剪与 DoW 防御原语**：
-  ```python
-  # 1. 过滤高熵投毒与 Base64 乱码 (防止 1 字符切成 5 Tokens)
-  sanitized_statement = filter_high_entropy_noise(raw_statement, max_entropy=4.5)
+* **Java 21 生产级落地源码 (`AdaptiveTokenPruner.java`)**：
+  ```java
+  package com.cogniva.agent.harness.context;
 
-  # 2. 证据多模态降维 (50 页报关单压缩为核心 JSON)
-  compact_evidence = evidence_dimension_reducer.reduce(raw_customs_pdf_text)
+  import java.nio.charset.StandardCharsets;
+  import java.util.*;
 
-  # 3. 动态滑动窗口剪枝
-  if current_tokens > MAX_CONTEXT_BUDGET:
-      pruned_context = compact_history_sliding_window(history_blocks, budget=1000)
+  /**
+   * Hook 2 功能七：自适应 Token 预算剪枝与 DoW 香农熵防盗刷盾
+   */
+  public final class AdaptiveTokenPruner {
+
+      private static final int MAX_STATEMENT_CHARS = 2000;
+      private static final double MAX_SHANNON_ENTROPY = 4.50;
+
+      public record PruningResult(
+              String sanitizedStatement,
+              String compactedHistory,
+              int estimatedTotalTokens
+      ) {}
+
+      public static PruningResult pruneAndShield(
+              String rawBuyerStatement, 
+              List<String> rawHistoryRounds, 
+              int targetBudgetTokens) {
+
+          // 1. 物理硬截断买家留言
+          String clamped = (rawBuyerStatement != null && rawBuyerStatement.length() > MAX_STATEMENT_CHARS)
+                  ? rawBuyerStatement.substring(0, MAX_STATEMENT_CHARS)
+                  : Objects.requireNonNullElse(rawBuyerStatement, "");
+
+          // 2. 香农信息熵校验 (防御高熵未切分 Base64 投毒与分词爆炸)
+          double entropy = calculateEntropy(clamped);
+          String shieldedStatement = (entropy > MAX_SHANNON_ENTROPY && clamped.length() > 256)
+                  ? "[HIGH_ENTROPY_ATTACK_PAYLOAD_PRUNED: entropy=" + String.format("%.2f", entropy) + "]"
+                  : clamped;
+
+          // 3. 自适应滑动窗口历史折叠 (保留最新 2 轮，其余执行抽象折叠)
+          StringBuilder historyBuilder = new StringBuilder();
+          if (rawHistoryRounds != null && !rawHistoryRounds.isEmpty()) {
+              int totalRounds = rawHistoryRounds.size();
+              int keepFromIndex = Math.max(0, totalRounds - 2);
+              if (keepFromIndex > 0) {
+                  historyBuilder.append("[System: Prior ").append(keepFromIndex).append(" rounds folded as past context]\n");
+              }
+              for (int i = keepFromIndex; i < totalRounds; i++) {
+                  historyBuilder.append(rawHistoryRounds.get(i)).append("\n");
+              }
+          }
+
+          // 4. 纳秒级预估 Token 总量 (平均按 4 字符 = 1 Token 预估)
+          int totalChars = shieldedStatement.length() + historyBuilder.length();
+          int estimatedTokens = (totalChars / 4) + 1500; // 包含 1500 系统模板底数
+
+          return new PruningResult(shieldedStatement, historyBuilder.toString(), estimatedTokens);
+      }
+
+      private static double calculateEntropy(String input) {
+          if (input == null || input.isEmpty()) return 0.0;
+          byte[] bytes = input.getBytes(StandardCharsets.UTF_8);
+          Map<Byte, Integer> freq = new HashMap<>();
+          for (byte b : bytes) freq.merge(b, 1, Integer::sum);
+          double entropy = 0.0;
+          for (int count : freq.values()) {
+              double p = (double) count / bytes.length;
+              entropy -= p * (Math.log(p) / Math.log(2));
+          }
+          return entropy;
+      }
+  }
   ```
-  > 💡 **DoW 算力耗尽专项附录深度穿透**：关于香农熵数学推导、BPE 分词爆炸微观机理与 Java 21 防御落地代码，详见专属技术附录：[11-附录-恶意算力耗尽攻击DoW与微内核防御体系-STE100规范全景.md](./appendix/11-附录-恶意算力耗尽攻击DoW与微内核防御体系-STE100规范全景.md)。
+* 📖 **深度架构穿透**：详见专属技术附录：[11-附录-恶意算力耗尽攻击DoW与微内核防御体系-STE100规范全景.md](./appendix/11-附录-恶意算力耗尽攻击DoW与微内核防御体系-STE100规范全景.md)。
+
+---
 
 #### 8. 功能八：不可篡改上下文数字指纹存证（SHA-256 Context Digest & Tamper-Proofing）
-* **核心职责**：为组装完成的不可变上下文签发“数字出生证明”，提供生产可观测性、确定性回放与司法级防抵赖依据。
-* **存证原语**：
-  * 对终版 `SanitizedContext` 的纯文本内容与绑定的配置元数据执行 SHA-256 哈希计算：
-    ```python
-    context_digest = hashlib.sha256(final_sanitized_prompt.encode('utf-8')).hexdigest()
-    run_state.metadata["context_digest"] = f"ctx_sha256_{context_digest}"
-    ```
-  * 同步上报至 Prometheus / OpenTelemetry 链路：`agent_context_assembled_tokens{tenant_id, model_id}`；
-  * **收益**：当发生资金仲裁审计时，安全部门可凭 `context_digest` 毫秒级复现模型在决策瞬间所看到的 100% 真实上下文切片。
+* **核心职责**：为经过清洗、脱敏、剪枝后的终版 `SanitizedContext` 签发物理不可篡改的“数字出生证明（Cryptographic Birth Certificate）”。当发生数万美元的资金退赔争议或 Visa 信用卡拒付仲裁（Chargeback）时，提供具备司法级采信力的确定性上下文复现证据。
+* **存证原语与标准**：
+  * **规范化哈希（Canonical SHA-256）**：对最终 Prompt 的纯文本消息、绑定的模具版本哈希、当前执行步数（`step_count`）进行规范化序列化，计算不可逆 SHA-256 摘要：
+    $$\text{context\_digest} = \text{SHA-256}(\text{CanonicalPrompt} \parallel \text{fencing\_token} \parallel \text{template\_version})$$
+  * **链路注入与指标上报**：将 `context_digest` 写入不可变 `RunState.metadata`，注入 W3C `traceparent` 链路上下文，并同步上报至 Prometheus / OpenTelemetry 链路指标：`agent_context_assembled_tokens{tenant_id, model_id, digest}`。
+* **Java 21 生产级落地源码 (`ContextDigestSigner.java`)**：
+  ```java
+  package com.cogniva.agent.harness.context;
+
+  import java.nio.charset.StandardCharsets;
+  import java.security.MessageDigest;
+  import java.security.NoSuchAlgorithmException;
+  import java.util.HexFormat;
+  import java.util.Objects;
+
+  /**
+   * Hook 2 功能八：上下文数字指纹签名与司法级存证器
+   */
+  public final class ContextDigestSigner {
+
+      public record SignedContextEnvelope(
+              String promptContent,
+              String contextDigestSha256,
+              long timestampEpochMs,
+              int tokenCount
+      ) {}
+
+      public static SignedContextEnvelope signAndSeal(
+              String finalPrompt, 
+              String templateVersion, 
+              long fencingToken, 
+              int estimatedTokens) {
+
+          Objects.requireNonNull(finalPrompt, "finalPrompt must not be null");
+
+          try {
+              MessageDigest digest = MessageDigest.getInstance("SHA-256");
+              // 规范化盐值拼接：Prompt内容 + 模具版本 + 分布式隔离代币
+              String payloadToHash = finalPrompt + "|" + templateVersion + "|" + fencingToken;
+              byte[] hashBytes = digest.digest(payloadToHash.getBytes(StandardCharsets.UTF_8));
+              String digestHex = "ctx_sha256_" + HexFormat.of().formatHex(hashBytes);
+
+              return new SignedContextEnvelope(
+                      finalPrompt,
+                      digestHex,
+                      System.currentTimeMillis(),
+                      estimatedTokens
+              );
+          } catch (NoSuchAlgorithmException e) {
+              throw new IllegalStateException("SHA-256 algorithm not available in JVM", e);
+          }
+      }
+  }
+  ```
+
+---
 
 #### 9. 功能九：流水线交接与跨周期代币库挂载（Pipeline Handover & Ephemeral Vault Hook）
-* **核心职责**：完成向直接下游 Hook 3 的精准交接，并将脱敏状态安全锚定到远期生命周期闭环中。
-* **交付原语与动作**：
-  * **交付不可变 `SanitizedContext`**：将最终纯净 Prompt 封装为只读对象交付给 Hook 3，下游不可随意篡改内容；
-  * **输出精确 Token 指标**：将剪枝后的真实输入 Token 计数值打入本次迭代的元数据，供 Hook 3 直接进行供应商 Rate Limit 与并发配额扣减；
-  * **挂载生命周期句柄（Lifecycle Anchoring）**：
-    * 将 `EphemeralPiIVault` 挂载至当前线程执行上下文中，使后续 **Hook 4 (`after_model`)** 可以就地提取代号白名单进行防幻觉比对与安全回填；
-    * 注册资源销毁钩子，委托 **Hook 8 (`after_finalize`)** 在 Run 终态时执行堆内存物理置零（Memory Zeroization），彻底消除数据常驻风险。
+* **核心职责**：完成向直接下游 Hook 3（`before_model`）的原子交接，同时将内存代币保险库（`EphemeralPiiVault`）安全挂载至当前执行线程的私有上下文中，为远期的 **Hook 4（防幻觉回填）** 与 **Hook 8（物理内存零化销毁）** 建立不可逆的生命周期因果锚点。
+* **交付动作与闭环契约**：
+  * **交付只读 `SanitizedContext`**：封装为不可变 Record 对象，封锁所有写操作，防止下游 Hook 发生隐蔽的数据污染；
+  * **输出真实 Token 指标**：将功能 7 计算出的精确 Token 计数值交给 Hook 3，使 Hook 3 可以立即执行云厂商 TPM 令牌桶限流与 Redis Lua 算力预算扣减；
+  * **远期挂载（Lifecycle Anchoring）**：
+    * 将堆内存私有代币保险库挂载至 `HarnessThreadContext`，使后续 **Hook 4 (`after_model`)** 可以提取代号白名单对大模型回包执行严格的包含性断言（$\text{ModelTokens} \subseteq \text{VaultTokens}$）；
+    * 绑定销毁回调（Destruction Hook），委托 **Hook 8 (`after_finalize`)** 在任务终态时触发 `Arrays.fill(chars, (char) 0)` 内存覆写置零，从物理上杜绝 Heap Dump 泄露。
+* **Java 21 生产级落地源码 (`PipelineHandoverManager.java`)**：
+  ```java
+  package com.cogniva.agent.harness.context;
+
+  import com.cogniva.agent.harness.security.EphemeralPiiVault;
+  import java.util.Objects;
+
+  /**
+   * Hook 2 功能九：流水线原子交接与跨周期生命周期挂载管理器
+   */
+  public final class PipelineHandoverManager {
+
+      public record SanitizedHandoverPackage(
+              String promptText,
+              String contextDigest,
+              int estimatedTokens,
+              String runId,
+              EphemeralPiiVault piiVaultHandle // 仅保留当前 Worker 私有堆内存强引用
+      ) {}
+
+      private static final ThreadLocal<EphemeralPiiVault> THREAD_VAULT_HOLDER = new ThreadLocal<>();
+
+      public static SanitizedHandoverPackage sealAndHandover(
+              ContextDigestSigner.SignedContextEnvelope signedEnvelope,
+              String runId,
+              EphemeralPiiVault piiVault) {
+
+          Objects.requireNonNull(signedEnvelope, "signedEnvelope required");
+          Objects.requireNonNull(piiVault, "piiVault required");
+
+          // 1. 将 EphemeralPiiVault 安全锚定在当前线程执行上下文中 (供 Hook 4 / Hook 8 消费)
+          THREAD_VAULT_HOLDER.set(piiVault);
+
+          // 2. 封包交付只读 SanitizedHandoverPackage 送入 Hook 3
+          return new SanitizedHandoverPackage(
+                  signedEnvelope.promptContent(),
+                  signedEnvelope.contextDigestSha256(),
+                  signedEnvelope.tokenCount(),
+                  runId,
+                  piiVault
+          );
+      }
+
+      public static EphemeralPiiVault resolveCurrentThreadVault() {
+          return THREAD_VAULT_HOLDER.get();
+      }
+
+      public static void cleanThreadVault() {
+          THREAD_VAULT_HOLDER.remove();
+      }
+  }
+  ```
 
 ---
 
