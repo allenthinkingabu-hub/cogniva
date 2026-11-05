@@ -197,4 +197,5 @@ class SandboxedActionRequest(BaseModel):
 
 - 上一步：[12-Hook4-after_model 结构强校验与物理剥离提权落地实战](file:///Users/allen/Desktop/NewArchitect/workspace/cogniva/doc/kb/agent/deep-dive/topics/01-lifecycle-hooks/12-Hook4-after_model-结构强校验与物理剥离提权落地实战.md)
 - 下一步：[14-Hook6-after_action 不可变幂等键与超时未知态对账落地实战](file:///Users/allen/Desktop/NewArchitect/workspace/cogniva/doc/kb/agent/deep-dive/topics/01-lifecycle-hooks/14-Hook6-after_action-不可变幂等键与超时未知态对账落地实战.md)
+- 跨Hook代币化闭环：[09-附录-Harness全生命周期数据代币化与跨Hook隐私沙箱闭环全景](file:///Users/allen/Desktop/NewArchitect/workspace/cogniva/doc/kb/agent/deep-dive/topics/01-lifecycle-hooks/appendix/09-附录-Harness全生命周期数据代币化与跨Hook隐私沙箱闭环全景.md)（掌握 Hook 5 如何执行去代币化反向赎回真卡号与地址）
 - 专题索引：[00-生命周期钩子（Lifecycle Hooks）专题总揽与实战索引](file:///Users/allen/Desktop/NewArchitect/workspace/cogniva/doc/kb/agent/deep-dive/topics/01-lifecycle-hooks/00-专题总揽与实战索引.md)
